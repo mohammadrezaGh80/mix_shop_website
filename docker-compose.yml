@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - "DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}"
+      - "DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}"
+      - "POSTGRES_NAME=${DOCKER_COMPOSE_POSTGRES_NAME}"
+      - "POSTGRES_USER=${DOCKER_COMPOSE_POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${DOCKER_COMPOSE_POSTGRES_PASSWORD}"
+      - "POSTGRES_HOST=${DOCKER_COMPOSE_POSTGRES_HOST}"
+      - "POSTGRES_PORT=${DOCKER_COMPOSE_POSTGRES_PORT}"
+
+  db:
+    image: postgres:15
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
