@@ -45,7 +45,7 @@ class CustomUser(AbstractBaseUser):
     phone_validator = PhoneValidator()
 
     email = models.EmailField(
-        verbose_name='email address',
+        verbose_name=_('email address'),
         max_length=255,
         unique=True,
     )

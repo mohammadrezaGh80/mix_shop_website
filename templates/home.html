@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+
+
+{% block page_title %}{% trans 'Home' %}{% endblock page_title %}
+
+{% block page_content %}
+    <h2>{% trans 'Home' %}</h2>
+    <div>
+        {% if user.is_authenticated %}
+            <p>{% trans 'Welcome' %} {{ user.email }}</p>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">{% trans 'Login' %}</a>
+        {% endif %}
+    </div>
+{% endblock page_content %}

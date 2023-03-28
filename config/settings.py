@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from django.contrib import messages
+
 from pathlib import Path
 from environs import Env
 import os
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 
     # my apps
     'accounts',
+    'pages',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +65,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,12 +121,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'fa'
+LANGUAGES = (
+    ("en", "English"),
+    ("fa", "Persian"),
+)
 
 TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "templates/locale/")
+]
 
 
 # Static files (CSS, JavaScript, Images)
@@ -136,3 +149,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication config
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# messages config
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}

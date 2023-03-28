@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-28 15:50+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\admin.py:18
+msgid "Personal info"
+msgstr "اطلاعات شخصی"
+
+#: .\admin.py:19
+msgid "Permissions"
+msgstr "دسترسی ها"
+
+#: .\apps.py:8
+msgid "accounts"
+msgstr "حساب های کاربری"
+
+#: .\forms.py:20
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\forms.py:21
+msgid "Password"
+msgstr "رمزعبور"
+
+#: .\models.py:48
+msgid "email address"
+msgstr "آدرس ایمیل"
+
+#: .\models.py:53
+msgid "username"
+msgstr "نام کاربری"
+
+#: .\models.py:58
+msgid ""
+"150 characters or fewer. Letters, digits and ./-/_ only which starts with "
+"letters and has at least 4 characters."
+msgstr ""
+"باید 150 کاراکتر یا کمتر باشد. شامل حروف،ارقام و ./-/_ است که باید با حروف "
+"شروع شود و حداقل دارای چهار کاراکتر باشد."
+
+#: .\models.py:62
+msgid "A user with that username already exists."
+msgstr "یک کاربر با این نام کاربری وجود دارد."
+
+#: .\models.py:65
+msgid "first name"
+msgstr "نام"
+
+#: .\models.py:66
+msgid "last name"
+msgstr "نام خانوادگی"
+
+#: .\models.py:67
+msgid "phone"
+msgstr "شماره تلفن"
+
+#: .\models.py:69
+msgid "birth date"
+msgstr "تاریخ تولد"
+
+#: .\models.py:71
+msgid "is active?"
+msgstr "فعال بودن"
+
+#: .\models.py:72
+msgid "is admin?"
+msgstr "مدیر بودن"
+
+#: .\models.py:80
+msgid "User"
+msgstr "کاربر"
+
+#: .\models.py:81
+msgid "Users"
+msgstr "کاربران"
+
+#: .\validators.py:8
+msgid ""
+"Enter a valid username. This value may contain only letters, digits, and ./-/"
+"_ only which starts with letters and has at least 4 characters."
+msgstr ""
+"یک نام کاربری معتبر وارد کنید. این نام باید شامل حروف، ارقام و ./-/_ باشد که "
+"با حروف شروع شود و حداقل دارای چهار کاراکتر باشد."
+
+#: .\validators.py:16
+msgid ""
+"Enter a valid phone number. This value must have 11 digits which starts with "
+"the number 09."
+msgstr ""
+"یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
+"شروع میشود."
+
+#: .\views.py:25
+msgid "Email and Password is incorrect!"
+msgstr "ایمیل و رمزعبور درست نمیباشند!"
