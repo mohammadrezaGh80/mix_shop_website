@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
+    BaseUserManager, AbstractBaseUser, AbstractUser
 )
 from django.utils.translation import gettext_lazy as _
 
-from accounts.validators import UsernameValidator
+from accounts.validators import UsernameValidator, PhoneValidator
 
 
 class CustomUserManager(BaseUserManager):
@@ -42,6 +42,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser):
     username_validator = UsernameValidator()
+    phone_validator = PhoneValidator()
 
     email = models.EmailField(
         verbose_name='email address',
@@ -53,6 +54,7 @@ class CustomUser(AbstractBaseUser):
         max_length=150,
         unique=True,
         blank=True,
+        null=True,
         help_text=_('150 characters or fewer. Letters, digits and ./-/_ only '
                     'which starts with letters and has at least 4 characters.'),
         validators=[username_validator],
@@ -60,8 +62,11 @@ class CustomUser(AbstractBaseUser):
             'unique': _("A user with that username already exists."),
         },
     )
-    first_name = models.CharField(verbose_name=_('first name'), max_length=150, blank=True)
-    last_name = models.CharField(verbose_name=_('last name'), max_length=150, blank=True)
+    first_name = models.CharField(verbose_name=_('first name'), max_length=150, blank=True, null=True)
+    last_name = models.CharField(verbose_name=_('last name'), max_length=150, blank=True, null=True)
+    phone = models.CharField(verbose_name=_('phone'), unique=True, max_length=11,
+                             blank=True, null=True, validators=[phone_validator])
+    birth_date = models.DateField(verbose_name=_('birth date'), blank=True, null=True)
 
     is_active = models.BooleanField(verbose_name=_('is active?'), default=True)
     is_admin = models.BooleanField(verbose_name=_('is admin?'), default=False)
