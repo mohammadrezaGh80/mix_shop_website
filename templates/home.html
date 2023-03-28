@@ -6,12 +6,21 @@
 {% block page_title %}{% trans 'Home' %}{% endblock page_title %}
 
 {% block page_content %}
-    <h2>{% trans 'Home' %}</h2>
     <div>
-        {% if user.is_authenticated %}
-            <p>{% trans 'Welcome' %} {{ user.email }}</p>
-        {% else %}
-            <a href="{% url 'accounts:login' %}">{% trans 'Login' %}</a>
-        {% endif %}
+        <div class="container">
+            <div class="row">
+                <h2>{% trans 'Home' %}</h2>
+                <div>
+                    {% if user.is_authenticated %}
+                        <span>{% trans 'Welcome' %} {{ user.email }}</span> |
+                        <a class="text-decoration-none"
+                           href="{% url 'accounts:logout' %}">{% trans 'Logout of account' %}</a>
+                    {% else %}
+                        <a class="text-decoration-none"
+                           href="{% url 'accounts:login' %}">{% trans 'Login to account' %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock page_content %}

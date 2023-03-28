@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 15:50+0430\n"
+"POT-Creation-Date: 2023-03-28 18:22+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,13 +30,17 @@ msgstr "دسترسی ها"
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:20
+#: .\forms.py:21
 msgid "Email"
 msgstr "ایمیل"
 
-#: .\forms.py:21
+#: .\forms.py:22
 msgid "Password"
 msgstr "رمزعبور"
+
+#: .\forms.py:27
+msgid "Your email is not valid!"
+msgstr "ایمیل شما معتبر نیست!"
 
 #: .\models.py:48
 msgid "email address"
@@ -106,6 +110,6 @@ msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: .\views.py:25
+#: .\views.py:29
 msgid "Email and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"

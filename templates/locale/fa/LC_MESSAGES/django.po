@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 15:45+0430\n"
+"POT-Creation-Date: 2023-03-28 18:26+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: .\home.html:6 .\home.html:9
 msgid "Home"
 msgstr "خانه"
@@ -25,6 +26,14 @@ msgstr "خانه"
 msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: .\home.html:14 .\registration\login.html:6 .\registration\login.html:32
+#: .\home.html:13
+msgid "Logout of account"
+msgstr "خروج از حساب کاربری"
+
+#: .\home.html:15
+msgid "Login to account"
+msgstr "ورود به حساب کاربری"
+
+#: .\registration\login.html:6 .\registration\login.html:32
 msgid "Login"
 msgstr "ورود"
