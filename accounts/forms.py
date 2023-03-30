@@ -33,11 +33,11 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}), label=_("Email"))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label=_("Email or Username"))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label=_("Password"))
 
-    def clean_email(self):
-        email = self.cleaned_data.get("email")
-        if len(email) > 255:
-            raise ValidationError(_("Your email is not valid!"), code="invalid_email")
-        return email
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if len(username) > 255:
+            raise ValidationError(_("Your username is not valid!"), code="invalid_username")
+        return username

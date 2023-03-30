@@ -23,12 +23,12 @@ class LoginView(View):
         form = LoginForm(request.POST)
         if form.is_valid():
             cleaned_data = form.cleaned_data
-            user = authenticate(request, username=cleaned_data["email"], password=cleaned_data["password"])
+            user = authenticate(request, username=cleaned_data["username"], password=cleaned_data["password"])
             if user is not None:
                 login(request, user)
                 return redirect("pages:home")
             else:
-                messages.error(request, _("Email and Password is incorrect!"))
+                messages.error(request, _("Username and Password is incorrect!"))
 
         return render(request, "registration/login.html", {"form": form})
 

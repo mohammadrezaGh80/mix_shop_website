@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 19:27+0430\n"
+"POT-Creation-Date: 2023-03-30 13:21+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,16 +63,17 @@ msgid "Password confirmation..."
 msgstr "تکرار رمز عبور..."
 
 #: .\forms.py:36
-msgid "Email"
-msgstr "ایمیل"
+msgid "Email or Username"
+msgstr "آدرس ایمیل یا نام کاربری"
 
 #: .\forms.py:37
 msgid "Password"
 msgstr "رمزعبور"
 
-#: .\forms.py:42
-msgid "Your email is not valid!"
-msgstr "ایمیل شما معتبر نیست!"
+
+#| msgid "Your email is not valid!"
+msgid "Your username is not valid!"
+msgstr "نام کاربری شما معتبر نیست!"
 
 #: .\models.py:48
 msgid "email address"
@@ -143,5 +144,10 @@ msgstr ""
 "شروع میشود."
 
 #: .\views.py:31
-msgid "Email and Password is incorrect!"
+#, fuzzy
+#| msgid "Email and Password is incorrect!"
+msgid "Username and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"
+
+#~ msgid "Email"
+#~ msgstr "ایمیل"
