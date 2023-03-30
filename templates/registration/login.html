@@ -26,10 +26,13 @@
                         <label class="form-label" for="password-input">{{ form.password.label }}:</label>
                         {{ form.password }}
                         {% for error in form.password.errors %}
-                            <p class="alert alert-danger">{{ error }}</p>
+                            <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
-                    <button class="btn btn-primary" type="submit">{% trans 'Login' %}</button>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button class="btn btn-primary" type="submit">{% trans 'Login' %}</button>
+                        <a class="text-decoration-none" href="{% url 'accounts:register' %}">{% trans 'Register' %}</a>
+                    </div>
                 </form>
             </div>
         </div>

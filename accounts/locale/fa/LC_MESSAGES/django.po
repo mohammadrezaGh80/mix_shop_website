@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 18:22+0430\n"
+"POT-Creation-Date: 2023-03-28 19:27+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,15 +30,47 @@ msgstr "دسترسی ها"
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:21
+#: .\forms.py:13
+msgid "email..."
+msgstr "ایمیل..."
+
+#: .\forms.py:14
+msgid "username..."
+msgstr "نام کاربری..."
+
+#: .\forms.py:15
+msgid "first name..."
+msgstr "نام..."
+
+#: .\forms.py:16
+msgid "last name..."
+msgstr "نام خانوادگی..."
+
+#: .\forms.py:17
+msgid "phone number..."
+msgstr "شماره تلفن..."
+
+#: .\forms.py:18
+msgid "birth date..."
+msgstr "تاریخ تولد..."
+
+#: .\forms.py:24
+msgid "Password..."
+msgstr "رمزعبور..."
+
+#: .\forms.py:26
+msgid "Password confirmation..."
+msgstr "تکرار رمز عبور..."
+
+#: .\forms.py:36
 msgid "Email"
 msgstr "ایمیل"
 
-#: .\forms.py:22
+#: .\forms.py:37
 msgid "Password"
 msgstr "رمزعبور"
 
-#: .\forms.py:27
+#: .\forms.py:42
 msgid "Your email is not valid!"
 msgstr "ایمیل شما معتبر نیست!"
 
@@ -110,6 +142,6 @@ msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: .\views.py:29
+#: .\views.py:31
 msgid "Email and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"
