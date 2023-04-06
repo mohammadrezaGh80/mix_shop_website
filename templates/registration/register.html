@@ -16,56 +16,56 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="email-input">{{ form.email.label }}:</label>
+                        <label class="form-label" for="id_email">{{ form.email.label }}:</label>
                         {{ form.email }}
                         {% for error in form.email.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.username.label }}:</label>
+                        <label class="form-label" for="id_username">{{ form.username.label }}:</label>
                         {{ form.username }}
                         {% for error in form.username.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.first_name.label }}:</label>
+                        <label class="form-label" for="id_first_name">{{ form.first_name.label }}:</label>
                         {{ form.first_name }}
                         {% for error in form.first_name.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.last_name.label }}:</label>
+                        <label class="form-label" for="id_last_name">{{ form.last_name.label }}:</label>
                         {{ form.last_name }}
                         {% for error in form.last_name.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.phone.label }}:</label>
+                        <label class="form-label" for="id_phone">{{ form.phone.label }}:</label>
                         {{ form.phone }}
                         {% for error in form.phone.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.birth_date.label }}:</label>
+                        <label class="form-label" for="id_birth_date">{{ form.birth_date.label }}:</label>
                         {{ form.birth_date }}
                         {% for error in form.birth_date.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.password1.label }}:</label>
+                        <label class="form-label" for="id_password1">{{ form.password1.label }}:</label>
                         {{ form.password1 }}
                         {% for error in form.password1.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div class="d-flex flex-column mb-3">
-                        <label class="form-label" for="password-input">{{ form.password2.label }}:</label>
+                        <label class="form-label" for="id_password2">{{ form.password2.label }}:</label>
                         {{ form.password2 }}
                         {% for error in form.password2.errors %}
                             <p class="alert alert-danger mt-2">{{ error }}</p>

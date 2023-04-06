@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 13:21+0430\n"
+"POT-Creation-Date: 2023-04-06 15:13+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,50 +30,65 @@ msgstr "دسترسی ها"
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:13
+#: .\forms.py:14 .\forms.py:49
 msgid "email..."
 msgstr "ایمیل..."
 
-#: .\forms.py:14
+#: .\forms.py:15
 msgid "username..."
 msgstr "نام کاربری..."
 
-#: .\forms.py:15
+#: .\forms.py:16
 msgid "first name..."
 msgstr "نام..."
 
-#: .\forms.py:16
+#: .\forms.py:17
 msgid "last name..."
 msgstr "نام خانوادگی..."
 
-#: .\forms.py:17
+#: .\forms.py:18
 msgid "phone number..."
 msgstr "شماره تلفن..."
 
-#: .\forms.py:18
+#: .\forms.py:19
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
-#: .\forms.py:24
-msgid "Password..."
+#: .\forms.py:25 .\forms.py:56
+msgid "password..."
 msgstr "رمزعبور..."
 
-#: .\forms.py:26
-msgid "Password confirmation..."
+#: .\forms.py:27 .\forms.py:62
+msgid "password confirmation..."
 msgstr "تکرار رمز عبور..."
 
-#: .\forms.py:36
+#: .\forms.py:37
 msgid "Email or Username"
 msgstr "آدرس ایمیل یا نام کاربری"
 
-#: .\forms.py:37
+#: .\forms.py:38
 msgid "Password"
 msgstr "رمزعبور"
 
-
-#| msgid "Your email is not valid!"
+#: .\forms.py:43
 msgid "Your username is not valid!"
 msgstr "نام کاربری شما معتبر نیست!"
+
+#: .\forms.py:48
+msgid "Email"
+msgstr "ایمیل..."
+
+#: .\forms.py:50
+msgid "Enter a valid email address."
+msgstr "یک آدرس ایمیل معتبر وارد کنید."
+
+#: .\forms.py:55
+msgid "New password"
+msgstr "رمزعبور جدید"
+
+#: .\forms.py:60
+msgid "New password confirmation"
+msgstr "تکرار رمز عبور جدید..."
 
 #: .\models.py:48
 msgid "email address"
@@ -143,11 +158,30 @@ msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: .\views.py:31
-#, fuzzy
-#| msgid "Email and Password is incorrect!"
+#: .\views.py:40
 msgid "Username and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"
 
-#~ msgid "Email"
-#~ msgstr "ایمیل"
+#: .\views.py:68
+msgid ""
+"Enter your email and a mail will be sent with instructions to reset password"
+msgstr ""
+"ایمیل خود را وارد کنید و یک ایمیل با دستورالعمل بازنشانی رمز عبور برایتان "
+"ارسال خواهد شد."
+
+#: .\views.py:95
+msgid "Invalid Header"
+msgstr "هدر نامعتبر است."
+
+#: .\views.py:98
+msgid "There isn't an email with this address"
+msgstr "ایمیلی با این آدرس وجود ندارد."
+
+#: .\views.py:104
+msgid ""
+"An email with password reset instructions has been sent to your email address"
+msgstr "ایمیلی با دستورالعمل بازنشانی رمز عبور برای ایمیل شما ارسال شد."
+
+#: .\views.py:114
+msgid "Your password has been successfully reset."
+msgstr "رمز شما با موفقیت بازنشانی شد."

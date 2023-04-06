@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 19:37+0430\n"
+"POT-Creation-Date: 2023-04-06 15:15+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "خوش آمدید"
 msgid "Logout of account"
 msgstr "خروج از حساب کاربری"
 
-#: .\home.html:20
+#: .\home.html:20 .\registration\password_reset_complete.html:18
 msgid "Login to account"
 msgstr "ورود به حساب کاربری"
 
@@ -43,7 +43,39 @@ msgstr "ایجاد حساب کاربری"
 msgid "Login"
 msgstr "ورود"
 
-#: .\registration\login.html:34 .\registration\register.html:6
+#: .\registration\login.html:35 .\registration\register.html:6
 #: .\registration\register.html:75
 msgid "Register"
 msgstr "ثبت نام"
+
+#: .\registration\login.html:37
+msgid "Forgot your password?"
+msgstr "رمز عبور خود را فراموش کرده اید؟"
+
+#: .\registration\password_reset.html:6
+msgid "Password Reset"
+msgstr "بازنشانی رمزعبور"
+
+#: .\registration\password_reset.html:23
+msgid "Send"
+msgstr "ارسال"
+
+#: .\registration\password_reset_complete.html:6
+msgid "Complete"
+msgstr "انجام شد"
+
+#: .\registration\password_reset_complete.html:17
+msgid "Back to home"
+msgstr "بازگشت به خانه"
+
+#: .\registration\password_reset_confirm.html:6
+msgid "Set New Password"
+msgstr "ایجاد رمزعبور جدید"
+
+#: .\registration\password_reset_confirm.html:28
+msgid "Change Password"
+msgstr "تغییر رمزعبور"
+
+#: .\registration\password_reset_done.html:6
+msgid "Sent"
+msgstr "ارسال شد"
