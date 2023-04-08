@@ -16,6 +16,8 @@ from pathlib import Path
 from environs import Env
 import os
 
+from accounts.rosetta_access import is_access_to_rosetta_views
+
 env = Env()
 env.read_env()
 
@@ -44,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party apps
+    'rosetta',
 
     # my apps
     'accounts',
@@ -164,3 +169,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "mohammadreza.gharghabi6@gmail.com"
 EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD")
+
+# Rosetta config
+ROSETTA_ACCESS_CONTROL_FUNCTION = is_access_to_rosetta_views

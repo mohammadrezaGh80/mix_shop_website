@@ -64,7 +64,6 @@ class PasswordResetView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect("pages:home")
-        messages.info(request, _("Enter your email and a mail will be sent with instructions to reset password"))
         password_reset_form = CustomPasswordResetForm()
         return render(request, "registration/password_reset.html", context={"form": password_reset_form})
 

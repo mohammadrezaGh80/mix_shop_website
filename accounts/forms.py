@@ -4,6 +4,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import SetPasswordForm
+from django.utils import timezone
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -16,8 +17,20 @@ class CustomUserCreationForm(UserCreationForm):
             "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("first name...")}),
             "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("last name...")}),
             "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": _("phone number...")}),
-            "birth_date": forms.DateInput(attrs={"class": "form-control", "placeholder": _("birth date...")}),
+            "birth_date": forms.DateInput(
+                attrs={"class": "form-control", "placeholder": _("birth date..."), "type": "date"}
+            ),
         }
+
+    def clean_birth_date(self):
+        birth_date = self.cleaned_data.get("birth_date")
+        current_date = timezone.now().date()
+        if birth_date and birth_date > current_date:
+            self.add_error(
+                "birth_date",
+                _("Your birth date is invalid,date of today: %(current_date)s") % {"current_date": current_date}
+            )
+        return birth_date
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)

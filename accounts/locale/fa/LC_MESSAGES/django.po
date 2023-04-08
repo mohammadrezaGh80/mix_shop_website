@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 15:13+0430\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2023-04-08 10:19+0430\n"
+"PO-Revision-Date: 2023-04-08 09:22+0330\n"
+"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: .\admin.py:18
 msgid "Personal info"
@@ -30,63 +31,70 @@ msgstr "دسترسی ها"
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:14 .\forms.py:49
+#: .\forms.py:15 .\forms.py:62
 msgid "email..."
 msgstr "ایمیل..."
 
-#: .\forms.py:15
+#: .\forms.py:16
 msgid "username..."
 msgstr "نام کاربری..."
 
-#: .\forms.py:16
+#: .\forms.py:17
 msgid "first name..."
 msgstr "نام..."
 
-#: .\forms.py:17
+#: .\forms.py:18
 msgid "last name..."
 msgstr "نام خانوادگی..."
 
-#: .\forms.py:18
+#: .\forms.py:19
 msgid "phone number..."
 msgstr "شماره تلفن..."
 
-#: .\forms.py:19
+#: .\forms.py:21
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
-#: .\forms.py:25 .\forms.py:56
+#: .\forms.py:31
+#, python-format
+#| msgid ""
+#| "Your birth year must be less than or equal to %(current_year)s"
+msgid "Your birth date is invalid,date of today: %(current_date)s"
+msgstr "تاریخ تولد شما نامعتبر است،تاریخ امروز: %(current_date)s"
+
+#: .\forms.py:38 .\forms.py:69
 msgid "password..."
 msgstr "رمزعبور..."
 
-#: .\forms.py:27 .\forms.py:62
+#: .\forms.py:40 .\forms.py:75
 msgid "password confirmation..."
 msgstr "تکرار رمز عبور..."
 
-#: .\forms.py:37
+#: .\forms.py:50
 msgid "Email or Username"
 msgstr "آدرس ایمیل یا نام کاربری"
 
-#: .\forms.py:38
+#: .\forms.py:51
 msgid "Password"
 msgstr "رمزعبور"
 
-#: .\forms.py:43
+#: .\forms.py:56
 msgid "Your username is not valid!"
 msgstr "نام کاربری شما معتبر نیست!"
 
-#: .\forms.py:48
+#: .\forms.py:61
 msgid "Email"
 msgstr "ایمیل..."
 
-#: .\forms.py:50
+#: .\forms.py:63
 msgid "Enter a valid email address."
 msgstr "یک آدرس ایمیل معتبر وارد کنید."
 
-#: .\forms.py:55
+#: .\forms.py:68
 msgid "New password"
 msgstr "رمزعبور جدید"
 
-#: .\forms.py:60
+#: .\forms.py:73
 msgid "New password confirmation"
 msgstr "تکرار رمز عبور جدید..."
 
@@ -144,44 +152,38 @@ msgstr "کاربران"
 
 #: .\validators.py:8
 msgid ""
-"Enter a valid username. This value may contain only letters, digits, and ./-/"
-"_ only which starts with letters and has at least 4 characters."
+"Enter a valid username. This value may contain only letters, digits, and "
+"./-/_ only which starts with letters and has at least 4 characters."
 msgstr ""
-"یک نام کاربری معتبر وارد کنید. این نام باید شامل حروف، ارقام و ./-/_ باشد که "
-"با حروف شروع شود و حداقل دارای چهار کاراکتر باشد."
+"یک نام کاربری معتبر وارد کنید. این نام باید شامل حروف، ارقام و ./-/_ باشد که"
+" با حروف شروع شود و حداقل دارای چهار کاراکتر باشد."
 
 #: .\validators.py:16
 msgid ""
-"Enter a valid phone number. This value must have 11 digits which starts with "
-"the number 09."
+"Enter a valid phone number. This value must have 11 digits which starts with"
+" the number 09."
 msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: .\views.py:40
+#: .\views.py:39
 msgid "Username and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"
 
-#: .\views.py:68
-msgid ""
-"Enter your email and a mail will be sent with instructions to reset password"
-msgstr ""
-"ایمیل خود را وارد کنید و یک ایمیل با دستورالعمل بازنشانی رمز عبور برایتان "
-"ارسال خواهد شد."
-
-#: .\views.py:95
+#: .\views.py:93
 msgid "Invalid Header"
 msgstr "هدر نامعتبر است."
 
-#: .\views.py:98
+#: .\views.py:96
 msgid "There isn't an email with this address"
 msgstr "ایمیلی با این آدرس وجود ندارد."
 
-#: .\views.py:104
+#: .\views.py:102
 msgid ""
-"An email with password reset instructions has been sent to your email address"
+"An email with password reset instructions has been sent to your email "
+"address"
 msgstr "ایمیلی با دستورالعمل بازنشانی رمز عبور برای ایمیل شما ارسال شد."
 
-#: .\views.py:114
+#: .\views.py:113
 msgid "Your password has been successfully reset."
 msgstr "رمز شما با موفقیت بازنشانی شد."
