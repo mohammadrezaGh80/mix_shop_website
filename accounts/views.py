@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views import View, generic
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
@@ -15,7 +15,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetConfirmView
 
-from .forms import LoginForm, CustomUserCreationForm, CustomPasswordResetForm, CustomSetPasswordForm
+from .forms import LoginForm, CustomUserCreationForm, CustomPasswordResetForm, CustomSetPasswordForm, CustomPasswordChangeForm
 
 
 class LoginView(View):
@@ -112,3 +112,18 @@ class PasswordResetCompleteView(View):
     def get(self, request, *args, **kwargs):
         messages.info(request, _("Your password has been successfully reset."))
         return render(request, "registration/password_reset_complete.html")
+
+
+class PasswordChangeView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = CustomPasswordChangeForm(request.user)
+        return render(request, "registration/password_change.html", context={"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, request.user)
+            messages.success(request, _("Your password has been changed successfully."))
+            return redirect("pages:home")
+        return render(request, "registration/password_change.html", context={"form": form})

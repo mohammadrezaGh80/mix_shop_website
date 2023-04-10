@@ -8,6 +8,11 @@ from django.utils import timezone
 
 
 class CustomUserCreationForm(UserCreationForm):
+    error_messages = {
+        **UserCreationForm.error_messages,
+        "invalid_birth_date": _("Your birth date is invalid,date of today: %(current_date)s")
+    }
+
     class Meta:
         model = get_user_model()
         fields = ("email", "username", "first_name", "last_name", "phone", "birth_date")
@@ -26,9 +31,10 @@ class CustomUserCreationForm(UserCreationForm):
         birth_date = self.cleaned_data.get("birth_date")
         current_date = timezone.now().date()
         if birth_date and birth_date > current_date:
-            self.add_error(
-                "birth_date",
-                _("Your birth date is invalid,date of today: %(current_date)s") % {"current_date": current_date}
+            raise ValidationError(
+                self.error_messages["invalid_birth_date"],
+                code="invalid_birth_date",
+                params={"current_date": current_date}
             )
         return birth_date
 
@@ -74,3 +80,37 @@ class CustomSetPasswordForm(SetPasswordForm):
         strip=False,
         widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": _("password confirmation...")}),
     )
+
+
+class CustomPasswordChangeForm(CustomSetPasswordForm):
+    error_messages = {
+        **CustomSetPasswordForm.error_messages,
+        "password_incorrect": _("Your current password was entered incorrectly. Please enter it again.")
+    }
+
+    current_password = forms.CharField(
+        label=_("Current password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "autofocus": True, "placeholder": _("current password...")}
+        ),
+    )
+
+    field_order = ("current_password", "new_password1", "new_password2")
+
+    def clean_current_password(self):
+        current_password = self.cleaned_data["current_password"]
+        if not self.user.check_password(current_password):
+            raise ValidationError(
+                self.error_messages["password_incorrect"],
+                code="password_incorrect",
+            )
+        return current_password
+
+    def save(self, commit=True):
+        password = self.cleaned_data["new_password2"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user
+
