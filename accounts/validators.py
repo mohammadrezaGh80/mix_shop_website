@@ -8,6 +8,7 @@ class UsernameValidator(validators.RegexValidator):
         'Enter a valid username. This value may contain only letters, '
         'digits, and ./-/_ only which starts with letters and has at least 4 characters.'
     )
+    code = "invalid_username"
 
 
 class PhoneValidator(validators.RegexValidator):
@@ -16,3 +17,4 @@ class PhoneValidator(validators.RegexValidator):
         'Enter a valid phone number. This value must have 11 digits'
         ' which starts with the number 09.'
     )
+    code = "invalid_phone"

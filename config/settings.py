@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 from pathlib import Path
 from environs import Env
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     # my apps
     'accounts',
     'pages',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -123,8 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fa'
 LANGUAGES = (
-    ("en", "English"),
-    ("fa", "Persian"),
+    ("en", _("English")),
+    ("fa", _("Persian")),
 )
 
 TIME_ZONE = 'Asia/Tehran'
@@ -141,6 +143,10 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# media config
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
