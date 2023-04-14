@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-08 12:02+0430\n"
-"PO-Revision-Date: 2023-04-08 11:03+0330\n"
+"POT-Creation-Date: 2023-04-14 12:45+0430\n"
+"PO-Revision-Date: 2023-04-14 11:46+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -31,80 +31,84 @@ msgstr "دسترسی ها"
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:13
+#: .\forms.py:15
 #, python-format
 msgid "Your birth date is invalid,date of today: %(current_date)s"
 msgstr "تاریخ تولد شما نامعتبر است،تاریخ امروز: %(current_date)s"
 
-#: .\forms.py:20 .\forms.py:68
+#: .\forms.py:16
+msgid "The age value for register must be at least 10 years old."
+msgstr "حداقل سن مورد نیاز برای ثبت نام 10 سال است."
+
+#: .\forms.py:23 .\forms.py:76
 msgid "email..."
 msgstr "ایمیل..."
 
-#: .\forms.py:21
+#: .\forms.py:24
 msgid "username..."
 msgstr "نام کاربری..."
 
-#: .\forms.py:22
+#: .\forms.py:25
 msgid "first name..."
 msgstr "نام..."
 
-#: .\forms.py:23
+#: .\forms.py:26
 msgid "last name..."
 msgstr "نام خانوادگی..."
 
-#: .\forms.py:24
+#: .\forms.py:27
 msgid "phone number..."
 msgstr "شماره تلفن..."
 
-#: .\forms.py:26
+#: .\forms.py:29
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
-#: .\forms.py:44 .\forms.py:75
+#: .\forms.py:52 .\forms.py:83
 msgid "password..."
 msgstr "رمزعبور..."
 
-#: .\forms.py:46 .\forms.py:81
+#: .\forms.py:54 .\forms.py:89
 msgid "password confirmation..."
 msgstr "تکرار رمز عبور..."
 
-#: .\forms.py:56
+#: .\forms.py:64
 msgid "Email or Username"
 msgstr "آدرس ایمیل یا نام کاربری"
 
-#: .\forms.py:57
+#: .\forms.py:65
 msgid "Password"
 msgstr "رمزعبور"
 
-#: .\forms.py:62
+#: .\forms.py:70
 msgid "Your username is not valid!"
 msgstr "نام کاربری شما معتبر نیست!"
 
-#: .\forms.py:67
+#: .\forms.py:75
 msgid "Email"
 msgstr "ایمیل..."
 
-#: .\forms.py:69
+#: .\forms.py:77
 msgid "Enter a valid email address."
 msgstr "یک آدرس ایمیل معتبر وارد کنید."
 
-#: .\forms.py:74
+#: .\forms.py:82
 msgid "New password"
 msgstr "رمزعبور جدید"
 
-#: .\forms.py:79
+#: .\forms.py:87
 msgid "New password confirmation"
 msgstr "تکرار رمز عبور جدید..."
 
-#: .\forms.py:88
+#: .\forms.py:96
 msgid "Your current password was entered incorrectly. Please enter it again."
 msgstr "رمزعبور فعلی خود را اشتباه وارد کردید. دوباره وارد کنید."
 
-#: .\forms.py:92
+#: .\forms.py:100
 msgid "Current password"
 msgstr "رمزعبور فعلی"
 
-#: .\forms.py:95
+#: .\forms.py:103
 msgid "current password..."
 msgstr "رمزعبور فعلی..."
 
@@ -168,7 +172,7 @@ msgstr ""
 "یک نام کاربری معتبر وارد کنید. این نام باید شامل حروف، ارقام و ./-/_ باشد که"
 " با حروف شروع شود و حداقل دارای چهار کاراکتر باشد."
 
-#: .\validators.py:16
+#: .\validators.py:17
 msgid ""
 "Enter a valid phone number. This value must have 11 digits which starts with"
 " the number 09."
@@ -199,7 +203,6 @@ msgid "Your password has been successfully reset."
 msgstr "رمز شما با موفقیت بازنشانی شد."
 
 #: .\views.py:127
-#| msgid "Your password has been changed successfully"
 msgid "Your password has been changed successfully."
 msgstr "رمز شما با موفقیت تغییر یافت."
 

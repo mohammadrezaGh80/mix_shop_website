@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rosetta',
+    'jalali_date',
 
     # my apps
     'accounts',

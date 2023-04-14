@@ -5,12 +5,17 @@ from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import SetPasswordForm
 from django.utils import timezone
+from django.utils.translation import get_language
+
+from dateutil.relativedelta import relativedelta
+import jdatetime
 
 
 class CustomUserCreationForm(UserCreationForm):
     error_messages = {
         **UserCreationForm.error_messages,
-        "invalid_birth_date": _("Your birth date is invalid,date of today: %(current_date)s")
+        "invalid_birth_date": _("Your birth date is invalid,date of today: %(current_date)s"),
+        "invalid_age": _("The age value for register must be at least 10 years old.")
     }
 
     class Meta:
@@ -22,19 +27,26 @@ class CustomUserCreationForm(UserCreationForm):
             "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("first name...")}),
             "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("last name...")}),
             "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": _("phone number...")}),
-            "birth_date": forms.DateInput(
-                attrs={"class": "form-control", "placeholder": _("birth date..."), "type": "date"}
-            ),
         }
 
     def clean_birth_date(self):
         birth_date = self.cleaned_data.get("birth_date")
         current_date = timezone.now().date()
+        if get_language() == "fa":
+            birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
+
         if birth_date and birth_date > current_date:
             raise ValidationError(
                 self.error_messages["invalid_birth_date"],
                 code="invalid_birth_date",
-                params={"current_date": current_date}
+                params={"current_date": current_date if get_language() == "en" else jdatetime.date.fromgregorian(
+                    year=current_date.year, month=current_date.month, day=current_date.day
+                ).strftime("%Y/%m/%d")}
+            )
+        elif birth_date and relativedelta(current_date, birth_date).years < 10:
+            raise ValidationError(
+                self.error_messages["invalid_age"],
+                code="invalid_age"
             )
         return birth_date
 
@@ -113,4 +125,3 @@ class CustomPasswordChangeForm(CustomSetPasswordForm):
         if commit:
             self.user.save()
         return self.user
-

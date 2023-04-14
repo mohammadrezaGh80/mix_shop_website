@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-10 19:01+0430\n"
-"PO-Revision-Date: 2023-04-10 18:02+0330\n"
+"POT-Creation-Date: 2023-04-14 17:50+0430\n"
+"PO-Revision-Date: 2023-04-14 16:51+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\_base.html:28
+#: .\_base.html:29
 msgid "EN"
 msgstr "انگلیسی"
 
-#: .\_base.html:31
+#: .\_base.html:32
 msgid "FA"
 msgstr "فارسی"
 
@@ -36,7 +36,6 @@ msgid "Welcome"
 msgstr "خوش آمدید"
 
 #: .\home.html:21
-#| msgid "Change Password"
 msgid "Change password"
 msgstr "تغییر رمزعبور"
 
@@ -53,12 +52,12 @@ msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
 
 #: .\registration\login.html:6 .\registration\login.html:33
-#: .\registration\register.html:76
+#: .\registration\register.html:80
 msgid "Login"
 msgstr "ورود"
 
 #: .\registration\login.html:35 .\registration\register.html:6
-#: .\registration\register.html:75
+#: .\registration\register.html:79
 msgid "Register"
 msgstr "ثبت نام"
 
@@ -108,3 +107,7 @@ msgstr "تغییر رمزعبور"
 #: .\registration\password_reset_done.html:6
 msgid "Sent"
 msgstr "ارسال شد"
+
+#: .\registration\register.html:56 .\registration\register.html:58
+msgid "birth date..."
+msgstr "تاریخ تولد..."
