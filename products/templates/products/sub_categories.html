@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<ul class="dropdown-menu dropdown-submenu">
+    {% for category in category.sub_categories.all %}
+        <li>
+            <a class="dropdown-item" href="#">{% trans category.category_name %} {% if category.sub_categories.all %}&raquo{% endif %}</a>
+        {% if category.sub_categories.all %}
+            {% include "products/sub_categories.html" %}
+        {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+

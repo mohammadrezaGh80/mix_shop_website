@@ -1,17 +1,12 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from .models import Category, SubCategory, ProductColor, ProductSize, Product, ProductImage
+from .models import Category, ProductColor, ProductSize, Product, ProductImage
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("category_name", )
-
-
-@admin.register(SubCategory)
-class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ("sub_category_name", "category", )
+    list_display = ("category_name", "parent")
 
 
 @admin.register(ProductColor)

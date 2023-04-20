@@ -10,18 +10,7 @@ class Category(models.Model):
     STATIONERY = _("stationery")
     BEAUTY_AND_HEALTH = _("beauty and health")
 
-    category_name = models.CharField(max_length=100, verbose_name=_("Category's name"))
-
-    def __str__(self):
-        return self.category_name
-
-    class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
-
-
-class SubCategory(models.Model):
-    PHONE = _("phone")
+    SMART_PHONE = _("smart phone")
     TELEVISION = _("television")
     LAPTOP = _("laptop")
     CAMERA = _("camera")
@@ -36,16 +25,16 @@ class SubCategory(models.Model):
     COSMETIC = _("cosmetic")
     SANITARY_WARE = _("sanitary ware")
 
-    sub_category_name = models.CharField(max_length=150, verbose_name=_("Sub category's name"))
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,
-                                 related_name="sub_categories", verbose_name=_("Category"))
+    category_name = models.CharField(max_length=150, verbose_name=_("Category's name"))
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
+                               related_name="sub_categories", verbose_name=_("Category"))
 
     def __str__(self):
-        return f"{self.sub_category_name}({self.category.category_name})"
+        return self.category_name
 
     class Meta:
-        verbose_name = _("Sub category")
-        verbose_name_plural = _("Sub categories")
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
 
 
 class ProductColor(models.Model):

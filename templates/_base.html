@@ -18,13 +18,60 @@
               crossorigin="anonymous">
     {% endif %}
     <title>{% block page_title %}{% endblock page_title %}</title>
+    <style>
+        {% if LANGUAGE_CODE == "en" %}
+            .dropdown-menu li {
+                position: relative;
+            }
+
+            .dropdown-menu .dropdown-submenu {
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: -7px;
+            }
+
+            .dropdown-menu .dropdown-submenu-left {
+                right: 100%;
+                left: auto;
+            }
+
+            .dropdown-menu > li:hover > .dropdown-submenu {
+                display: block;
+            }
+            {% else %}
+            .dropdown-menu li {
+                position: relative;
+            }
+
+            .dropdown-menu .dropdown-submenu {
+                display: none;
+                position: absolute;
+                right: 100%;
+                top: -7px;
+            }
+
+            .dropdown-menu .dropdown-submenu-left {
+                left: 100%;
+                right: auto;
+            }
+
+            .dropdown-menu > li:hover > .dropdown-submenu {
+                display: block;
+            }
+        {% endif %}
+    </style>
 </head>
 <body>
 
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="d-flex align-items-center my-3">
+<div class="my-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                {% include "products/categories.html" %}
+            </div>
+            <div class="col-6">
+                <div class="d-flex align-items-center justify-content-end">
                     <a class="text-decoration-none bg-primary text-light px-2 py-1 rounded"
                        href="{% url 'pages:change_language' %}?lang=en&next_page={{ request.path }}">{% trans 'EN' %}</a>
                     <span class="mx-2">/</span>
@@ -34,6 +81,7 @@
             </div>
         </div>
     </div>
+</div>
 
 {% block page_content %}
 {% endblock page_content %}

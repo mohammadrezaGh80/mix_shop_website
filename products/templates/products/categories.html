@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<div class="btn-group">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            data-bs-auto-close="outside" aria-expanded="false">
+        {% trans "categories" %}
+    </button>
+    <ul class="dropdown-menu">
+        {% for category in categories %}
+            {% if not category.parent %}
+                <li>
+                    <a class="dropdown-item" href="#">{% trans category.category_name %} {% if category.sub_categories.all %}&raquo{% endif %}</a>
+                {% if category.sub_categories.all %}
+                    {% include "products/sub_categories.html" with category=category %}
+                {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
