@@ -32,10 +32,10 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_birth_date(self):
         birth_date = self.cleaned_data.get("birth_date")
         current_date = timezone.now().date()
-        if get_language() == "fa":
+        if birth_date and get_language() == "fa":
             birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
 
-        if birth_date and birth_date > current_date:
+        if birth_date and birth_date < current_date:
             raise ValidationError(
                 self.error_messages["invalid_birth_date"],
                 code="invalid_birth_date",
@@ -59,9 +59,49 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    error_messages = {
+        "invalid_birth_date": _("Your birth date is invalid,date of today: %(current_date)s"),
+        "invalid_age": _("The age value for register must be at least 10 years old.")
+    }
+
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", "first_name", "last_name", "phone", "birth_date", "is_active", "is_admin",)
+        fields = ("username", "email", "first_name", "last_name", "phone", "birth_date",)
+        widgets = {
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": _("email...")}),
+            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": _("username...")}),
+            "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("first name...")}),
+            "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("last name...")}),
+            "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": _("phone number...")}),
+        }
+
+    def clean_birth_date(self):
+        birth_date = self.cleaned_data.get("birth_date")
+        current_date = timezone.now().date()
+        if birth_date and get_language() == "fa":
+            birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month,
+                                        day=birth_date.day).togregorian()
+
+        if birth_date and birth_date < current_date:
+            raise ValidationError(
+                self.error_messages["invalid_birth_date"],
+                code="invalid_birth_date",
+                params={"current_date": current_date if get_language() == "en" else jdatetime.date.fromgregorian(
+                    year=current_date.year, month=current_date.month, day=current_date.day
+                ).strftime("%Y/%m/%d")}
+            )
+        elif birth_date and relativedelta(current_date, birth_date).years < 10:
+            raise ValidationError(
+                self.error_messages["invalid_age"],
+                code="invalid_age"
+            )
+        return birth_date
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
 
 
 class LoginForm(forms.Form):

@@ -1,0 +1,63 @@
+{% load i18n %}
+
+<div class="sidebar border border-secondary rounded p-3">
+    <div class="top-sidebar d-flex justify-content-between align-items-center">
+        <figure class="mb-0" style="width: 45px;height: 45px">
+            <img class="w-100 h-100 d-block"
+                 src="https://api.digikala.com/static/files/fd4840b2.svg" alt="">
+        </figure>
+        <p class="d-flex flex-column mb-0">
+            <span>{{ user.email }}</span>
+            {% if user.phone %}
+                <span>{{ user.phone }}</span>
+            {% endif %}
+        </p>
+        <a href="{% url "profiles:personal_info" %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.5" stroke="currentColor" style="width: 25px;height: 25px">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+            </svg>
+        </a>
+    </div>
+    <div class="bottom-sidebar mt-5">
+        <ul>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "summary_of_activities" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:profile_page" %}">{% trans "Summary of activities" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "orders" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:orders" %}">{% trans "Orders" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "favorites_list" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:favorites_list" %}">{% trans "Favorites list" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "comments" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:comments" %}">{% trans "Comments" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "addresses" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:addresses" %}">{% trans "Addresses" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "messages" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:messages" %}">{% trans "Messages" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "recent_visits" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:recent_visits" %}">{% trans "Recent visits" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "personal_info" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:personal_info" %}">{% trans "Personal info" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if section == "logout" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "accounts:logout" %}">{% trans "Logout" %}</a>
+            </li>
+        </ul>
+    </div>
+</div>

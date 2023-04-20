@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 12:19+0430\n"
-"PO-Revision-Date: 2023-04-20 11:20+0330\n"
+"POT-Creation-Date: 2023-04-20 19:23+0430\n"
+"PO-Revision-Date: 2023-04-20 18:23+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,6 +19,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
+#: .\templates\profiles\addresses.html:6
+#: .\templates\profiles\addresses.html:21
+#: .\templates\profiles\sidebar_profile.html:43
+msgid "Addresses"
+msgstr "آدرس ها"
+
+#: .\templates\profiles\comments.html:6 .\templates\profiles\comments.html:21
+#: .\templates\profiles\sidebar_profile.html:39
+msgid "Comments"
+msgstr "دیدگاه ها"
+
+#: .\templates\profiles\favorites.html:6
+#: .\templates\profiles\favorites.html:21
+#: .\templates\profiles\sidebar_profile.html:35
+#| msgid "Favorits list"
+msgid "Favorites list"
+msgstr "لیست علاقه مندی ها"
+
+#: .\templates\profiles\messages.html:6 .\templates\profiles\messages.html:21
+#: .\templates\profiles\sidebar_profile.html:47
+msgid "Messages"
+msgstr "پیغام ها"
+
+#: .\templates\profiles\orders.html:6 .\templates\profiles\orders.html:21
+#: .\templates\profiles\sidebar_profile.html:31
+msgid "Orders"
+msgstr "سفارش ها"
+
+#: .\templates\profiles\personal_info.html:6
+#: .\templates\profiles\sidebar_profile.html:55
+msgid "Personal info"
+msgstr "اطلاعات حساب کاربری"
+
+#: .\templates\profiles\personal_info.html:68
+#: .\templates\profiles\personal_info.html:71
+msgid "birth date..."
+msgstr "تاریخ تولد..."
+
+#: .\templates\profiles\personal_info.html:79
+msgid "Edit"
+msgstr "ویرایش"
+
 #: .\templates\profiles\profile_page.html:6
 msgid "Profile"
 msgstr "پروفایل"
+
+#: .\templates\profiles\profile_page.html:21
+#: .\templates\profiles\sidebar_profile.html:27
+msgid "Summary of activities"
+msgstr "خلاصه فعالیت ها"
+
+#: .\templates\profiles\recent_visits.html:6
+#: .\templates\profiles\recent_visits.html:21
+#: .\templates\profiles\sidebar_profile.html:51
+msgid "Recent visits"
+msgstr "بازدید های اخیر"
+
+#: .\templates\profiles\sidebar_profile.html:59
+msgid "Logout"
+msgstr "خروج"
+
+#: .\views.py:47
+msgid "Your information has been edited successfully."
+msgstr "اطلاعات شما با موفقیت ویرایش شد."

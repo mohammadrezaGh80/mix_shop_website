@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-15 19:33+0430\n"
-"PO-Revision-Date: 2023-04-15 18:40+0330\n"
+"PO-Revision-Date: 2023-04-20 16:16+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: .\admin.py:18
 msgid "Personal info"
-msgstr "اطلاعات شخصی"
+msgstr "اطلاعات حساب کاربری"
 
 #: .\admin.py:19
 msgid "Permissions"

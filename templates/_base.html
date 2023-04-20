@@ -19,6 +19,18 @@
     {% endif %}
     <title>{% block page_title %}{% endblock page_title %}</title>
     <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,li,ol{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
         {% if LANGUAGE_CODE == "en" %}
             .dropdown-menu li {
                 position: relative;
@@ -39,7 +51,7 @@
             .dropdown-menu > li:hover > .dropdown-submenu {
                 display: block;
             }
-            {% else %}
+        {% else %}
             .dropdown-menu li {
                 position: relative;
             }

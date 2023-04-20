@@ -3,7 +3,7 @@
 {% load i18n %}
 
 
-{% block page_title %}{% trans 'Profile' %}{% endblock page_title %}
+{% block page_title %}{% trans 'Recent visits' %}{% endblock page_title %}
 
 {% block page_content %}
     <div class="mt-5">
@@ -14,11 +14,11 @@
                 {% endfor %}
 
                 <div class="col-4">
-                    {% include "profiles/profile_sidebar.html" with section="summary_of_activities" %}
+                    {% include "profiles/profile_sidebar.html" with section="recent_visits" %}
                 </div>
                 <div class="col-8">
                     <div>
-                        {% trans "Summary of activities" %}
+                        {% trans "Recent visits" %}
                     </div>
                 </div>
             </div>
