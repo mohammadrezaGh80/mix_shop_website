@@ -18,6 +18,8 @@
                     {% if user.is_authenticated %}
                         <span>{% trans 'Welcome' %} {{ user.email }}</span> |
                         <a class="text-decoration-none"
+                           href="{% url 'profiles:profile_page' %}">{% trans 'Profile' %}</a> |
+                        <a class="text-decoration-none"
                            href="{% url 'accounts:password_change' %}">{% trans 'Change password' %}</a> |
                         <a class="text-decoration-none"
                            href="{% url 'accounts:logout' %}">{% trans 'Logout of account' %}</a>

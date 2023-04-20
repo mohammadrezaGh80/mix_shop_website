@@ -34,7 +34,7 @@ class LoginView(View):
             user = authenticate(request, username=cleaned_data["username"], password=cleaned_data["password"])
             if user is not None:
                 login(request, user)
-                return redirect("pages:home")
+                return redirect(self.request.GET.get("next", "pages:home"))
             else:
                 messages.error(request, _("Username and Password is incorrect!"))
 

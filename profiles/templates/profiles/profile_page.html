@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+
+
+{% block page_title %}{% trans 'Profile' %}{% endblock page_title %}
+
+{% block page_content %}
+    <div class="mt-5">
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+
+            <div class="col-4">
+                <div>
+                    fdlkdcodko
+                </div>
+            </div>
+            <div class="col-8">
+                <div>
+                    d,slxsssll
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
