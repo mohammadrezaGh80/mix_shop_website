@@ -14,13 +14,17 @@
                 {% endfor %}
 
                 <div>
-                {% if products %}
-                    {% for product in products %}
-                        {{ product.title }}
-                    {% endfor %}
-                {% else %}
-                    <p class="alert alert-info">{% trans "There aren't any product." %}</p>
-                {% endif %}
+                    {% if products %}
+                        {% for product in products %}
+                            <div class="my-3">
+                                <h3>{{ product.title }}(<span class="fs-4">{{ product.price }} {% trans "$" %}</span>)</h3>
+                                <div class="mw-100 mt-4">{{ product.description|safe }}</div>
+                            </div>
+                            ----------------------------------
+                        {% endfor %}
+                    {% else %}
+                        <p class="alert alert-info">{% trans "There aren't any product." %}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

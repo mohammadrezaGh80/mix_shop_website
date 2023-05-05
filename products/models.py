@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.core import validators
 
+from ckeditor.fields import RichTextField
+
 
 class Category(models.Model):
     DIGITAL_PRODUCT = _("digital-product")
@@ -94,7 +96,7 @@ class Product(models.Model):
     )
     color = models.ManyToManyField(ProductColor, related_name="products", blank=True, verbose_name=_("Color"))
     size = models.ManyToManyField(ProductSize, related_name="products", blank=True, verbose_name=_("Size"))
-    description = models.TextField(verbose_name=_("Description"))
+    description = RichTextField(verbose_name=_("Description"))
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE, verbose_name=_("Category"))
 
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name=_("Created datetime"))

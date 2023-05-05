@@ -31,6 +31,10 @@
             padding: 0;
         }
 
+        p{
+            margin: 0;
+        }
+
         {% if LANGUAGE_CODE == "en" %}
             .dropdown-menu li {
                 position: relative;
@@ -72,6 +76,20 @@
                 display: block;
             }
         {% endif %}
+
+        {#product sub category list#}
+
+        table{
+            border: none!important;
+        }
+
+        table tr > td{
+            padding-bottom: 15px!important;
+        }
+
+        table tr > td:last-child{
+            padding: 0 10px 15px 10px!important;
+        }
     </style>
 </head>
 <body>

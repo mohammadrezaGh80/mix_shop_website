@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     # third party apps
     'rosetta',
     'jalali_date',
+    'ckeditor',
+    'modeltranslation',
 
     # my apps
     'accounts',
@@ -145,11 +147,13 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# static config
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # media config
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

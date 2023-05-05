@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 11:25+0430\n"
-"PO-Revision-Date: 2023-05-05 10:25+0330\n"
+"POT-Creation-Date: 2023-05-05 16:40+0430\n"
+"PO-Revision-Date: 2023-05-05 15:40+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\admin.py:33 .\models.py:96
+#: .\admin.py:33 .\models.py:98
 msgid "Size"
 msgstr "اندازه"
 
-#: .\admin.py:37 .\models.py:95
+#: .\admin.py:37 .\models.py:97
 msgid "Color"
 msgstr "رنگ"
 
@@ -31,215 +31,215 @@ msgstr "رنگ"
 msgid "products"
 msgstr "محصولات"
 
-#: .\models.py:8
+#: .\models.py:10
 msgid "digital-product"
 msgstr "کالای دیجیتال"
 
-#: .\models.py:9
+#: .\models.py:11
 msgid "clothing"
 msgstr "پوشاک"
 
-#: .\models.py:10
+#: .\models.py:12
 msgid "stationery"
 msgstr "لوازم تحریر"
 
-#: .\models.py:11
+#: .\models.py:13
 msgid "beauty-and-health"
 msgstr "زیبایی و سلامت"
 
-#: .\models.py:13
+#: .\models.py:15
 msgid "smart-phone"
 msgstr "موبایل"
 
-#: .\models.py:14
+#: .\models.py:16
 msgid "television"
 msgstr "تلویزیون"
 
-#: .\models.py:15
+#: .\models.py:17
 msgid "laptop"
 msgstr "لپ تاپ"
 
-#: .\models.py:16
+#: .\models.py:18
 msgid "camera"
 msgstr "دوربین"
 
-#: .\models.py:17
+#: .\models.py:19
 msgid "game-console"
 msgstr "کنسول بازی"
 
-#: .\models.py:18
+#: .\models.py:20
 msgid "menswear"
 msgstr "لباس مردانه"
 
-#: .\models.py:19
+#: .\models.py:21
 msgid "women's-dress"
 msgstr "لباس زنانه"
 
-#: .\models.py:20
+#: .\models.py:22
 msgid "men's-shoes"
 msgstr "کفش مردانه"
 
-#: .\models.py:21
+#: .\models.py:23
 msgid "women's-shoes"
 msgstr "کفش زنانه"
 
-#: .\models.py:22
+#: .\models.py:24
 msgid "notebook"
 msgstr "دفتر"
 
-#: .\models.py:23
+#: .\models.py:25
 msgid "pencil"
 msgstr "مداد"
 
-#: .\models.py:24
+#: .\models.py:26
 msgid "desk"
 msgstr "میز تحریر"
 
-#: .\models.py:25
+#: .\models.py:27
 msgid "cosmetic"
 msgstr "لوازم آرایشی"
 
-#: .\models.py:26
+#: .\models.py:28
 msgid "sanitary-ware"
 msgstr "لوازم بهداشتی"
 
-#: .\models.py:28
+#: .\models.py:30
 msgid "Category's name"
 msgstr "نام دسته بندی"
 
-#: .\models.py:30 .\models.py:36 .\models.py:98
+#: .\models.py:32 .\models.py:38 .\models.py:100
 msgid "Category"
 msgstr "دسته بندی"
 
-#: .\models.py:37
+#: .\models.py:39
 msgid "Categories"
 msgstr "دسته بندی ها"
 
-#: .\models.py:41
+#: .\models.py:43
 msgid "red"
 msgstr "قرمز"
 
-#: .\models.py:42
+#: .\models.py:44
 msgid "blue"
 msgstr "آبی"
 
-#: .\models.py:43
+#: .\models.py:45
 msgid "black"
 msgstr "مشکی"
 
-#: .\models.py:44
+#: .\models.py:46
 msgid "white"
 msgstr "سفید"
 
-#: .\models.py:45
+#: .\models.py:47
 msgid "pink"
 msgstr "صورتی"
 
-#: .\models.py:46
+#: .\models.py:48
 msgid "yellow"
 msgstr "زرد"
 
-#: .\models.py:47
+#: .\models.py:49
 msgid "brown"
 msgstr "قهوه ای"
 
-#: .\models.py:48
+#: .\models.py:50
 msgid "purple"
 msgstr "بنفش"
 
-#: .\models.py:49
+#: .\models.py:51
 msgid "green"
 msgstr "سبز"
 
-#: .\models.py:50
+#: .\models.py:52
 msgid "orange"
 msgstr "نارنجی"
 
-#: .\models.py:51
+#: .\models.py:53
 msgid "gray"
 msgstr "خاکستری"
 
-#: .\models.py:52
+#: .\models.py:54
 msgid "golden"
 msgstr "طلایی"
 
-#: .\models.py:53
+#: .\models.py:55
 msgid "silver"
 msgstr "نقره ای"
 
-#: .\models.py:54
+#: .\models.py:56
 msgid "bronze"
 msgstr "برنزی"
 
-#: .\models.py:56
+#: .\models.py:58
 msgid "Color's name"
 msgstr "نام رنگ"
 
-#: .\models.py:62
+#: .\models.py:64
 msgid "Product color"
 msgstr "رنگ محصول"
 
-#: .\models.py:63
+#: .\models.py:65
 msgid "Product colors"
 msgstr "رنگ های محصول"
 
-#: .\models.py:75
+#: .\models.py:77
 msgid "Size's name"
 msgstr "نام اندازه"
 
-#: .\models.py:81
+#: .\models.py:83
 msgid "Product size"
 msgstr "اندازه محصول"
 
-#: .\models.py:82
+#: .\models.py:84
 msgid "Product sizes"
 msgstr "اندازه های محصول"
 
-#: .\models.py:86
+#: .\models.py:88
 msgid "Title"
 msgstr "عنوان"
 
-#: .\models.py:88
+#: .\models.py:90
 msgid "Seller"
 msgstr "فروشنده"
 
-#: .\models.py:92
+#: .\models.py:94
 msgid "The value of the price cannot be negative or zero."
 msgstr "مقدار قیمت نمیتواند عدد منفی یا صفر باشد."
 
-#: .\models.py:93
+#: .\models.py:95
 msgid "Price"
 msgstr "قیمت"
 
-#: .\models.py:97
+#: .\models.py:99
 msgid "Description"
 msgstr "توضیحات"
 
-#: .\models.py:100
+#: .\models.py:102
 msgid "Created datetime"
 msgstr "زمان ایجاد"
 
-#: .\models.py:101
+#: .\models.py:103
 msgid "Modified datetime"
 msgstr "زمان ویرایش"
 
-#: .\models.py:107 .\models.py:113
+#: .\models.py:109 .\models.py:115
 msgid "Product"
 msgstr "محصول"
 
-#: .\models.py:108
+#: .\models.py:110
 msgid "Products"
 msgstr "محصولات"
 
-#: .\models.py:112
+#: .\models.py:114
 msgid "Image"
 msgstr "عکس"
 
-#: .\models.py:119
+#: .\models.py:121
 msgid "Product image"
 msgstr "عکس محصول"
 
-#: .\models.py:120
+#: .\models.py:122
 msgid "Product images"
 msgstr "عکس های محصولات"
 
@@ -247,7 +247,11 @@ msgstr "عکس های محصولات"
 msgid "categories"
 msgstr "دسته بندی ها"
 
-#: .\templates\products\product_sub_category_list.html:22
+#: .\templates\products\product_sub_category_list.html:20
+msgid "$"
+msgstr "تومان"
+
+#: .\templates\products\product_sub_category_list.html:26
 msgid "There aren't any product."
 msgstr "هیچ محصولی وجود ندارد."
 
