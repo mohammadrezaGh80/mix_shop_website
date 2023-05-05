@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 19:43+0430\n"
-"PO-Revision-Date: 2023-04-15 18:43+0330\n"
+"POT-Creation-Date: 2023-05-05 11:25+0430\n"
+"PO-Revision-Date: 2023-05-05 10:25+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -32,7 +32,7 @@ msgid "products"
 msgstr "محصولات"
 
 #: .\models.py:8
-msgid "digital product"
+msgid "digital-product"
 msgstr "کالای دیجیتال"
 
 #: .\models.py:9
@@ -44,12 +44,11 @@ msgid "stationery"
 msgstr "لوازم تحریر"
 
 #: .\models.py:11
-msgid "beauty and health"
+msgid "beauty-and-health"
 msgstr "زیبایی و سلامت"
 
 #: .\models.py:13
-#| msgid "phone"
-msgid "smart phone"
+msgid "smart-phone"
 msgstr "موبایل"
 
 #: .\models.py:14
@@ -65,7 +64,7 @@ msgid "camera"
 msgstr "دوربین"
 
 #: .\models.py:17
-msgid "game console"
+msgid "game-console"
 msgstr "کنسول بازی"
 
 #: .\models.py:18
@@ -73,15 +72,15 @@ msgid "menswear"
 msgstr "لباس مردانه"
 
 #: .\models.py:19
-msgid "women's dress"
+msgid "women's-dress"
 msgstr "لباس زنانه"
 
 #: .\models.py:20
-msgid "men's shoes"
+msgid "men's-shoes"
 msgstr "کفش مردانه"
 
 #: .\models.py:21
-msgid "women's shoes"
+msgid "women's-shoes"
 msgstr "کفش زنانه"
 
 #: .\models.py:22
@@ -101,14 +100,14 @@ msgid "cosmetic"
 msgstr "لوازم آرایشی"
 
 #: .\models.py:26
-msgid "sanitary ware"
+msgid "sanitary-ware"
 msgstr "لوازم بهداشتی"
 
 #: .\models.py:28
 msgid "Category's name"
 msgstr "نام دسته بندی"
 
-#: .\models.py:30 .\models.py:36
+#: .\models.py:30 .\models.py:36 .\models.py:98
 msgid "Category"
 msgstr "دسته بندی"
 
@@ -216,37 +215,44 @@ msgstr "قیمت"
 msgid "Description"
 msgstr "توضیحات"
 
-#: .\models.py:99
+#: .\models.py:100
 msgid "Created datetime"
 msgstr "زمان ایجاد"
 
-#: .\models.py:100
+#: .\models.py:101
 msgid "Modified datetime"
 msgstr "زمان ویرایش"
 
-#: .\models.py:106 .\models.py:112
+#: .\models.py:107 .\models.py:113
 msgid "Product"
 msgstr "محصول"
 
-#: .\models.py:107
+#: .\models.py:108
 msgid "Products"
 msgstr "محصولات"
 
-#: .\models.py:111
+#: .\models.py:112
 msgid "Image"
 msgstr "عکس"
 
-#: .\models.py:118
+#: .\models.py:119
 msgid "Product image"
 msgstr "عکس محصول"
 
-#: .\models.py:119
+#: .\models.py:120
 msgid "Product images"
 msgstr "عکس های محصولات"
 
 #: .\templates\products\categories.html:6
 msgid "categories"
 msgstr "دسته بندی ها"
+
+#: .\templates\products\product_sub_category_list.html:22
+msgid "There aren't any product."
+msgstr "هیچ محصولی وجود ندارد."
+
+#~ msgid "Home"
+#~ msgstr "خانه"
 
 #~ msgid "Sub category's name"
 #~ msgstr "نام زیردسته بندی"

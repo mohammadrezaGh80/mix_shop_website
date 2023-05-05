@@ -1,3 +1,29 @@
-from django.shortcuts import render
+from django.views import View
+from django.shortcuts import get_object_or_404, render
+from django.http import Http404
 
-# Create your views here.
+from .models import Category, Product
+
+
+class ProductCategoryView(View):
+    def get(self, request, category_name, *args, **kwargs):
+        category = get_object_or_404(Category, category_name=category_name)
+        if category.parent:
+            raise Http404()
+
+        sub_categories = category.sub_categories.all()
+
+        return render(request, "products/product_category.html",
+                      context={"category_name": category_name, "sub_categories": sub_categories})
+
+
+class ProductSubCategoryListView(View):
+    def get(self, request, category_name, *args, **kwargs):
+        category = get_object_or_404(Category, category_name=category_name)
+        if not category.parent:
+            raise Http404()
+
+        products = Product.objects.filter(category=category)
+
+        return render(request, "products/product_sub_category_list.html",
+                      context={"category_name": category_name, "products": products})

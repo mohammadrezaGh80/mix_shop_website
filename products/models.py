@@ -5,25 +5,25 @@ from django.core import validators
 
 
 class Category(models.Model):
-    DIGITAL_PRODUCT = _("digital product")
+    DIGITAL_PRODUCT = _("digital-product")
     CLOTHING = _("clothing")
     STATIONERY = _("stationery")
-    BEAUTY_AND_HEALTH = _("beauty and health")
+    BEAUTY_AND_HEALTH = _("beauty-and-health")
 
-    SMART_PHONE = _("smart phone")
+    SMART_PHONE = _("smart-phone")
     TELEVISION = _("television")
     LAPTOP = _("laptop")
     CAMERA = _("camera")
-    GAME_CONSOLE = _("game console")
+    GAME_CONSOLE = _("game-console")
     MENSWEAR = _("menswear")
-    WOMEN_DRESS = _("women's dress")
-    MEN_SHOES = _("men's shoes")
-    WOMEN_SHOES = _("women's shoes")
+    WOMEN_DRESS = _("women's-dress")
+    MEN_SHOES = _("men's-shoes")
+    WOMEN_SHOES = _("women's-shoes")
     NOTEBOOK = _("notebook")
     PENCIL = _("pencil")
     DESK = _("desk")
     COSMETIC = _("cosmetic")
-    SANITARY_WARE = _("sanitary ware")
+    SANITARY_WARE = _("sanitary-ware")
 
     category_name = models.CharField(max_length=150, verbose_name=_("Category's name"))
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
@@ -95,6 +95,7 @@ class Product(models.Model):
     color = models.ManyToManyField(ProductColor, related_name="products", blank=True, verbose_name=_("Color"))
     size = models.ManyToManyField(ProductSize, related_name="products", blank=True, verbose_name=_("Size"))
     description = models.TextField(verbose_name=_("Description"))
+    category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE, verbose_name=_("Category"))
 
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name=_("Created datetime"))
     modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))

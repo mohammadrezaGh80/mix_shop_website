@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+
+
+{% block page_title %}{% trans category_name %}{% endblock page_title %}
+
+{% block page_content %}
+    <div>
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+
+                <div>
+                {% if products %}
+                    {% for product in products %}
+                        {{ product.title }}
+                    {% endfor %}
+                {% else %}
+                    <p class="alert alert-info">{% trans "There aren't any product." %}</p>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}

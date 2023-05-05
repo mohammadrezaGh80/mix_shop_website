@@ -19,16 +19,8 @@ class FavoritesTemplateView(LoginRequiredMixin, generic.TemplateView):
     template_name = "profiles/favorites.html"
 
 
-class CommentsTemplateView(LoginRequiredMixin, generic.TemplateView):
-    template_name = "profiles/comments.html"
-
-
 class AddressesTemplateView(LoginRequiredMixin, generic.TemplateView):
     template_name = "profiles/addresses.html"
-
-
-class MessagesTemplateView(LoginRequiredMixin, generic.TemplateView):
-    template_name = "profiles/messages.html"
 
 
 class RecentVisitsTemplateView(LoginRequiredMixin, generic.TemplateView):
