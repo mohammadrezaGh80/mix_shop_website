@@ -1,6 +1,9 @@
 {% extends "_base.html" %}
 
 {% load i18n %}
+{% load price_conversion_tags %}
+{% load humanize %}
+{% get_current_language as LANGUAGE_CODE %}
 
 
 {% block page_title %}{% trans category_name %}{% endblock page_title %}
@@ -17,7 +20,16 @@
                     {% if products %}
                         {% for product in products %}
                             <div class="my-3">
-                                <h3>{{ product.title }}(<span class="fs-4">{{ product.price }} {% trans "$" %}</span>)</h3>
+                                <h3>{{ product.title }}(
+                                    <span class="fs-4">
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            ${{ product.price|convert_price_to_dollar|intword }}
+                                        {% else %}
+                                            {{ product.price|convert_english_number_to_persian|intcomma:False }} تومان
+                                        {% endif %}
+                                    </span>
+                                    )
+                                </h3>
                                 <div class="mw-100 mt-4">{{ product.description|safe }}</div>
                             </div>
                             ----------------------------------
