@@ -2,7 +2,7 @@
 {% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
-<html {% if LANGUAGE_CODE == "fa" %}dir="rtl" lang="fa" {% else %}dir="ltr" lang="en" {% endif %}>
+<html {% if LANGUAGE_CODE == "fa" %}dir="rtl" lang="fa" {% elif LANGUAGE_CODE == "en" %}dir="ltr" lang="en" {% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -55,7 +55,7 @@
             .dropdown-menu > li:hover > .dropdown-submenu {
                 display: block;
             }
-        {% else %}
+        {% elif LANGUAGE_CODE == "fa" %}
             .dropdown-menu li {
                 position: relative;
             }

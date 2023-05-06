@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.contrib.auth import get_user_model
 
 from accounts.forms import CustomUserChangeForm
 
@@ -33,8 +34,9 @@ class PersonalInfoUpdateView(LoginRequiredMixin, View):
         return render(request, "profiles/personal_info.html", context={"form": form})
 
     def post(self, request, *args, **kwargs):
+        user = get_user_model().objects.get(pk=request.user.pk)
         form = CustomUserChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, _("Your information has been edited successfully."))
-        return render(request, "profiles/personal_info.html", context={"form": form})
+        return render(request, "profiles/personal_info.html", context={"form": form, "user": user})

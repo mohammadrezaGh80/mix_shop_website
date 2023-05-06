@@ -18,4 +18,4 @@ def convert_english_number_to_persian(number):
 def convert_price_to_dollar(number):
     response = requests.get("https://dapi.p3p.repl.co/api/?currency=usd")
     dict_response = response.json()
-    return int(dict_response["Price"]) * (number * 10)
+    return number / (int(dict_response["Price"]) // 10)
