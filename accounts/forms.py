@@ -11,6 +11,95 @@ from dateutil.relativedelta import relativedelta
 import jdatetime
 
 
+class CreateAccountForm(forms.Form):
+    error_messages = {
+        "password_mismatch": _("The two password fields didn't match."),
+        "duplicate_email": _("A user with that email already exists.")
+    }
+
+    email = forms.EmailField(label=_("Email address"),
+                             widget=forms.TextInput(attrs={"class": "form-control", "placeholder": _("email...")}))
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False
+    )
+    password2 = forms.CharField(
+        label=_("Password confirmation"),
+        strip=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(CreateAccountForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': _('password...')})
+        self.fields['password2'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': _('password confirmation...')})
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        user = get_user_model().objects.filter(email=email)
+        if user.exists():
+            raise ValidationError(
+                self.error_messages["duplicate_email"],
+                code="duplicate_email",
+            )
+        return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
+            )
+        return password2
+
+
+class PersonalDetailsForm(forms.ModelForm):
+    error_messages = {
+        "invalid_birth_date": _("Your birth date is invalid,date of today: %(current_date)s"),
+        "invalid_age": _("The age value for register must be at least 10 years old.")
+    }
+
+    class Meta:
+        model = get_user_model()
+        fields = ("username", "first_name", "last_name", "phone", "birth_date")
+        widgets = {
+            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": _("username...")}),
+            "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("first name...")}),
+            "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("last name...")}),
+            "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": _("phone number...")}),
+        }
+
+    def clean_birth_date(self):
+        birth_date = self.cleaned_data.get("birth_date")
+        current_date = timezone.now().date()
+        if birth_date and get_language() == "fa":
+            birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
+
+        if birth_date and birth_date < current_date:
+            raise ValidationError(
+                self.error_messages["invalid_birth_date"],
+                code="invalid_birth_date",
+                params={"current_date": current_date if get_language() == "en" else jdatetime.date.fromgregorian(
+                    year=current_date.year, month=current_date.month, day=current_date.day
+                ).strftime("%Y/%m/%d")}
+            )
+        elif birth_date and relativedelta(current_date, birth_date).years < 10:
+            raise ValidationError(
+                self.error_messages["invalid_age"],
+                code="invalid_age"
+            )
+        return birth_date
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+
 class CustomUserCreationForm(UserCreationForm):
     error_messages = {
         **UserCreationForm.error_messages,

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from django.views import View, generic
+from django.views import View
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -15,7 +15,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetConfirmView
 
-from .forms import LoginForm, CustomUserCreationForm, CustomPasswordResetForm, CustomSetPasswordForm, CustomPasswordChangeForm
+from .forms import LoginForm, CustomPasswordResetForm, CustomSetPasswordForm, CustomPasswordChangeForm, CreateAccountForm, PersonalDetailsForm
 
 
 class LoginView(View):
@@ -47,17 +47,53 @@ class LogoutView(LoginRequiredMixin, View):
         return redirect("pages:home")
 
 
-class RegisterCreateView(generic.CreateView):
-    model = get_user_model()
-    template_name = "registration/register.html"
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy("accounts:login")
-
+class RegisterStepOneView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect("pages:home")
-        form = self.form_class()
-        return render(request, self.template_name, {"form": form})
+
+        info_user = request.session.get("info_user")
+        if info_user and "password" in info_user.keys():
+            info_user.pop("password")
+            request.session.modified = True
+
+        form = CreateAccountForm(initial=info_user)
+        return render(request, "registration/register_step_1.html", context={"form": form})
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("pages:home")
+
+        form = CreateAccountForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            request.session["info_user"] = {
+                "email": cleaned_data["email"], "password": cleaned_data["password2"]
+            }
+            return redirect("accounts:register_step_two")
+        return render(request, "registration/register_step_1.html", context={"form": form})
+
+
+class RegisterStepTwoView(View):
+    def get(self, request, *args, **kwargs):
+        info_user = request.session.get("info_user")
+        if not info_user or (info_user and "email" not in info_user.keys() or "password" not in info_user.keys()):
+            return redirect("accounts:register_step_one")
+        form = PersonalDetailsForm()
+        return render(request, "registration/register_step_2.html", context={"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = PersonalDetailsForm(request.POST)
+        if form.is_valid():
+            info_user = request.session["info_user"]
+            user = form.save(commit=False)
+            user.email = info_user["email"]
+            user.set_password(info_user["password"])
+            user.save()
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+            messages.success(request, _("Account created successfully."))
+            return redirect("pages:home")
+        return render(request, "registration/register_step_2.html", context={"form": form})
 
 
 class PasswordResetView(View):

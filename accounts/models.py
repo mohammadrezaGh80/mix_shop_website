@@ -45,12 +45,12 @@ class CustomUser(AbstractBaseUser):
     phone_validator = PhoneValidator()
 
     email = models.EmailField(
-        verbose_name=_('email address'),
+        verbose_name=_('Email address'),
         max_length=255,
         unique=True,
     )
     username = models.CharField(
-        verbose_name=_('username'),
+        verbose_name=_('Username'),
         max_length=150,
         unique=True,
         blank=True,
@@ -62,14 +62,14 @@ class CustomUser(AbstractBaseUser):
             'unique': _("A user with that username already exists."),
         },
     )
-    first_name = models.CharField(verbose_name=_('first name'), max_length=150, blank=True, null=True)
-    last_name = models.CharField(verbose_name=_('last name'), max_length=150, blank=True, null=True)
-    phone = models.CharField(verbose_name=_('phone'), unique=True, max_length=11,
+    first_name = models.CharField(verbose_name=_('First name'), max_length=150, blank=True, null=True)
+    last_name = models.CharField(verbose_name=_('Last name'), max_length=150, blank=True, null=True)
+    phone = models.CharField(verbose_name=_('Phone'), unique=True, max_length=11,
                              blank=True, null=True, validators=[phone_validator])
-    birth_date = models.DateField(verbose_name=_('birth date'), blank=True, null=True)
+    birth_date = models.DateField(verbose_name=_('Birth date'), blank=True, null=True)
 
-    is_active = models.BooleanField(verbose_name=_('is active?'), default=True)
-    is_admin = models.BooleanField(verbose_name=_('is admin?'), default=False)
+    is_active = models.BooleanField(verbose_name=_('Is active?'), default=True)
+    is_admin = models.BooleanField(verbose_name=_('Is admin?'), default=False)
 
     objects = CustomUserManager()
 
