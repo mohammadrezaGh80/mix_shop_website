@@ -27,3 +27,12 @@ class ProductSubCategoryListView(View):
 
         return render(request, "products/product_sub_category_list.html",
                       context={"category_name": category_name, "products": products})
+
+
+class ProductDetailView(View):
+    def get(self, request, category_name, pk, *args, **kwargs):
+        category = get_object_or_404(Category, category_name=category_name)
+        product = get_object_or_404(Product, category=category, pk=pk)
+
+        return render(request, "products/product_detail.html", context={"product": product})
+

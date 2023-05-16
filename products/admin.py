@@ -4,6 +4,11 @@ from django.utils.translation import gettext_lazy as _
 from .models import Category, ProductColor, ProductSize, Product, ProductImage
 
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 3
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("category_name", "parent")
@@ -27,6 +32,9 @@ class ProductImageAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("title", "seller", "get_size", "get_color", "price", "created_datetime", )
+    inlines = [
+        ProductImageInline,
+    ]
 
     def get_size(self, obj):
         return ", ".join([size.size_name for size in sizes]) if (sizes := obj.size.all()) else "-"

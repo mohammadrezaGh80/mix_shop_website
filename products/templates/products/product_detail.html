@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+{% load price_conversion_tags %}
+{% load humanize %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+{% block page_title %}{% trans product.title %}{% endblock page_title %}
+
+{% block page_content %}
+    <div>
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+
+                <div class="col-12 my-3">
+                    <div class="d-flex">
+                        <div style="width: 50%;" id="carouselExampleIndicators" class="carousel slide">
+                            <div class="carousel-indicators">
+                                {% for slider in product.images.all %}
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ forloop.counter0 }}"
+                                            class="{% if forloop.first %}active{% endif %}"></button>
+                                {% endfor %}
+                            </div>
+                            <div class="carousel-inner">
+                                {% for slider in product.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ slider.image.url }}" class="d-block w-100">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="px-3 py-5 fs-5 fw-bold d-flex flex-column">
+                            <span>{{ product.title }}</span>
+                            <span class="fs-4 d-flex justify-content-end fw-bold mt-auto">
+                                {% if LANGUAGE_CODE == "en" %}
+                                    {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
+                                {% elif LANGUAGE_CODE == "fa" %}
+                                    {{ product.price|convert_english_number_to_persian|intcomma:False }}
+                                    {% trans "$" %}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mw-100 my-5">{{ product.description|safe }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}

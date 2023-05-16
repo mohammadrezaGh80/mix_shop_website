@@ -16,28 +16,33 @@
                     <p class="alert alert-{{ message.tags }}">{{ message }}</p>
                 {% endfor %}
 
-                <div>
-                    {% if products %}
-                        {% for product in products %}
-                            <div class="my-3">
-                                <h3>{{ product.title }}(
-                                    <span class="fs-4">
-                                        {% if LANGUAGE_CODE == "en" %}
-                                            {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
-                                        {% elif LANGUAGE_CODE == "fa" %}
-                                            {{ product.price|convert_english_number_to_persian|intcomma:False }} {% trans "$" %}
-                                        {% endif %}
-                                    </span>
-                                    )
-                                </h3>
-                                <div class="mw-100 mt-4">{{ product.description|safe }}</div>
+                {% if products %}
+                    {% for product in products %}
+                        <div class="col-12 col-md-4 my-3">
+                            <div class="card p-3 h-100">
+                                <a href="{{ product.get_absolute_url }}" class="d-flex justify-content-center">
+                                    <figure style="width: 240px;height: 240px">
+                                        <img class="w-100 h-100 d-block" src="{{ product.images.all.0.image.url }}"
+                                             alt="">
+                                    </figure>
+                                </a>
+                                <a href="{{ product.get_absolute_url }}"
+                                   class="d-flex text-center text-decoration-none flex-grow-1 my-3">{{ product.title }}
+                                </a>
+                                <span style="font-size: 17px" class="d-flex justify-content-end fw-bold">
+                                    {% if LANGUAGE_CODE == "en" %}
+                                        {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
+                                    {% elif LANGUAGE_CODE == "fa" %}
+                                        {{ product.price|convert_english_number_to_persian|intcomma:False }}
+                                        {% trans "$" %}
+                                    {% endif %}
+                                </span>
                             </div>
-                            ----------------------------------
-                        {% endfor %}
-                    {% else %}
-                        <p class="alert alert-info">{% trans "There aren't any product." %}</p>
-                    {% endif %}
-                </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="alert alert-info">{% trans "There aren't any product." %}</p>
+                {% endif %}
             </div>
         </div>
     </div>
