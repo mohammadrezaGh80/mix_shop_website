@@ -8,7 +8,7 @@ from .models import Category, Product
 class ProductCategoryView(View):
     def get(self, request, category_name, *args, **kwargs):
         category = get_object_or_404(Category, category_name=category_name)
-        if category.parent:
+        if not category.sub_categories.exists():
             raise Http404()
 
         sub_categories = category.sub_categories.all()
@@ -20,7 +20,7 @@ class ProductCategoryView(View):
 class ProductSubCategoryListView(View):
     def get(self, request, category_name, *args, **kwargs):
         category = get_object_or_404(Category, category_name=category_name)
-        if not category.parent:
+        if category.sub_categories.exists():
             raise Http404()
 
         products = Product.objects.filter(category=category)

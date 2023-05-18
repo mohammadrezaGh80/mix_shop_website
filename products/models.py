@@ -12,8 +12,8 @@ class Category(models.Model):
     CLOTHING = _("clothing")
     STATIONERY = _("stationery")
     BEAUTY_AND_HEALTH = _("beauty-and-health")
-
     SMART_PHONE = _("smart-phone")
+
     TELEVISION = _("television")
     LAPTOP = _("laptop")
     CAMERA = _("camera")
@@ -27,6 +27,9 @@ class Category(models.Model):
     DESK = _("desk")
     COSMETIC = _("cosmetic")
     SANITARY_WARE = _("sanitary-ware")
+    XIAOMI = _("xiaomi")
+    APPLE = _("apple")
+    SAMSUNG = _("samsung")
 
     category_name = models.CharField(max_length=150, verbose_name=_("Category's name"))
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,

@@ -16,13 +16,13 @@
                     <p class="alert alert-{{ message.tags }}">{{ message }}</p>
                 {% endfor %}
 
-                {% if products %}
+            {% if products %}
                     {% for product in products %}
                         <div class="col-12 col-md-4 my-3">
                             <div class="card p-3 h-100">
                                 <a href="{{ product.get_absolute_url }}" class="d-flex justify-content-center">
                                     <figure style="width: 240px;height: 240px">
-                                        <img class="w-100 h-100 d-block" src="{{ product.images.all.0.image.url }}"
+                                        <img class="w-100 h-100 d-block object-fit-cover" src="{{ product.images.all.0.image.url }}"
                                              alt="">
                                     </figure>
                                 </a>

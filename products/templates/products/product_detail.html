@@ -23,29 +23,63 @@
                                 {% for slider in product.images.all %}
                                     <button type="button" data-bs-target="#carouselExampleIndicators"
                                             data-bs-slide-to="{{ forloop.counter0 }}"
-                                            class="{% if forloop.first %}active{% endif %}"></button>
+                                            class="bg-danger {% if forloop.first %}active{% endif %}"></button>
                                 {% endfor %}
                             </div>
                             <div class="carousel-inner">
                                 {% for slider in product.images.all %}
                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ slider.image.url }}" class="d-block w-100">
+                                        <img src="{{ slider.image.url }}" class="d-block w-100 object-fit-cover">
                                     </div>
                                 {% endfor %}
                             </div>
                             <button class="carousel-control-prev" type="button"
                                     data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="bg-danger d-flex rounded-circle p-2">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button"
                                     data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="bg-danger d-flex rounded-circle p-2">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <div class="px-3 py-5 fs-5 fw-bold d-flex flex-column">
+                        <div class="px-3 py-5 fs-5 fw-bold d-flex flex-column flex-grow-1">
                             <span>{{ product.title }}</span>
+                            {% if product.color.count %}
+                                <div class="d-flex align-items-center mt-4">
+                                    {% if product.color.count > 1 %}
+                                        <span>{% trans "Colors:" %}</span>
+                                    {% else %}
+                                        <span>{% trans "Color:" %}</span>
+                                    {% endif %}
+                                    <ul class="d-flex align-items-center">
+                                        {% for color in product.color.all %}
+                                            <li class="ps-2">{% trans color.color_name %}</li>
+                                            {% if not forloop.last %}{% trans "," %} {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if product.size.count %}
+                                <div class="d-flex align-items-center mt-4">
+                                    {% if product.size.count > 1 %}
+                                        <span>{% trans "Sizes:" %}</span>
+                                    {% else %}
+                                        <span>{% trans "Size:" %}</span>
+                                    {% endif %}
+                                    <ul class="d-flex align-items-center">
+                                        {% for size in product.size.all %}
+                                            <li class="ps-2">{% trans size.size_name %}</li>
+                                            {% if not forloop.last %}{% trans "," %} {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
                             <span class="fs-4 d-flex justify-content-end fw-bold mt-auto">
                                 {% if LANGUAGE_CODE == "en" %}
                                     {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
