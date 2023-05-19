@@ -13,7 +13,9 @@
                     <p class="alert alert-{{ message.tags }}">{{ message }}</p>
                 {% endfor %}
 
-                <form action="{% url 'accounts:register_step_two' %}" method="post">
+                <div class="col-12">
+                    {% include "registration/register_topbar.html" with amount=75 %}
+                    <form class="mt-4" action="" method="post">
                     {% csrf_token %}
                     <div class="d-flex flex-column mb-3">
                         <label class="form-label" for="id_username">{{ form.username.label }}:</label>
@@ -79,6 +81,7 @@
                                 name="register-button">{% trans 'Register' %}</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>

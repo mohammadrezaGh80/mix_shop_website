@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<div class="d-flex justify-content-around">
+  <div>
+      <span style="width: 100px;height: 100px" class="d-flex justify-content-center align-items-center border border-primary rounded-circle p-2 text-center fw-bold">{% trans 'Account' %}</span>
+  </div>
+  <div>
+      <span style="width: 100px;height: 100px" class="d-flex justify-content-center align-items-center border border-primary rounded-circle p-2 text-center fw-bold">{% trans 'Personal' %}</span>
+  </div>
+</div>
+
+<div class="progress mt-3" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: {{ amount }}%"></div>
+</div>

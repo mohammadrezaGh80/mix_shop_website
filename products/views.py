@@ -23,7 +23,7 @@ class ProductSubCategoryListView(View):
         if category.sub_categories.exists():
             raise Http404()
 
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category).order_by("-modified_datetime")
 
         return render(request, "products/product_sub_category_list.html",
                       context={"category_name": category_name, "products": products})

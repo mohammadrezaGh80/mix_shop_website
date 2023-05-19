@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-14 17:50+0430\n"
-"PO-Revision-Date: 2023-04-14 16:51+0330\n"
+"POT-Creation-Date: 2023-05-19 10:36+0330\n"
+"PO-Revision-Date: 2023-05-19 10:36+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\_base.html:29
+#: .\_base.html:106
 msgid "EN"
 msgstr "انگلیسی"
 
-#: .\_base.html:32
+#: .\_base.html:109
 msgid "FA"
 msgstr "فارسی"
 
@@ -36,28 +36,33 @@ msgid "Welcome"
 msgstr "خوش آمدید"
 
 #: .\home.html:21
+msgid "Profile"
+msgstr "پروفایل"
+
+#: .\home.html:23
 msgid "Change password"
 msgstr "تغییر رمزعبور"
 
-#: .\home.html:23
+#: .\home.html:25
 msgid "Logout of account"
 msgstr "خروج از حساب کاربری"
 
-#: .\home.html:26 .\registration\password_reset_complete.html:17
+#: .\home.html:28 .\registration\password_reset_complete.html:17
 msgid "Login to account"
 msgstr "ورود به حساب کاربری"
 
-#: .\home.html:28
+#: .\home.html:30
 msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
 
 #: .\registration\login.html:6 .\registration\login.html:33
-#: .\registration\register.html:80
+#: .\registration\register_step_1.html:42
 msgid "Login"
 msgstr "ورود"
 
-#: .\registration\login.html:35 .\registration\register.html:6
-#: .\registration\register.html:79
+#: .\registration\login.html:35 .\registration\register_step_1.html:7
+#: .\registration\register_step_2.html:6
+#: .\registration\register_step_2.html:81
 msgid "Register"
 msgstr "ثبت نام"
 
@@ -108,6 +113,15 @@ msgstr "تغییر رمزعبور"
 msgid "Sent"
 msgstr "ارسال شد"
 
-#: .\registration\register.html:56 .\registration\register.html:58
+#: .\registration\register_step_2.html:52
+#: .\registration\register_step_2.html:55
 msgid "birth date..."
 msgstr "تاریخ تولد..."
+
+#: .\registration\register_topbar.html:6
+msgid "Account"
+msgstr "حساب کاربری"
+
+#: .\registration\register_topbar.html:11
+msgid "Personal"
+msgstr "اطلاعات شخصی"
