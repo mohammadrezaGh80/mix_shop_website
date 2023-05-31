@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 
 from .models import Category, Product
+from profiles.recent_visits import RecentVisits
 
 
 class ProductCategoryView(View):
@@ -31,8 +32,10 @@ class ProductSubCategoryListView(View):
 
 class ProductDetailView(View):
     def get(self, request, category_name, pk, *args, **kwargs):
+        recent_visits = RecentVisits(request)
+
         category = get_object_or_404(Category, category_name=category_name)
         product = get_object_or_404(Product, category=category, pk=pk)
-
+        recent_visits.add_product(product)
         return render(request, "products/product_detail.html", context={"product": product})
 

@@ -1,7 +1,8 @@
 {% extends "_base.html" %}
 
 {% load i18n %}
-
+{% load price_conversion_tags %}
+{% load humanize %}
 
 {% block page_title %}{% trans 'Recent visits' %}{% endblock page_title %}
 
@@ -17,8 +18,70 @@
                     {% include "profiles/profile_sidebar.html" with section="recent_visits" %}
                 </div>
                 <div class="col-8">
-                    <div>
-                        {% trans "Recent visits" %}
+                    <div class="row">
+                        {% for recent_visit in recent_visits %}
+                            <div class="col-12 col-md-6 mb-3">
+                                <div class="card p-3 h-100">
+                                    <a href="{{ recent_visit.product.get_absolute_url }}"
+                                       class="d-flex justify-content-center">
+                                        <figure style="width: 240px;height: 240px">
+                                            <img class="w-100 h-100 d-block object-fit-cover"
+                                                 src="{{ recent_visit.product.images.all.0.image.url }}"
+                                                 alt="">
+                                        </figure>
+                                    </a>
+                                    <a href="{{ recent_visit.product.get_absolute_url }}"
+                                       class="d-flex text-center text-decoration-none flex-grow-1 my-3">{{ recent_visit.product.title }}
+                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                                data-bs-target="#deleteProductModal{{ recent_visit.product_id }}">
+                                            {% trans "Delete" %}
+                                        </button>
+
+                                        <div class="modal fade" id="deleteProductModal{{ recent_visit.product_id }}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">{% trans "Remove from recent visits" %}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>{% blocktrans with title=recent_visit.product.title %}Are you sure for remove
+                                                            {{ title }} from recent
+                                                            visits?{% endblocktrans %}</p>
+                                                    </div>
+                                                    <div class="modal-footer border-top-0">
+                                                        <button type="button" class="btn btn-outline-danger"
+                                                                data-bs-dismiss="modal">{% trans "Cancel" %}
+                                                        </button>
+                                                        <form action="{% url 'profiles:delete_product_recent_visits' %}"
+                                                              method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" value="{{ recent_visit.product_id }}"
+                                                                   name="delete_id">
+                                                            <button type="submit"
+                                                                    class="btn btn-danger">{% trans "Remove product" %}
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span style="font-size: 17px" class="d-flex justify-content-end fw-bold">
+                                            {% if LANGUAGE_CODE == "en" %}
+                                                {% trans "$" %}{{ recent_visit.product.price|convert_price_to_dollar|intword }}
+                                            {% elif LANGUAGE_CODE == "fa" %}
+                                                {{ recent_visit.product.price|convert_english_number_to_persian|intcomma:False }}
+                                                {% trans "$" %}
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>

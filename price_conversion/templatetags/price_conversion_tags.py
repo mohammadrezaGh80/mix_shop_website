@@ -16,7 +16,7 @@ def convert_english_number_to_persian(number):
 
 @register.filter
 def convert_price_to_dollar(number):
-    response = requests.get("https://dapi.p3p.repl.co/api/?currency=usd")
+    response = requests.get("http://api.navasan.tech/latest?api_key=freet5OQhAkh5Z3UpIWRcl4b65brHfpm&item=usd_buy")
     dict_response = response.json()
-    converted_number = number / (int(dict_response["Price"]) // 10)
-    return 1 if converted_number < 1 else converted_number
+    converted_number = number / int(dict_response["usd_buy"]["value"])
+    return converted_number if converted_number > 1 else 1

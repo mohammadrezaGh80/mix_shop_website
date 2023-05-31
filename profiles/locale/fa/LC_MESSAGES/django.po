@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 19:23+0430\n"
-"PO-Revision-Date: 2023-04-20 18:23+0330\n"
+"POT-Creation-Date: 2023-05-31 10:09+0330\n"
+"PO-Revision-Date: 2023-05-31 10:11+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -21,34 +21,23 @@ msgstr ""
 
 #: .\templates\profiles\addresses.html:6
 #: .\templates\profiles\addresses.html:21
-#: .\templates\profiles\sidebar_profile.html:43
+#: .\templates\profiles\profile_sidebar.html:43
 msgid "Addresses"
 msgstr "آدرس ها"
 
-#: .\templates\profiles\comments.html:6 .\templates\profiles\comments.html:21
-#: .\templates\profiles\sidebar_profile.html:39
-msgid "Comments"
-msgstr "دیدگاه ها"
-
 #: .\templates\profiles\favorites.html:6
 #: .\templates\profiles\favorites.html:21
-#: .\templates\profiles\sidebar_profile.html:35
-#| msgid "Favorits list"
+#: .\templates\profiles\profile_sidebar.html:39
 msgid "Favorites list"
 msgstr "لیست علاقه مندی ها"
 
-#: .\templates\profiles\messages.html:6 .\templates\profiles\messages.html:21
-#: .\templates\profiles\sidebar_profile.html:47
-msgid "Messages"
-msgstr "پیغام ها"
-
 #: .\templates\profiles\orders.html:6 .\templates\profiles\orders.html:21
-#: .\templates\profiles\sidebar_profile.html:31
+#: .\templates\profiles\profile_sidebar.html:35
 msgid "Orders"
 msgstr "سفارش ها"
 
 #: .\templates\profiles\personal_info.html:6
-#: .\templates\profiles\sidebar_profile.html:55
+#: .\templates\profiles\profile_sidebar.html:51
 msgid "Personal info"
 msgstr "اطلاعات حساب کاربری"
 
@@ -58,6 +47,7 @@ msgid "birth date..."
 msgstr "تاریخ تولد..."
 
 #: .\templates\profiles\personal_info.html:79
+#: .\templates\profiles\profile_sidebar.html:22
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -66,20 +56,55 @@ msgid "Profile"
 msgstr "پروفایل"
 
 #: .\templates\profiles\profile_page.html:21
-#: .\templates\profiles\sidebar_profile.html:27
+#: .\templates\profiles\profile_sidebar.html:31
 msgid "Summary of activities"
 msgstr "خلاصه فعالیت ها"
 
-#: .\templates\profiles\recent_visits.html:6
-#: .\templates\profiles\recent_visits.html:21
-#: .\templates\profiles\sidebar_profile.html:51
+#: .\templates\profiles\profile_sidebar.html:47
+#: .\templates\profiles\recent_visits.html:7
 msgid "Recent visits"
 msgstr "بازدید های اخیر"
 
-#: .\templates\profiles\sidebar_profile.html:59
+#: .\templates\profiles\profile_sidebar.html:55
 msgid "Logout"
 msgstr "خروج"
 
-#: .\views.py:47
+#: .\templates\profiles\recent_visits.html:39
+msgid "Delete"
+msgstr "حذف"
+
+#: .\templates\profiles\recent_visits.html:46
+#| msgid "Recent visits"
+msgid "Remove from recent visits"
+msgstr "حذف از بازدید های اخیر"
+
+#: .\templates\profiles\recent_visits.html:51
+#, python-format
+msgid ""
+"Are you sure for remove\n"
+"                                                            %(title)s from recent\n"
+"                                                            visits?"
+msgstr "آیا از حذف %(title)s از بازدیدهای اخیر اطمینان دارید؟"
+
+#: .\templates\profiles\recent_visits.html:57
+msgid "Cancel"
+msgstr "انصراف"
+
+#: .\templates\profiles\recent_visits.html:65
+msgid "Remove product"
+msgstr "حذف محصول"
+
+#: .\templates\profiles\recent_visits.html:74
+#: .\templates\profiles\recent_visits.html:77
+msgid "$"
+msgstr "تومان"
+
+#: .\views.py:48
 msgid "Your information has been edited successfully."
 msgstr "اطلاعات شما با موفقیت ویرایش شد."
+
+#~ msgid "Comments"
+#~ msgstr "دیدگاه ها"
+
+#~ msgid "Messages"
+#~ msgstr "پیغام ها"

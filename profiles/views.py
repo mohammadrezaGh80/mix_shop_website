@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -6,6 +6,8 @@ from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 
 from accounts.forms import CustomUserChangeForm
+from products.models import Product
+from .recent_visits import RecentVisits
 
 
 class ProfilePageTemplateView(LoginRequiredMixin, generic.TemplateView):
@@ -27,6 +29,11 @@ class AddressesTemplateView(LoginRequiredMixin, generic.TemplateView):
 class RecentVisitsTemplateView(LoginRequiredMixin, generic.TemplateView):
     template_name = "profiles/recent_visits.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["recent_visits"] = RecentVisits(self.request)
+        return context
+
 
 class PersonalInfoUpdateView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -40,3 +47,16 @@ class PersonalInfoUpdateView(LoginRequiredMixin, View):
             form.save()
             messages.success(request, _("Your information has been edited successfully."))
         return render(request, "profiles/personal_info.html", context={"form": form, "user": user})
+
+
+class DeleteProductOfRecentVisits(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        recent_visits = RecentVisits(request)
+
+        product_id = int(request.POST["delete_id"])
+        product = get_object_or_404(Product, pk=product_id)
+
+        recent_visits.remove_product(product)
+        return redirect("profiles:recent_visits")
+
