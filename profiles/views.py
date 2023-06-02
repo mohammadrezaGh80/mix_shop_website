@@ -35,6 +35,13 @@ class RecentVisitsTemplateView(LoginRequiredMixin, generic.TemplateView):
         return context
 
 
+class ClearRecentVisits(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        recent_visits = RecentVisits(request)
+        recent_visits.clear()
+        return redirect("profiles:recent_visits")
+
+
 class PersonalInfoUpdateView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = CustomUserChangeForm(instance=request.user)

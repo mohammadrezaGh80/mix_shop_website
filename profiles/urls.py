@@ -10,6 +10,7 @@ urlpatterns = [
     path("favorites/", views.FavoritesTemplateView.as_view(), name="favorites_list"),
     path("addresses/", views.AddressesTemplateView.as_view(), name="addresses"),
     path("recent_visits/", views.RecentVisitsTemplateView.as_view(), name="recent_visits"),
+    path("recent_visits/clear/", views.ClearRecentVisits.as_view(), name="clear_recent_visits"),
     path("personal_info/", views.PersonalInfoUpdateView.as_view(), name="personal_info"),
     path("recent_visits/delete/", views.DeleteProductOfRecentVisits.as_view(), name="delete_product_recent_visits"),
 ]

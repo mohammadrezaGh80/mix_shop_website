@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 10:09+0330\n"
-"PO-Revision-Date: 2023-05-31 10:11+0330\n"
+"POT-Creation-Date: 2023-06-02 11:52+0330\n"
+"PO-Revision-Date: 2023-06-02 11:52+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -69,37 +69,44 @@ msgstr "بازدید های اخیر"
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\profiles\recent_visits.html:39
+#: .\templates\profiles\recent_visits.html:27
+msgid "Clear All"
+msgstr "پاک کردن همه"
+
+#: .\templates\profiles\recent_visits.html:49
 msgid "Delete"
 msgstr "حذف"
 
-#: .\templates\profiles\recent_visits.html:46
-#| msgid "Recent visits"
+#: .\templates\profiles\recent_visits.html:57
 msgid "Remove from recent visits"
 msgstr "حذف از بازدید های اخیر"
 
-#: .\templates\profiles\recent_visits.html:51
+#: .\templates\profiles\recent_visits.html:63
 #, python-format
+#| msgid ""
+#| "Are you sure for remove\n"
+#| "                                                            %(title)s from recent\n"
+#| "                                                            visits?"
 msgid ""
-"Are you sure for remove\n"
-"                                                            %(title)s from recent\n"
-"                                                            visits?"
+"Are you\n"
+"                                                            sure for remove\n"
+"                                                            %(title)s from recent visits?"
 msgstr "آیا از حذف %(title)s از بازدیدهای اخیر اطمینان دارید؟"
 
-#: .\templates\profiles\recent_visits.html:57
+#: .\templates\profiles\recent_visits.html:69
 msgid "Cancel"
 msgstr "انصراف"
 
-#: .\templates\profiles\recent_visits.html:65
+#: .\templates\profiles\recent_visits.html:78
 msgid "Remove product"
 msgstr "حذف محصول"
 
-#: .\templates\profiles\recent_visits.html:74
-#: .\templates\profiles\recent_visits.html:77
+#: .\templates\profiles\recent_visits.html:87
+#: .\templates\profiles\recent_visits.html:90
 msgid "$"
 msgstr "تومان"
 
-#: .\views.py:48
+#: .\views.py:55
 msgid "Your information has been edited successfully."
 msgstr "اطلاعات شما با موفقیت ویرایش شد."
 

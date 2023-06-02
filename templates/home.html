@@ -1,6 +1,8 @@
 {% extends "_base.html" %}
 
 {% load i18n %}
+{% load price_conversion_tags %}
+{% load humanize %}
 
 
 {% block page_title %}{% trans 'Home' %}{% endblock page_title %}
@@ -13,21 +15,52 @@
                     <p class="alert alert-{{ message.tags }}">{{ message }}</p>
                 {% endfor %}
 
-                <h2>{% trans 'Home' %}</h2>
-                <div>
-                    {% if user.is_authenticated %}
-                        <span>{% trans 'Welcome' %} {{ user.email }}</span> |
-                        <a class="text-decoration-none"
-                           href="{% url 'profiles:profile_page' %}">{% trans 'Profile' %}</a> |
-                        <a class="text-decoration-none"
-                           href="{% url 'accounts:password_change' %}">{% trans 'Change password' %}</a> |
-                        <a class="text-decoration-none"
-                           href="{% url 'accounts:logout' %}">{% trans 'Logout of account' %}</a>
-                    {% else %}
-                        <a class="text-decoration-none"
-                           href="{% url 'accounts:login' %}">{% trans 'Login to account' %}</a> |
-                        <a class="text-decoration-none"
-                           href="{% url 'accounts:register_step_one' %}">{% trans 'Register an account' %}</a>
+                <div class="col-12">
+                    <h2>{% trans 'Home' %}</h2>
+                    <div>
+                        {% if user.is_authenticated %}
+                            <span>{% trans 'Welcome' %} {{ user.email }}</span> |
+                            <a class="text-decoration-none"
+                               href="{% url 'profiles:profile_page' %}">{% trans 'Profile' %}</a> |
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:password_change' %}">{% trans 'Change password' %}</a> |
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:logout' %}">{% trans 'Logout of account' %}</a>
+                        {% else %}
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:login' %}">{% trans 'Login to account' %}</a> |
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:register_step_one' %}">{% trans 'Register an account' %}</a>
+                        {% endif %}
+                    </div>
+                    {% if suggestion_products %}
+                        <div class="my-5">
+                            <h3>{% trans "Suggestion products:" %}</h3>
+                            <div style="white-space: nowrap" class="mt-4 overflow-x-auto d-flex">
+                                {% for product in suggestion_products %}
+                                    <div style="flex: 0 0 250px; white-space: normal;" class="card p-3 m-2">
+                                        <a href="{{ product.get_absolute_url }}" class="d-flex justify-content-center">
+                                            <figure style="width: 150px;height: 150px">
+                                                <img class="w-100 h-100 d-block object-fit-cover"
+                                                     src="{{ product.images.all.0.image.url }}"
+                                                     alt="">
+                                            </figure>
+                                        </a>
+                                        <a href="{{ product.get_absolute_url }}" style="font-size: 15px"
+                                           class="d-flex text-center text-decoration-none flex-grow-1 my-3">{{ product.title }}
+                                        </a>
+                                        <span style="font-size: 17px" class="d-flex justify-content-end fw-bold">
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
+                                        {% elif LANGUAGE_CODE == "fa" %}
+                                            {{ product.price|convert_english_number_to_persian|intcomma:False }}
+                                            {% trans "$" %}
+                                        {% endif %}
+                                    </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>

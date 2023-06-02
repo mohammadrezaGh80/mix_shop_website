@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-19 10:36+0330\n"
-"PO-Revision-Date: 2023-05-19 10:36+0330\n"
+"POT-Creation-Date: 2023-06-01 18:41+0330\n"
+"PO-Revision-Date: 2023-06-01 18:42+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,33 +27,37 @@ msgstr "انگلیسی"
 msgid "FA"
 msgstr "فارسی"
 
-#: .\home.html:6 .\home.html:16
+#: .\home.html:6 .\home.html:17
 msgid "Home"
 msgstr "خانه"
 
-#: .\home.html:19
+#: .\home.html:20
 msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: .\home.html:21
+#: .\home.html:22
 msgid "Profile"
 msgstr "پروفایل"
 
-#: .\home.html:23
+#: .\home.html:24
 msgid "Change password"
 msgstr "تغییر رمزعبور"
 
-#: .\home.html:25
+#: .\home.html:26
 msgid "Logout of account"
 msgstr "خروج از حساب کاربری"
 
-#: .\home.html:28 .\registration\password_reset_complete.html:17
+#: .\home.html:29 .\registration\password_reset_complete.html:17
 msgid "Login to account"
 msgstr "ورود به حساب کاربری"
 
-#: .\home.html:30
+#: .\home.html:31
 msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
+
+#: .\home.html:35
+msgid "Suggestion products:"
+msgstr "محصولات پیشنهادی:"
 
 #: .\registration\login.html:6 .\registration\login.html:33
 #: .\registration\register_step_1.html:42
@@ -118,10 +122,10 @@ msgstr "ارسال شد"
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
-#: .\registration\register_topbar.html:6
+#: .\registration\register_topbar.html:5
 msgid "Account"
 msgstr "حساب کاربری"
 
-#: .\registration\register_topbar.html:11
+#: .\registration\register_topbar.html:8
 msgid "Personal"
 msgstr "اطلاعات شخصی"

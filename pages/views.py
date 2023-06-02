@@ -2,10 +2,41 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import activate, get_language
 from django.conf import settings
+from django.views import View
+
+from products.models import Product
+from profiles.recent_visits import RecentVisits
+from itertools import groupby
+from math import ceil
 
 
-def home_page_view(request):
-    return render(request, "home.html")
+class HomePageView(View):
+    def get(self, request, *args, **kwargs):
+        COUNT_OF_SUGGESTION = 10
+
+        recent_visits = RecentVisits(request)
+        list_category_with_count = sorted(
+            [(key, len(list(group)))
+             for key, group in groupby(recent_visits, key=lambda recent_visit: recent_visit["category"])],
+            key=lambda category: category[1],
+            reverse=True
+        )
+        count_recent_visits_product = sum([group[1] for group in list_category_with_count])
+        print(list_category_with_count)
+        print(count_recent_visits_product)
+        list_category_with_count_suggestion = [
+            (list_category_with_count[index][0], list_category_with_count[index][1] +
+             ceil((COUNT_OF_SUGGESTION - count_recent_visits_product - index) / len(list_category_with_count)))
+            for index in range(len(list_category_with_count))
+        ]
+        print(list_category_with_count_suggestion)
+
+        suggestion_products = []
+        for category_group in list_category_with_count_suggestion:
+            products = Product.objects.filter(category__category_name=category_group[0])[:category_group[1]]
+            suggestion_products.extend(products)
+
+        return render(request, "home.html", context={"suggestion_products": suggestion_products})
 
 
 def change_language_view(request):

@@ -19,6 +19,15 @@
                 </div>
                 <div class="col-8">
                     <div class="row">
+                        {% if recent_visits|length %}
+                            <div class="d-flex justify-content-end">
+                                <form method="post" action="{% url "profiles:clear_recent_visits" %}">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="mb-3 text-decoration-none btn btn-outline-danger">{% trans "Clear All" %}</button>
+                                </form>
+                            </div>
+                        {% endif %}
                         {% for recent_visit in recent_visits %}
                             <div class="col-12 col-md-6 mb-3">
                                 <div class="card p-3 h-100">
@@ -34,23 +43,26 @@
                                        class="d-flex text-center text-decoration-none flex-grow-1 my-3">{{ recent_visit.product.title }}
                                     </a>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-outline-secondary"
+                                                data-bs-toggle="modal"
                                                 data-bs-target="#deleteProductModal{{ recent_visit.product_id }}">
                                             {% trans "Delete" %}
                                         </button>
 
-                                        <div class="modal fade" id="deleteProductModal{{ recent_visit.product_id }}">
+                                        <div class="modal fade"
+                                             id="deleteProductModal{{ recent_visit.product_id }}">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">{% trans "Remove from recent visits" %}</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        <button type="button" class="btn-close shadow-none"
+                                                                data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>{% blocktrans with title=recent_visit.product.title %}Are you sure for remove
-                                                            {{ title }} from recent
-                                                            visits?{% endblocktrans %}</p>
+                                                        <p>{% blocktrans with title=recent_visit.product.title %}Are you
+                                                            sure for remove
+                                                            {{ title }} from recent visits?{% endblocktrans %}</p>
                                                     </div>
                                                     <div class="modal-footer border-top-0">
                                                         <button type="button" class="btn btn-outline-danger"
@@ -59,7 +71,8 @@
                                                         <form action="{% url 'profiles:delete_product_recent_visits' %}"
                                                               method="post">
                                                             {% csrf_token %}
-                                                            <input type="hidden" value="{{ recent_visit.product_id }}"
+                                                            <input type="hidden"
+                                                                   value="{{ recent_visit.product_id }}"
                                                                    name="delete_id">
                                                             <button type="submit"
                                                                     class="btn btn-danger">{% trans "Remove product" %}
@@ -81,7 +94,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-
                     </div>
                 </div>
             </div>

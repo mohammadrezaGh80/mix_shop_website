@@ -33,6 +33,9 @@ class RecentVisits:
             del self.recent_visits[product_id]
         self.save()
 
+    def clear(self):
+        del self.session["recent_visits"]
+
     def __iter__(self):
         recent_visits_copy = self.recent_visits.copy()
 
@@ -41,6 +44,7 @@ class RecentVisits:
 
         for product in products:
             recent_visits_copy[str(product.id)]["product"] = product
+            recent_visits_copy[str(product.id)]["category"] = product.category.category_name
 
         for item in dict(reversed(recent_visits_copy.items())).values():
             yield item
