@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-02 11:52+0330\n"
-"PO-Revision-Date: 2023-06-02 11:52+0330\n"
+"POT-Creation-Date: 2023-06-08 11:20+0330\n"
+"PO-Revision-Date: 2023-06-08 11:21+0330\n"
 "Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -73,38 +73,42 @@ msgstr "خروج"
 msgid "Clear All"
 msgstr "پاک کردن همه"
 
-#: .\templates\profiles\recent_visits.html:49
+#: .\templates\profiles\recent_visits.html:48
 msgid "Delete"
 msgstr "حذف"
 
-#: .\templates\profiles\recent_visits.html:57
+#: .\templates\profiles\recent_visits.html:56
 msgid "Remove from recent visits"
 msgstr "حذف از بازدید های اخیر"
 
-#: .\templates\profiles\recent_visits.html:63
+#: .\templates\profiles\recent_visits.html:62
 #, python-format
 #| msgid ""
-#| "Are you sure for remove\n"
-#| "                                                            %(title)s from recent\n"
-#| "                                                            visits?"
+#| "Are you\n"
+#| "                                                            sure for remove\n"
+#| "                                                            %(title)s from recent visits?"
 msgid ""
 "Are you\n"
-"                                                            sure for remove\n"
-"                                                            %(title)s from recent visits?"
+"                                                                sure for remove\n"
+"                                                                %(title)s from recent visits?"
 msgstr "آیا از حذف %(title)s از بازدیدهای اخیر اطمینان دارید؟"
 
-#: .\templates\profiles\recent_visits.html:69
+#: .\templates\profiles\recent_visits.html:68
 msgid "Cancel"
 msgstr "انصراف"
 
-#: .\templates\profiles\recent_visits.html:78
+#: .\templates\profiles\recent_visits.html:77
 msgid "Remove product"
 msgstr "حذف محصول"
 
-#: .\templates\profiles\recent_visits.html:87
-#: .\templates\profiles\recent_visits.html:90
+#: .\templates\profiles\recent_visits.html:86
+#: .\templates\profiles\recent_visits.html:89
 msgid "$"
 msgstr "تومان"
+
+#: .\templates\profiles\recent_visits.html:97
+msgid "You have not visited any products."
+msgstr "از هیچ محصولی بازدید نکرده اید."
 
 #: .\views.py:55
 msgid "Your information has been edited successfully."

@@ -22,14 +22,11 @@ class HomePageView(View):
             reverse=True
         )
         count_recent_visits_product = sum([group[1] for group in list_category_with_count])
-        print(list_category_with_count)
-        print(count_recent_visits_product)
         list_category_with_count_suggestion = [
             (list_category_with_count[index][0], list_category_with_count[index][1] +
              ceil((COUNT_OF_SUGGESTION - count_recent_visits_product - index) / len(list_category_with_count)))
             for index in range(len(list_category_with_count))
         ]
-        print(list_category_with_count_suggestion)
 
         suggestion_products = []
         for category_group in list_category_with_count_suggestion:

@@ -27,31 +27,31 @@
     <div class="bottom-sidebar mt-5">
         <ul>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "summary_of_activities" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:profile_page" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:profile_page" %}">{% trans "Summary of activities" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "orders" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:orders" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:orders" %}">{% trans "Orders" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "favorites_list" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:favorites_list" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:favorites_list" %}">{% trans "Favorites list" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "addresses" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:addresses" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:addresses" %}">{% trans "Addresses" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "recent_visits" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:recent_visits" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:recent_visits" %}">{% trans "Recent visits" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "personal_info" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:personal_info" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:personal_info" %}">{% trans "Personal info" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
-                <a class="text-decoration-none d-inline-block py-2 {% if section == "logout" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                <a class="text-decoration-none d-inline-block py-2 text-black fw-bold"
                    href="{% url "accounts:logout" %}">{% trans "Logout" %}</a>
             </li>
         </ul>
