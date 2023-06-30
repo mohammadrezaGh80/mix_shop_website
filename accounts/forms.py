@@ -78,7 +78,7 @@ class PersonalDetailsForm(forms.ModelForm):
         if birth_date and get_language() == "fa":
             birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
 
-        if birth_date and birth_date < current_date:
+        if birth_date and birth_date > current_date:
             raise ValidationError(
                 self.error_messages["invalid_birth_date"],
                 code="invalid_birth_date",
@@ -124,7 +124,7 @@ class CustomUserCreationForm(UserCreationForm):
         if birth_date and get_language() == "fa":
             birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
 
-        if birth_date and birth_date < current_date:
+        if birth_date and birth_date > current_date:
             raise ValidationError(
                 self.error_messages["invalid_birth_date"],
                 code="invalid_birth_date",
@@ -171,7 +171,7 @@ class CustomUserChangeForm(UserChangeForm):
             birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month,
                                         day=birth_date.day).togregorian()
 
-        if birth_date and birth_date < current_date:
+        if birth_date and birth_date > current_date:
             raise ValidationError(
                 self.error_messages["invalid_birth_date"],
                 code="invalid_birth_date",
