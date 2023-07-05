@@ -163,11 +163,15 @@ class Comment(models.Model):
     suggestion = models.PositiveSmallIntegerField(default=NONE, choices=suggestion_CHOICES, blank=True,
                                                   verbose_name=_("Suggestion"))
     is_anonymous = models.BooleanField(default=False, verbose_name=_("Is anonymous?"))
-    number_of_likes = models.PositiveIntegerField(default=0, verbose_name=_("Number of likes"))
-    number_of_dislikes = models.PositiveIntegerField(default=0, verbose_name=_("Number of dislikes"))
 
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name=_("Created datetime"))
     modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def get_total_like(self):
+        return self.likes.count()
+
+    def get_total_dislike(self):
+        return self.dislikes.count()
 
     def __str__(self):
         return f"{self.title}({self.user.email}) --> {self.product.title}"
@@ -181,8 +185,6 @@ class Question(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="questions", verbose_name=_("User"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="questions", verbose_name=_("Product"))
     text = models.CharField(max_length=100, verbose_name=_("Text"))
-    number_of_likes = models.PositiveIntegerField(default=0, verbose_name=_("Number of likes"))
-    number_of_dislikes = models.PositiveIntegerField(default=0, verbose_name=_("Number of dislikes"))
 
     created_datetime = models.DateTimeField(auto_now_add=True, verbose_name=_("Created datetime"))
     modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
@@ -193,3 +195,61 @@ class Question(models.Model):
     class Meta:
         verbose_name = _("Question")
         verbose_name_plural = _("Questions")
+
+
+class CommentLike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="comment_likes",
+                             verbose_name=_("User"))
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="likes", verbose_name=_("Comment"))
+    modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def __str__(self):
+        return f"{self.user} liked {self.comment.title}"
+
+    class Meta:
+        verbose_name = _("Comment like")
+        verbose_name_plural = _("Comment likes")
+
+
+class CommentDislike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="comment_dislikes",
+                             verbose_name=_("User"))
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="dislikes", verbose_name=_("Comment"))
+    modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def __str__(self):
+        return f"{self.user} disliked {self.comment.title}"
+
+    class Meta:
+        verbose_name = _("Comment dislike")
+        verbose_name_plural = _("Comment dislikes")
+
+
+class QuestionLike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="question_likes",
+                             verbose_name=_("User"))
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="likes",
+                                 verbose_name=_("Question"))
+    modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def __str__(self):
+        return f"{self.user} liked {self.question.text[:30]}"
+
+    class Meta:
+        verbose_name = _("Question like")
+        verbose_name_plural = _("Question likes")
+
+
+class QuestionDislike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="question_dislikes",
+                             verbose_name=_("User"))
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="dislikes",
+                                 verbose_name=_("Question"))
+    modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def __str__(self):
+        return f"{self.user} disliked {self.question.text[:30]}"
+
+    class Meta:
+        verbose_name = _("Question dislike")
+        verbose_name_plural = _("Question dislikes")

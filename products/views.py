@@ -1,10 +1,10 @@
 from django.views import View
-from django.shortcuts import get_object_or_404, render, redirect
-from django.http import Http404
+from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.http import Http404, JsonResponse
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
-from .models import Category, Product, Comment
+from .models import Category, Product, Comment, CommentLike, CommentDislike
 from profiles.recent_visits import RecentVisits
 from .forms import CommentForm
 
@@ -39,7 +39,7 @@ class ProductDetailView(View):
         category = get_object_or_404(Category, category_name=category_name)
         product = get_object_or_404(Product, category=category, pk=pk)
         recent_visits.add_product(product)
-        comments = Comment.objects.filter(product=product).order_by("-modified_datetime")
+        comments = product.comments.order_by("-modified_datetime")
 
         if request.user.is_authenticated:
             comment = Comment.objects.filter(user=request.user, product=product)
@@ -66,3 +66,29 @@ class ProductDetailView(View):
             messages.success(request, _("Your comment was successfully submitted."))
             return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
         return render(request, "products/product_detail.html", context={"product": product, "form": form})
+
+
+class ProductLikeComment(View):
+    def post(self, request, category_name, id_product, id_comment, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=id_comment)
+        try:
+            comment_like = CommentLike.objects.get(user=request.user, comment=comment)
+        except CommentLike.DoesNotExist:
+            CommentLike.objects.create(user=request.user, comment=comment)
+            return JsonResponse({"status": "liked"})
+        else:
+            comment_like.delete()
+            return JsonResponse({"status": "retake_liked"})
+
+
+class ProductDislikeComment(View):
+    def post(self, request, category_name, id_product, id_comment, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=id_comment)
+        try:
+            comment_dislike = CommentDislike.objects.get(user=request.user, comment=comment)
+        except CommentDislike.DoesNotExist:
+            CommentDislike.objects.create(user=request.user, comment=comment)
+            return JsonResponse({"status": "disliked"})
+        else:
+            comment_dislike.delete()
+            return JsonResponse({"status": "retake_disliked"})

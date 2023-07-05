@@ -5,6 +5,8 @@
 {% load humanize %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load jalali_tags %}
+{% load products_tags %}
+{% load static %}
 
 
 {% block page_title %}{% trans product.title %}{% endblock page_title %}
@@ -81,6 +83,10 @@
                                     </ul>
                                 </div>
                             {% endif %}
+                            {% if comments.count > 0 %}
+                                <a style="font-size: 14px;color: #27bae9" href="#comments"
+                                   class="mt-4 text-decoration-none">{{ comments.count }} {% trans "Comment" %}</a>
+                            {% endif %}
                             <span class="fs-4 d-flex justify-content-end fw-bold mt-auto">
                                 {% if LANGUAGE_CODE == "en" %}
                                     {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
@@ -96,7 +102,7 @@
                         {% if not user.is_authenticated %}
                             <a style="width: 160px; height: 50px"
                                href="{% url 'accounts:login' %}?next={% url 'products:product_detail' product.category product.pk %}"
-                               class="btn btn-outline-danger align-self-end">
+                               class="btn btn-outline-danger d-flex justify-content-center align-items-center align-self-end">
                                 {% trans "Register comment" %}
                             </a>
                         {% else %}
@@ -126,7 +132,7 @@
                                                     {% csrf_token %}
                                                     <div class="d-flex flex-column mb-3">
                                                         <div class="d-flex align-items-center">
-                                                            <span>{{ form.star_rating.label }}:</span>
+                                                            <span class="required-input">{{ form.star_rating.label }}:</span>
                                                             <div class="d-flex flex-row-reverse align-items-center column-gap-1 wrapper-rating ms-3">
                                                                 <input type="radio" id="id_star_rating_4"
                                                                        name="star_rating"
@@ -183,7 +189,7 @@
                                                         {% endfor %}
                                                     </div>
                                                     <div class="d-flex flex-column mb-3">
-                                                        <label class="form-label"
+                                                        <label class="form-label required-input"
                                                                for="id_text">{{ form.text.label }}:</label>
                                                         {{ form.text }}
                                                         {% for error in form.text.errors %}
@@ -208,41 +214,92 @@
                         {% endif %}
                         <div class="comments-wrapper flex-grow-1 mx-4 overflow-y-scroll">
                             <div class="text-end border-top border-2 pt-2">{{ comments.count }} {% trans "Comment" %}</div>
-                            <div class="comments">
-                                {% for comment in comments %}
-                                    <div class="border-bottom border-2 py-4">
-                                        <div class="d-flex">
-                                        <span style="width: 30px;height: 25px"
-                                              class="text-light px-1 rounded d-flex justify-content-center align-items-center me-2 {% if comment.star_rating >= 3 %}bg-success{% else %}bg-warning bg-gradient{% endif %}">
-                                            {{ comment.star_rating }}
-                                        </span>
-                                            <div class="d-flex flex-column">
-                                                {% if comment.title %}
-                                                    <span class="fw-bold d-inline-block mb-2">{{ comment.title }}</span>
-                                                {% endif %}
-                                                <p class="mb-3">
-                                                    {% if LANGUAGE_CODE == "fa" %}
-                                                        <span>{{ comment.modified_datetime|to_jalali:"%Y/%m/%d %H:%M" }}</span>
-                                                    {% elif LANGUAGE_CODE == "en" %}
-                                                        <span>{{ comment.modified_datetime|date:"Y/m/d H:i" }}</span>
+                            {% if comments.count > 0 %}
+                                <div id="comments" class="comments">
+                                    {% for comment in comments %}
+                                        <div class="border-bottom border-2 py-4">
+                                            <div class="d-flex">
+                                                <span style="width: 30px;height: 25px"
+                                                      class="text-light px-1 rounded d-flex justify-content-center align-items-center me-2 {% if comment.star_rating >= 3 %}bg-success{% else %}bg-warning bg-gradient{% endif %}">
+                                                    {{ comment.star_rating }}
+                                                </span>
+                                                <div class="d-flex flex-column">
+                                                    {% if comment.title %}
+                                                        <span class="fw-bold d-inline-block mb-2">{{ comment.title }}</span>
                                                     {% endif %}
-                                                    <span>-</span>
-                                                    {% if comment.is_anonymous %}
-                                                        <span class="ms-1">{% trans "Digikala user" %}</span>
-                                                    {% else %}
-                                                        <span class="ms-1">{{ comment.user.email }}</span>
-                                                    {% endif %}
-                                                </p>
+                                                    <p class="mb-3">
+                                                        {% if LANGUAGE_CODE == "fa" %}
+                                                            <span>{{ comment.modified_datetime|to_jalali:"%Y/%m/%d %H:%M" }}</span>
+                                                        {% elif LANGUAGE_CODE == "en" %}
+                                                            <span>{{ comment.modified_datetime|date:"Y/m/d H:i" }}</span>
+                                                        {% endif %}
+                                                        <span>-</span>
+                                                        {% if comment.is_anonymous %}
+                                                            <span class="ms-1">{% trans "Mixshop user" %}</span>
+                                                        {% else %}
+                                                            <span class="ms-1">{{ comment.user.email }}</span>
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <p class="border-top border-bottom mx-4 py-3">{{ comment.text }}</p>
+                                            <div class="wrapper-like-dislike d-flex align-items-center justify-content-end">
+                                                <div class="wrapper-like d-flex align-items-center">
+                                                    <span class="comment_likes_count">{{ comment.get_total_like }}</span>
+                                                    <form action="{% url 'products:product_like_comment' product.category.category_name product.pk comment.pk %}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        {% if not user.is_authenticated %}
+                                                            <a href="{% url 'accounts:login' %}?next={{ request.path }}"
+                                                               class="btn btn-link text-secondary px-2">
+                                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <button type="submit"
+                                                                    class="comment-like-button btn btn-link text-secondary px-2">
+                                                                {% if comment|is_user_liked_comment:user %}
+                                                                    <i class="bi bi-hand-thumbs-up-fill"></i>
+                                                                {% else %}
+                                                                    <i class="bi bi-hand-thumbs-up"></i>
+                                                                {% endif %}
+                                                            </button>
+                                                        {% endif %}
+                                                    </form>
+                                                </div>
+                                                <div class="wrapper-dislike d-flex align-items-center ms-2">
+                                                    <span class="comment_dislikes_count">{{ comment.get_total_dislike }}</span>
+                                                    <form action="{% url 'products:product_dislike_comment' product.category.category_name product.pk comment.pk %}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        {% if not user.is_authenticated %}
+                                                            <a href="{% url 'accounts:login' %}?next={{ request.path }}"
+                                                               class="btn btn-link text-secondary px-2">
+                                                                <i class="bi bi-hand-thumbs-down"></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <button type="submit"
+                                                                    class="comment-dislike-button btn btn-link text-secondary px-2">
+                                                                {% if comment|is_user_disliked_comment:user %}
+                                                                    <i class="bi bi-hand-thumbs-down-fill"></i>
+                                                                {% else %}
+                                                                    <i class="bi bi-hand-thumbs-down"></i>
+                                                                {% endif %}
+                                                            </button>
+                                                        {% endif %}
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                        <p class="border-top border-bottom mx-4 py-3">{{ comment.text }}</p>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="fw-bold">{% trans "You can also comment on this product." %}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock page_content %}

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 15:21+0330\n"
-"PO-Revision-Date: 2023-06-30 15:21+0330\n"
+"POT-Creation-Date: 2023-07-02 18:53+0330\n"
+"PO-Revision-Date: 2023-07-02 18:53+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,17 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\admin.py:41 .\models.py:102
+#: .\admin.py:43 .\models.py:102
 msgid "Size"
 msgstr "اندازه"
 
-#: .\admin.py:45 .\models.py:101
+#: .\admin.py:48 .\models.py:101
 msgid "Color"
 msgstr "رنگ"
 
-#: .\admin.py:60 .\models.py:161 .\models.py:183
+#: .\admin.py:63 .\models.py:161 .\models.py:187
 msgid "Text"
 msgstr "متن نظر"
+
+#: .\admin.py:72 .\admin.py:81 .\admin.py:90 .\admin.py:99
+msgid "Title of product"
+msgstr "عنوان کالا"
 
 #: .\apps.py:8
 msgid "products"
@@ -239,15 +243,16 @@ msgstr "قیمت"
 msgid "Description"
 msgstr "توضیحات"
 
-#: .\models.py:106 .\models.py:169 .\models.py:187
+#: .\models.py:106 .\models.py:167 .\models.py:189
 msgid "Created datetime"
 msgstr "زمان ایجاد"
 
-#: .\models.py:107 .\models.py:170 .\models.py:188
+#: .\models.py:107 .\models.py:168 .\models.py:190 .\models.py:204
+#: .\models.py:218 .\models.py:233 .\models.py:248
 msgid "Modified datetime"
 msgstr "زمان ویرایش"
 
-#: .\models.py:116 .\models.py:122 .\models.py:159 .\models.py:182
+#: .\models.py:116 .\models.py:122 .\models.py:159 .\models.py:186
 msgid "Product"
 msgstr "محصول"
 
@@ -303,7 +308,8 @@ msgstr "پیشنهاد نمیکنم"
 msgid "I'm not sure"
 msgstr "مطمئن نیستم"
 
-#: .\models.py:158 .\models.py:181
+#: .\models.py:158 .\models.py:185 .\models.py:202 .\models.py:216
+#: .\models.py:230 .\models.py:245
 msgid "User"
 msgstr "کاربر"
 
@@ -319,86 +325,116 @@ msgstr "پیشنهاد"
 msgid "Is anonymous?"
 msgstr "ناشناس است؟"
 
-#: .\models.py:166 .\models.py:184
-msgid "Number of likes"
-msgstr "تعداد موافقین"
-
-#: .\models.py:167 .\models.py:185
-msgid "Number of dislikes"
-msgstr "تعداد مخالفین"
-
-#: .\models.py:176 .\templates\products\product_detail.html:209
+#: .\models.py:180 .\models.py:203 .\models.py:217
+#: .\templates\products\product_detail.html:87
+#: .\templates\products\product_detail.html:215
 msgid "Comment"
 msgstr "دیدگاه"
 
-#: .\models.py:177
+#: .\models.py:181
 msgid "Comments"
 msgstr "دیدگاه ها"
 
-#: .\models.py:194
+#: .\models.py:196 .\models.py:232 .\models.py:247
 msgid "Question"
 msgstr "پرسش"
 
-#: .\models.py:195
+#: .\models.py:197
 msgid "Questions"
 msgstr "پرسش ها"
+
+#: .\models.py:210
+msgid "Comment like"
+msgstr "موافقت دیدگاه"
+
+#: .\models.py:211
+msgid "Comment likes"
+msgstr "موافقت های دیدگاه"
+
+#: .\models.py:224
+msgid "Comment dislike"
+msgstr "مخالفت دیدگاه"
+
+#: .\models.py:225
+msgid "Comment dislikes"
+msgstr "مخالفت های دیدگاه"
+
+#: .\models.py:239
+msgid "Question like"
+msgstr "موافقت پرسش"
+
+#: .\models.py:240
+msgid "Question likes"
+msgstr "موافقت های پرسش"
+
+#: .\models.py:254
+msgid "Question dislike"
+msgstr "مخالفت پرسش"
+
+#: .\models.py:255
+msgid "Question dislikes"
+msgstr "مخالفت های پرسش"
 
 #: .\templates\products\categories.html:7
 msgid "categories"
 msgstr "دسته بندی ها"
 
-#: .\templates\products\product_detail.html:57
+#: .\templates\products\product_detail.html:59
 msgid "Colors:"
 msgstr "رنگ ها:"
 
-#: .\templates\products\product_detail.html:59
+#: .\templates\products\product_detail.html:61
 msgid "Color:"
 msgstr "رنگ:"
 
-#: .\templates\products\product_detail.html:64
-#: .\templates\products\product_detail.html:79
+#: .\templates\products\product_detail.html:66
+#: .\templates\products\product_detail.html:81
 msgid ","
 msgstr "،"
 
-#: .\templates\products\product_detail.html:72
+#: .\templates\products\product_detail.html:74
 msgid "Sizes:"
 msgstr "اندازه ها:"
 
-#: .\templates\products\product_detail.html:74
+#: .\templates\products\product_detail.html:76
 msgid "Size:"
 msgstr "اندازه:"
 
-#: .\templates\products\product_detail.html:86
-#: .\templates\products\product_detail.html:89
+#: .\templates\products\product_detail.html:91
+#: .\templates\products\product_detail.html:94
 #: .\templates\products\product_sub_category_list.html:34
 #: .\templates\products\product_sub_category_list.html:37
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\products\product_detail.html:100
-#: .\templates\products\product_detail.html:106
-#: .\templates\products\product_detail.html:200
+#: .\templates\products\product_detail.html:105
+#: .\templates\products\product_detail.html:112
+#: .\templates\products\product_detail.html:206
 msgid "Register comment"
 msgstr "ثبت دیدگاه"
 
-#: .\templates\products\product_detail.html:114
+#: .\templates\products\product_detail.html:120
 msgid "Your Comment"
 msgstr "دیدگاه شما"
 
-#: .\templates\products\product_detail.html:116
+#: .\templates\products\product_detail.html:122
 #, python-format
 msgid ""
 "About\n"
 "                                                        %(title)s"
 msgstr "در مورد %(title)s"
 
-#: .\templates\products\product_detail.html:194
+#: .\templates\products\product_detail.html:200
 msgid "Register a comment anonymously"
 msgstr "ارسال دیدگاه به صورت ناشناس"
 
-#: .\templates\products\product_detail.html:223
-msgid "Digikala user"
-msgstr "کاربر دیجی کالا"
+#: .\templates\products\product_detail.html:237
+msgid "Mixshop user"
+msgstr "کاربر میکس شاپ"
+
+#: .\templates\products\product_detail.html:277
+msgid "You can also comment on this product."
+msgstr "شما هم می‌توانید در مورد این کالا نظر دهید."
 
 #: .\templates\products\product_sub_category_list.html:44
 msgid "There aren't any product."
@@ -407,6 +443,15 @@ msgstr "هیچ محصولی وجود ندارد."
 #: .\views.py:66
 msgid "Your comment was successfully submitted."
 msgstr "دیدگاه شما با موفقیت ثبت شد."
+
+#~ msgid "Number of likes"
+#~ msgstr "تعداد موافقین"
+
+#~ msgid "Number of dislikes"
+#~ msgstr "تعداد مخالفین"
+
+#~ msgid "Digikala user"
+#~ msgstr "کاربر دیجی کالا"
 
 #, python-format
 #~ msgid "About %(title)s"
