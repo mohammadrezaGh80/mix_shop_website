@@ -216,7 +216,7 @@
                             <div class="text-end border-top border-2 pt-2">{{ comments.count }} {% trans "Comment" %}</div>
                             {% if comments.count > 0 %}
                                 <div id="comments" class="comments">
-                                    {% for comment in comments %}
+                                    {% for comment in page_obj %}
                                         <div class="border-bottom border-2 py-4">
                                             <div class="d-flex">
                                                 <span style="width: 30px;height: 25px"
@@ -291,6 +291,46 @@
                                             </div>
                                         </div>
                                     {% endfor %}
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center my-3">
+                                    <span class="text-danger">
+                                        {% if page_obj.has_previous %}
+                                            <a class="text-decoration-none text-danger fw-bold"
+                                               href="?page={{ page_obj.previous_page_number }}#comments">
+                                                {% if LANGUAGE_CODE == "fa" %}
+                                                    <i class="bi bi-chevron-right"></i>
+                                                {% elif LANGUAGE_CODE == "en" %}
+                                                    <i class="bi bi-chevron-left"></i>
+                                                {% endif %}
+                                                {% trans "Before" %}
+                                            </a>
+                                        {% endif %}
+                                    </span>
+                                    <ul class="custom-pagination d-flex">
+                                        {% for page in range_pages %}
+                                            {% if page in list_show_pages %}
+                                                <li class="me-2 page">
+                                                    <a style="width: 30px;height: 30px" href="?page={{ page }}#comments"
+                                                       class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="me-1">...</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <span class="text-danger">
+                                        {% if page_obj.has_next %}
+                                            <a class="text-decoration-none text-danger fw-bold"
+                                               href="?page={{ page_obj.next_page_number }}#comments">
+                                                {% trans "After" %}
+                                                {% if LANGUAGE_CODE == "fa" %}
+                                                    <i class="bi bi-chevron-left"></i>
+                                                {% elif LANGUAGE_CODE == "en" %}
+                                                    <i class="bi bi-chevron-right"></i>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    </span>
                                 </div>
                             {% else %}
                                 <p class="fw-bold">{% trans "You can also comment on this product." %}</p>

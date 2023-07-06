@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 18:53+0330\n"
-"PO-Revision-Date: 2023-07-02 18:53+0330\n"
+"POT-Creation-Date: 2023-07-06 11:39+0330\n"
+"PO-Revision-Date: 2023-07-06 11:41+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -326,8 +326,8 @@ msgid "Is anonymous?"
 msgstr "ناشناس است؟"
 
 #: .\models.py:180 .\models.py:203 .\models.py:217
-#: .\templates\products\product_detail.html:87
-#: .\templates\products\product_detail.html:215
+#: .\templates\products\product_detail.html:88
+#: .\templates\products\product_detail.html:216
 msgid "Comment"
 msgstr "دیدگاه"
 
@@ -400,39 +400,47 @@ msgstr "اندازه ها:"
 msgid "Size:"
 msgstr "اندازه:"
 
-#: .\templates\products\product_detail.html:91
-#: .\templates\products\product_detail.html:94
+#: .\templates\products\product_detail.html:92
+#: .\templates\products\product_detail.html:95
 #: .\templates\products\product_sub_category_list.html:34
 #: .\templates\products\product_sub_category_list.html:37
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\products\product_detail.html:105
-#: .\templates\products\product_detail.html:112
-#: .\templates\products\product_detail.html:206
+#: .\templates\products\product_detail.html:106
+#: .\templates\products\product_detail.html:113
+#: .\templates\products\product_detail.html:207
 msgid "Register comment"
 msgstr "ثبت دیدگاه"
 
-#: .\templates\products\product_detail.html:120
+#: .\templates\products\product_detail.html:121
 msgid "Your Comment"
 msgstr "دیدگاه شما"
 
-#: .\templates\products\product_detail.html:122
+#: .\templates\products\product_detail.html:123
 #, python-format
 msgid ""
 "About\n"
 "                                                        %(title)s"
 msgstr "در مورد %(title)s"
 
-#: .\templates\products\product_detail.html:200
+#: .\templates\products\product_detail.html:201
 msgid "Register a comment anonymously"
 msgstr "ارسال دیدگاه به صورت ناشناس"
 
-#: .\templates\products\product_detail.html:237
+#: .\templates\products\product_detail.html:238
 msgid "Mixshop user"
 msgstr "کاربر میکس شاپ"
 
-#: .\templates\products\product_detail.html:277
+#: .\templates\products\product_detail.html:298
+msgid "Before"
+msgstr "قبلی"
+
+#: .\templates\products\product_detail.html:315
+msgid "After"
+msgstr "بعدی"
+
+#: .\templates\products\product_detail.html:320
 msgid "You can also comment on this product."
 msgstr "شما هم می‌توانید در مورد این کالا نظر دهید."
 
@@ -440,7 +448,7 @@ msgstr "شما هم می‌توانید در مورد این کالا نظر د�
 msgid "There aren't any product."
 msgstr "هیچ محصولی وجود ندارد."
 
-#: .\views.py:66
+#: .\views.py:91
 msgid "Your comment was successfully submitted."
 msgstr "دیدگاه شما با موفقیت ثبت شد."
 
