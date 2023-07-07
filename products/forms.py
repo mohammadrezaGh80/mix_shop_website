@@ -1,7 +1,8 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import Comment
+from .models import Comment, Question
 
 
 class CommentForm(forms.ModelForm):
@@ -15,3 +16,27 @@ class CommentForm(forms.ModelForm):
         labels = {
             "star_rating": _("Give rating"),
         }
+
+
+class QuestionForm(forms.ModelForm):
+    error_messages = {
+        "invalid_text": _("Your text must have at least %(min_characters)s characters.")
+    }
+
+    class Meta:
+        model = Question
+        fields = ("text", )
+        widgets = {
+            "text": forms.Textarea(attrs={'class': 'form-control'})
+        }
+
+    def clean_text(self):
+        text = self.cleaned_data.get("text")
+        min_characters = 7
+        if len(text) < min_characters:
+            raise ValidationError(
+                self.error_messages["invalid_text"],
+                code="invalid_text",
+                params={"min_characters": min_characters}
+            )
+        return text

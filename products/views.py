@@ -1,13 +1,14 @@
-from django.core.paginator import Paginator
 from django.views import View
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, JsonResponse
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.views.generic.base import ContextMixin
 
 from .models import Category, Product, Comment, CommentLike, CommentDislike
 from profiles.recent_visits import RecentVisits
-from .forms import CommentForm
+from .forms import CommentForm, QuestionForm
+from .paginator import CustomPaginator
 
 
 class ProductCategoryView(View):
@@ -34,68 +35,82 @@ class ProductSubCategoryListView(View):
                       context={"category_name": category_name, "products": products})
 
 
-class ProductDetailView(View):
-    def get(self, request, category_name, pk, *args, **kwargs):
-        recent_visits = RecentVisits(request)
-        category = get_object_or_404(Category, category_name=category_name)
-        product = get_object_or_404(Product, category=category, pk=pk)
-        recent_visits.add_product(product)
+class ProductDetailView(ContextMixin, View):
+    def get_object(self):
+        category = get_object_or_404(Category, category_name=self.kwargs["category_name"])
+        product = get_object_or_404(Product, category=category, pk=self.kwargs["pk"])
+        return product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.get_object()
         comments = product.comments.order_by("-modified_datetime")
+        questions = product.questions.order_by("-modified_datetime")
+        context["product"] = product
+        context["comments"] = comments
+        context["questions"] = questions
+        context["question_form"] = QuestionForm()
 
-        paginator = Paginator(comments, 2)
-        page = request.GET.get("page")
+        paginator = CustomPaginator(comments, 2)
+        page = self.request.GET.get("page")
         page_obj = paginator.get_page(page)
+        range_pages = page_obj.paginator.get_elided_page_range(number=page, on_each_side=1)
+        context["page_obj"] = page_obj
+        context["range_pages"] = range_pages
 
-        LAST_PAGE_NUMBER = page_obj.paginator.num_pages
-        BEFORE_AND_AFTER_PAGE_COUNT = 1
-        list_range_pages = range(1, LAST_PAGE_NUMBER + 1)
-        list_show_pages = [1, page_obj.paginator.num_pages]
+        return context
 
-        if LAST_PAGE_NUMBER - (2 * BEFORE_AND_AFTER_PAGE_COUNT) > 2 * BEFORE_AND_AFTER_PAGE_COUNT:
-            if page_obj.number == 1:
-                list_show_pages[1:1] = [2, 3]
-            elif page_obj.number == LAST_PAGE_NUMBER:
-                list_show_pages[-1:-1] = [LAST_PAGE_NUMBER - 2, LAST_PAGE_NUMBER - 1]
-            else:
-                list_between_pages = []
-                for index in range(-BEFORE_AND_AFTER_PAGE_COUNT, BEFORE_AND_AFTER_PAGE_COUNT + 1):
-                    if page_obj.number + index not in list_show_pages:
-                        list_between_pages.append(page_obj.number + index)
-                list_show_pages[1:1] = list_between_pages
-        else:
-            list_show_pages = list_range_pages
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+
+        recent_visits = RecentVisits(request)
+        product = self.get_object()
+        recent_visits.add_product(product)
 
         if request.user.is_authenticated:
             comment = Comment.objects.filter(user=request.user, product=product)
-            form = CommentForm(instance=comment.first()) if comment.exists() else CommentForm()
+            comment_form = CommentForm(instance=comment.first()) if comment.exists() else CommentForm()
         else:
-            form = CommentForm()
+            comment_form = CommentForm()
 
-        return render(request, "products/product_detail.html",
-                      context={"product": product, "form": form, "comments": comments,
-                               "page_obj": page_obj, "list_show_pages": list_show_pages,
-                               "range_pages": list_range_pages})
+        context["comment_form"] = comment_form
+        return render(request, "products/product_detail.html", context)
 
     def post(self, request, *args, **kwargs):
-        category = get_object_or_404(Category, category_name=kwargs["category_name"])
-        product = get_object_or_404(Product, category=category, pk=kwargs["pk"])
+        context = self.get_context_data()
+        product = self.get_object()
 
-        comment = Comment.objects.filter(user=request.user, product=product)
-        form = CommentForm(request.POST, instance=comment.first())
-        if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.user = request.user
-            new_comment.product = product
-            if "is_anonymous" in request.POST:
-                new_comment.is_anonymous = True
-            new_comment.save()
-            messages.success(request, _("Your comment was successfully submitted."))
-            return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
-        return render(request, "products/product_detail.html", context={"product": product, "form": form})
+        if "send_comment" in request.POST:
+            comment = Comment.objects.filter(user=request.user, product=product)
+            comment_form = CommentForm(request.POST, instance=comment.first())
+            if comment_form.is_valid():
+                new_comment = comment_form.save(commit=False)
+                new_comment.user = request.user
+                new_comment.product = product
+                if "is_anonymous" in request.POST:
+                    new_comment.is_anonymous = True
+                new_comment.save()
+                messages.success(request, _("Your comment was successfully submitted."))
+                return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
+
+            context["comment_form"] = comment_form
+            return render(request, "products/product_detail.html", context)
+        elif "send_question" in request.POST:
+            question_form = QuestionForm(request.POST)
+            if question_form.is_valid():
+                question = question_form.save(commit=False)
+                question.product = product
+                question.user = request.user
+                question.save()
+                messages.success(request, _("Your question was successfully submitted."))
+                return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
+
+            context["question_form"] = question_form
+            return render(request, "products/product_detail.html", context)
 
 
 class ProductLikeComment(View):
-    def post(self, request, category_name, id_product, id_comment, *args, **kwargs):
+    def post(self, request, id_comment, *args, **kwargs):
         comment = get_object_or_404(Comment, pk=id_comment)
         try:
             comment_like = CommentLike.objects.get(user=request.user, comment=comment)
@@ -108,7 +123,7 @@ class ProductLikeComment(View):
 
 
 class ProductDislikeComment(View):
-    def post(self, request, category_name, id_product, id_comment, *args, **kwargs):
+    def post(self, request, id_comment, *args, **kwargs):
         comment = get_object_or_404(Comment, pk=id_comment)
         try:
             comment_dislike = CommentDislike.objects.get(user=request.user, comment=comment)
@@ -118,3 +133,15 @@ class ProductDislikeComment(View):
         else:
             comment_dislike.delete()
             return JsonResponse({"status": "retake_disliked"})
+
+
+class ProductSendQuestion(View):
+    def post(self, request, *args, **kwargs):
+        category = get_object_or_404(Category, category_name=kwargs["category_name"])
+        product = get_object_or_404(Product, category=category, pk=kwargs["pk"])
+
+        question_form = QuestionForm(request.POST)
+        if question_form.is_valid():
+            pass
+        return render(request, "products/product_detail.html",
+                      context={"comment_form": CommentForm(), "question_form": question_form, "product": product})

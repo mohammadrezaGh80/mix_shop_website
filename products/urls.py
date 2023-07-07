@@ -11,5 +11,5 @@ urlpatterns = [
     path('search/<str:category_name>/<int:id_product>/like/<int:id_comment>/', views.ProductLikeComment.as_view(),
          name="product_like_comment"),
     path('search/<str:category_name>/<int:id_product>/dislike/<int:id_comment>/', views.ProductDislikeComment.as_view(),
-         name="product_dislike_comment"),
+         name="product_dislike_comment")
 ]

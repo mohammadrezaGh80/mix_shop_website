@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 11:39+0330\n"
-"PO-Revision-Date: 2023-07-06 11:41+0330\n"
+"POT-Creation-Date: 2023-07-07 15:28+0330\n"
+"PO-Revision-Date: 2023-07-07 15:28+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -39,13 +39,18 @@ msgstr "عنوان کالا"
 msgid "products"
 msgstr "محصولات"
 
-#: .\forms.py:13
+#: .\forms.py:14
 msgid "Write for us..."
 msgstr "برای ما بنویسید..."
 
-#: .\forms.py:16
+#: .\forms.py:17
 msgid "Give rating"
 msgstr "امتیاز بدهید"
+
+#: .\forms.py:23
+#, python-format
+msgid "Your text must have at least %(min_characters)s characters."
+msgstr "متن شما باید حداقل دارای %(min_characters)s کاراکتر باشد."
 
 #: .\models.py:11
 msgid "digital-product"
@@ -432,25 +437,44 @@ msgstr "ارسال دیدگاه به صورت ناشناس"
 msgid "Mixshop user"
 msgstr "کاربر میکس شاپ"
 
-#: .\templates\products\product_detail.html:298
+#: .\templates\products\product_detail.html:305
 msgid "Before"
 msgstr "قبلی"
 
-#: .\templates\products\product_detail.html:315
+#: .\templates\products\product_detail.html:321
 msgid "After"
 msgstr "بعدی"
 
-#: .\templates\products\product_detail.html:320
+#: .\templates\products\product_detail.html:332
 msgid "You can also comment on this product."
 msgstr "شما هم می‌توانید در مورد این کالا نظر دهید."
+
+#: .\templates\products\product_detail.html:341
+#: .\templates\products\product_detail.html:348
+#: .\templates\products\product_detail.html:371
+msgid "Register question"
+msgstr "ثبت پرسش"
+
+#: .\templates\products\product_detail.html:355
+msgid "Register your question about this product"
+msgstr "پرسش خود را درباره این کالا ثبت کنید"
+
+#: .\templates\products\product_detail.html:392
+#| msgid "You can also comment on this product."
+msgid "You can also question on this product."
+msgstr "شما هم می‌توانید در مورد این کالا سوال بپرسید."
 
 #: .\templates\products\product_sub_category_list.html:44
 msgid "There aren't any product."
 msgstr "هیچ محصولی وجود ندارد."
 
-#: .\views.py:91
+#: .\views.py:93
 msgid "Your comment was successfully submitted."
 msgstr "دیدگاه شما با موفقیت ثبت شد."
+
+#: .\views.py:105
+msgid "Your question was successfully submitted."
+msgstr "پرسش شما با موفقیت ثبت شد."
 
 #~ msgid "Number of likes"
 #~ msgstr "تعداد موافقین"
