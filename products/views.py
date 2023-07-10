@@ -5,9 +5,9 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.views.generic.base import ContextMixin
 
-from .models import Category, Product, Comment, CommentLike, CommentDislike
+from .models import Category, Product, Comment, CommentLike, CommentDislike, Question, Answer, AnswerLike, AnswerDislike
 from profiles.recent_visits import RecentVisits
-from .forms import CommentForm, QuestionForm
+from .forms import CommentForm, QuestionForm, AnswerForm
 from .paginator import CustomPaginator
 
 
@@ -50,13 +50,21 @@ class ProductDetailView(ContextMixin, View):
         context["comments"] = comments
         context["questions"] = questions
         context["question_form"] = QuestionForm()
+        context["answer_form"] = AnswerForm()
 
-        paginator = CustomPaginator(comments, 2)
-        page = self.request.GET.get("page")
-        page_obj = paginator.get_page(page)
-        range_pages = page_obj.paginator.get_elided_page_range(number=page, on_each_side=1)
-        context["page_obj"] = page_obj
-        context["range_pages"] = range_pages
+        paginator_comment = CustomPaginator(comments, 2)
+        page_1 = self.request.GET.get("page1")
+        page_obj_comment = paginator_comment.get_page(page_1)
+        range_pages_comment = page_obj_comment.paginator.get_elided_page_range(number=page_1, on_each_side=1)
+        context["page_obj_comment"] = page_obj_comment
+        context["range_pages_comment"] = range_pages_comment
+
+        paginator_comment = CustomPaginator(questions, 2)
+        page_2 = self.request.GET.get("page2")
+        page_obj_question = paginator_comment.get_page(page_2)
+        range_pages_question = page_obj_question.paginator.get_elided_page_range(number=page_2, on_each_side=1)
+        context["page_obj_question"] = page_obj_question
+        context["range_pages_question"] = range_pages_question
 
         return context
 
@@ -79,9 +87,10 @@ class ProductDetailView(ContextMixin, View):
     def post(self, request, *args, **kwargs):
         context = self.get_context_data()
         product = self.get_object()
+        comment = Comment.objects.filter(user=request.user, product=product)
+        comment_form = CommentForm(instance=comment.first())
 
         if "send_comment" in request.POST:
-            comment = Comment.objects.filter(user=request.user, product=product)
             comment_form = CommentForm(request.POST, instance=comment.first())
             if comment_form.is_valid():
                 new_comment = comment_form.save(commit=False)
@@ -93,8 +102,6 @@ class ProductDetailView(ContextMixin, View):
                 messages.success(request, _("Your comment was successfully submitted."))
                 return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
 
-            context["comment_form"] = comment_form
-            return render(request, "products/product_detail.html", context)
         elif "send_question" in request.POST:
             question_form = QuestionForm(request.POST)
             if question_form.is_valid():
@@ -106,7 +113,24 @@ class ProductDetailView(ContextMixin, View):
                 return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
 
             context["question_form"] = question_form
-            return render(request, "products/product_detail.html", context)
+
+        elif "send_answer" in request.POST:
+            answer_form = AnswerForm(request.POST)
+            question = get_object_or_404(Question, pk=int(request.POST["id_question"]))
+            if answer_form.is_valid():
+                answer = answer_form.save(commit=False)
+                answer.product = product
+                answer.user = request.user
+                answer.question = question
+                answer.save()
+                messages.success(request, _("Your answer was successfully submitted."))
+                return redirect("products:product_detail", kwargs["category_name"], kwargs["pk"])
+
+            context["answer_form"] = answer_form
+
+        context["comment_form"] = comment_form
+
+        return render(request, "products/product_detail.html", context)
 
 
 class ProductLikeComment(View):
@@ -135,13 +159,27 @@ class ProductDislikeComment(View):
             return JsonResponse({"status": "retake_disliked"})
 
 
-class ProductSendQuestion(View):
-    def post(self, request, *args, **kwargs):
-        category = get_object_or_404(Category, category_name=kwargs["category_name"])
-        product = get_object_or_404(Product, category=category, pk=kwargs["pk"])
+class ProductLikeAnswer(View):
+    def post(self, request, id_answer, *args, **kwargs):
+        answer = get_object_or_404(Answer, pk=id_answer)
+        try:
+            answer_like = AnswerLike.objects.get(user=request.user, answer=answer)
+        except AnswerLike.DoesNotExist:
+            AnswerLike.objects.create(user=request.user, answer=answer)
+            return JsonResponse({"status": "liked"})
+        else:
+            answer_like.delete()
+            return JsonResponse({"status": "retake_liked"})
 
-        question_form = QuestionForm(request.POST)
-        if question_form.is_valid():
-            pass
-        return render(request, "products/product_detail.html",
-                      context={"comment_form": CommentForm(), "question_form": question_form, "product": product})
+
+class ProductDislikeAnswer(View):
+    def post(self, request, id_answer, *args, **kwargs):
+        answer = get_object_or_404(Answer, pk=id_answer)
+        try:
+            answer_dislike = AnswerDislike.objects.get(user=request.user, answer=answer)
+        except AnswerDislike.DoesNotExist:
+            AnswerDislike.objects.create(user=request.user, answer=answer)
+            return JsonResponse({"status": "disliked"})
+        else:
+            answer_dislike.delete()
+            return JsonResponse({"status": "retake_disliked"})

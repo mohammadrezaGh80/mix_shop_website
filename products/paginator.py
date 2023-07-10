@@ -22,8 +22,11 @@ class CustomPaginator(Paginator):
         else:
             list_show_pages = self.page_range
 
+        flag = False
         for num in self.page_range:
             if num in list_show_pages:
+                flag = False
                 yield num
-            else:
+            elif num not in list_show_pages and flag is False:
                 yield self.ELLIPSIS
+                flag = True

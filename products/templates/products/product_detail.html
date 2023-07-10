@@ -83,10 +83,16 @@
                                     </ul>
                                 </div>
                             {% endif %}
-                            {% if comments.count > 0 %}
-                                <a style="font-size: 14px;color: #27bae9" href="#comments"
-                                   class="mt-4 text-decoration-none">{{ comments.count }} {% trans "Comment" %}</a>
-                            {% endif %}
+                            <div class="d-flex align-items center mt-4">
+                                {% if comments.count > 0 %}
+                                    <a style="font-size: 14px;color: #27bae9" href="#comments"
+                                       class="text-decoration-none">{{ comments.count }} {% trans "Comment" %}</a>
+                                {% endif %}
+                                {% if questions.count > 0 %}
+                                    <a style="font-size: 14px;color: #27bae9" href="#questions"
+                                       class="ms-2 text-decoration-none">{{ questions.count }} {% trans "Question" %}</a>
+                                {% endif %}
+                            </div>
                             <span class="fs-4 d-flex justify-content-end fw-bold mt-auto">
                                 {% if LANGUAGE_CODE == "en" %}
                                     {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
@@ -216,7 +222,7 @@
                             <div class="text-end border-top border-2 pt-2">{{ comments.count }} {% trans "Comment" %}</div>
                             {% if comments.count > 0 %}
                                 <div id="comments" class="comments">
-                                    {% for comment in page_obj %}
+                                    {% for comment in page_obj_comment %}
                                         <div class="border-bottom border-2 py-4">
                                             <div class="d-flex">
                                                 <span style="width: 30px;height: 25px"
@@ -294,9 +300,9 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center my-3">
                                     <span class="text-danger">
-                                        {% if page_obj.has_previous %}
+                                        {% if page_obj_comment.has_previous %}
                                             <a class="text-decoration-none text-danger fw-bold"
-                                               href="?page={{ page_obj.previous_page_number }}#comments">
+                                               href="?page1={{ page_obj_comment.previous_page_number }}#comments">
                                                 {% if LANGUAGE_CODE == "fa" %}
                                                     <i class="bi bi-chevron-right"></i>
                                                 {% elif LANGUAGE_CODE == "en" %}
@@ -307,17 +313,17 @@
                                         {% endif %}
                                     </span>
                                     <ul class="custom-pagination d-flex">
-                                        {% for page in range_pages %}
+                                        {% for page in range_pages_comment %}
                                             <li class="me-2 page">
-                                                <a style="width: 30px;height: 30px" href="?page={{ page }}#comments"
-                                                   class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                <a style="width: 30px;height: 30px" href="?page1={{ page }}#comments"
+                                                   class="{% if page_obj_comment.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                     <span class="text-danger">
-                                        {% if page_obj.has_next %}
+                                        {% if page_obj_comment.has_next %}
                                             <a class="text-decoration-none text-danger fw-bold"
-                                               href="?page={{ page_obj.next_page_number }}#comments">
+                                               href="?page1={{ page_obj_comment.next_page_number }}#comments">
                                                 {% trans "After" %}
                                                 {% if LANGUAGE_CODE == "fa" %}
                                                     <i class="bi bi-chevron-left"></i>
@@ -362,13 +368,19 @@
                                                       method="post" class="question-form">
                                                     {% csrf_token %}
                                                     <div class="d-flex flex-column mb-3">
-                                                        {{ question_form.text }}
+                                                        <textarea name="text" cols="40" rows="10" class="form-control"
+                                                                  maxlength="100" required=""
+                                                                  id="id_text_question"></textarea>
                                                         {% for error in question_form.text.errors %}
                                                             <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
                                                         {% endfor %}
                                                     </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <span id="length_text_question">100/0</span>
+                                                    </div>
                                                     <button name="send_question" type="submit"
-                                                            class="btn btn-danger mt-3">{% trans "Register question" %}</button>
+                                                            class="btn btn-danger mt-3" id="question_button"
+                                                            disabled>{% trans "Register question" %}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -376,21 +388,171 @@
                                 </div>
                             </div>
                         {% endif %}
-                        {% if questions.count > 0 %}
-                            <div id="questions" class="questions-wrapper flex-grow-1 mx-4 overflow-y-scroll">
-                                {% for question in questions %}
-                                    <div class="border-bottom border-2 py-4">
-                                        <div>
-                                            <div class="d-flex align-items-center fw-bold">
+                        <div class="questions-wrapper flex-grow-1 mx-4 overflow-y-scroll">
+                            {% if questions.count > 0 %}
+                                <div id="questions" class="questions">
+                                    {% for question in page_obj_question %}
+                                        <div class="border-bottom border-2 mb-4">
+                                            <div class="d-flex align-items-center fw-bold mb-4">
                                                 <i class="bi bi-question-square text-info fs-4"></i>
-                                                <p style="font-size: 18px" class="ms-3">{{ question.text }}</p>
+                                                <p style="font-size: 18px" class="ms-3 flex-grow-1">
+                                                    {{ question.text }}
+                                                </p>
+                                            </div>
+                                            <div class="wrapper-answer my-3">
+                                                {% for answer in question.answers.all %}
+                                                    <div class="answer d-flex align-items-center py-3 {% if not forloop.last %}border-bottom border-1{% endif %}">
+                                                        <span style="font-size: 14px">{% trans "Answer" %}</span>
+                                                        <div class="ms-3 flex-grow-1">
+                                                            <p>{{ answer.text }}</p>
+                                                            <span style="font-size: 14px"
+                                                                  class="d-inline-block mt-2">{{ answer.user.email }}</span>
+                                                        </div>
+                                                        <div class="wrapper-like-dislike d-flex align-items-center justify-content-end align-self-end">
+                                                            <div class="wrapper-like d-flex align-items-center">
+                                                                <span class="comment_likes_count">{{ answer.get_total_like }}</span>
+                                                                <form action="{% url 'products:product_like_answer' product.category.category_name product.pk answer.pk %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    {% if not user.is_authenticated %}
+                                                                        <a href="{% url 'accounts:login' %}?next={{ request.path }}"
+                                                                           class="btn btn-link text-secondary px-2">
+                                                                            <i class="bi bi-hand-thumbs-up"></i>
+                                                                        </a>
+                                                                    {% else %}
+                                                                        <button type="submit"
+                                                                                class="answer-like-button btn btn-link text-secondary px-2">
+                                                                            {% if answer|is_user_liked_answer:user %}
+                                                                                <i class="bi bi-hand-thumbs-up-fill"></i>
+                                                                            {% else %}
+                                                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                                            {% endif %}
+                                                                        </button>
+                                                                    {% endif %}
+                                                                </form>
+                                                            </div>
+                                                            <div class="wrapper-dislike d-flex align-items-center ms-2">
+                                                                <span class="comment_dislikes_count">{{ answer.get_total_dislike }}</span>
+                                                                <form action="{% url 'products:product_dislike_answer' product.category.category_name product.pk answer.pk %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    {% if not user.is_authenticated %}
+                                                                        <a href="{% url 'accounts:login' %}?next={{ request.path }}"
+                                                                           class="btn btn-link text-secondary px-2">
+                                                                            <i class="bi bi-hand-thumbs-down"></i>
+                                                                        </a>
+                                                                    {% else %}
+                                                                        <button type="submit"
+                                                                                class="answer-dislike-button btn btn-link text-secondary px-2">
+                                                                            {% if answer|is_user_disliked_answer:user %}
+                                                                                <i class="bi bi-hand-thumbs-down-fill"></i>
+                                                                            {% else %}
+                                                                                <i class="bi bi-hand-thumbs-down"></i>
+                                                                            {% endif %}
+                                                                        </button>
+                                                                    {% endif %}
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="ms-3 border-top border-1 py-4">
+                                                <button style="width: 160px; height: 50px" type="button"
+                                                        class="btn btn-link text-decoration-none p-0"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#registerAnswer">
+                                                    <span>{% trans "Register a new answer" %}</span>
+                                                    {% if LANGUAGE_CODE == "fa" %}
+                                                        <i class="bi bi-chevron-left"></i>
+                                                    {% elif LANGUAGE_CODE == "en" %}
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    {% endif %}
+                                                </button>
+                                            </div>
+
+                                            <div class="modal fade" id="registerAnswer">
+                                                <div style="max-width: 650px"
+                                                     class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header mx-3 px-0">
+                                                            <p class="fw-bold">{% trans "Answer this question" %}</p>
+                                                            <button type="button" class="btn-close shadow-none"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body pt-0 pb-4">
+                                                            <div class="px-4">
+                                                                <p class="my-4">{{ question.text }}</p>
+                                                                <form action="" method="post" class="answer-form">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="id_question"
+                                                                           value="{{ question.id }}">
+                                                                    <div class="d-flex flex-column mb-3">
+                                                                    <textarea name="text" cols="40" rows="10"
+                                                                              class="form-control" maxlength="100"
+                                                                              required=""
+                                                                              id="id_text_answer"></textarea>
+                                                                        {% for error in answer_form.text.errors %}
+                                                                            <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <span id="length_text_answer">500/0</span>
+                                                                    </div>
+                                                                    <button name="send_answer" type="submit"
+                                                                            class="btn btn-danger mt-3"
+                                                                            id="answer_button"
+                                                                            disabled>{% trans "Register answer" %}</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p class="fw-bold">{% trans "You can also question on this product." %}</p>
-                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center my-3">
+                                <span class="text-danger">
+                                    {% if page_obj_question.has_previous %}
+                                        <a class="text-decoration-none text-danger fw-bold"
+                                           href="?page2={{ page_obj_question.previous_page_number }}#questions">
+                                            {% if LANGUAGE_CODE == "fa" %}
+                                                <i class="bi bi-chevron-right"></i>
+                                            {% elif LANGUAGE_CODE == "en" %}
+                                                <i class="bi bi-chevron-left"></i>
+                                            {% endif %}
+                                            {% trans "Before" %}
+                                        </a>
+                                    {% endif %}
+                                </span>
+                                    <ul class="custom-pagination d-flex">
+                                        {% for page in range_pages_question %}
+                                            <li class="me-2 page">
+                                                <a style="width: 30px;height: 30px" href="?page2={{ page }}#questions"
+                                                   class="{% if page_obj_question.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <span class="text-danger">
+                                    {% if page_obj_question.has_next %}
+                                        <a class="text-decoration-none text-danger fw-bold"
+                                           href="?page2={{ page_obj_question.next_page_number }}#questions">
+                                            {% trans "After" %}
+                                            {% if LANGUAGE_CODE == "fa" %}
+                                                <i class="bi bi-chevron-left"></i>
+                                            {% elif LANGUAGE_CODE == "en" %}
+                                                <i class="bi bi-chevron-right"></i>
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
+                                </span>
+                                </div>
+                            {% else %}
+                                <p class="fw-bold ms-3">{% trans "You can also question on this product." %}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

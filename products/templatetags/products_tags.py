@@ -19,3 +19,13 @@ def is_user_liked_comment(comment, user):
 @register.filter
 def is_user_disliked_comment(comment, user):
     return comment.dislikes.filter(user=user).exists()
+
+
+@register.filter
+def is_user_liked_answer(answer, user):
+    return answer.likes.filter(user=user).exists()
+
+
+@register.filter
+def is_user_disliked_answer(answer, user):
+    return answer.dislikes.filter(user=user).exists()

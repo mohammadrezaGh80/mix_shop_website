@@ -197,6 +197,29 @@ class Question(models.Model):
         verbose_name_plural = _("Questions")
 
 
+class Answer(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="answers", verbose_name=_("User"))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="answers", verbose_name=_("Product"))
+    text = models.CharField(max_length=500, verbose_name=_("Text"))
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="answers", verbose_name=_("Question"))
+
+    created_datetime = models.DateTimeField(auto_now_add=True, verbose_name=_("Created datetime"))
+    modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
+
+    def get_total_like(self):
+        return self.likes.count()
+
+    def get_total_dislike(self):
+        return self.dislikes.count()
+
+    def __str__(self):
+        return f"{self.text[:30]}({self.user.email}) --> {self.question.text[:30]}"
+
+    class Meta:
+        verbose_name = _("Answer")
+        verbose_name_plural = _("Answers")
+
+
 class CommentLike(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="comment_likes",
                              verbose_name=_("User"))
@@ -225,31 +248,31 @@ class CommentDislike(models.Model):
         verbose_name_plural = _("Comment dislikes")
 
 
-class QuestionLike(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="question_likes",
+class AnswerLike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="answer_likes",
                              verbose_name=_("User"))
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="likes",
-                                 verbose_name=_("Question"))
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name="likes",
+                               verbose_name=_("Answer"))
     modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
 
     def __str__(self):
-        return f"{self.user} liked {self.question.text[:30]}"
+        return f"{self.user} liked {self.answer.text[:30]}"
 
     class Meta:
-        verbose_name = _("Question like")
-        verbose_name_plural = _("Question likes")
+        verbose_name = _("Answer like")
+        verbose_name_plural = _("Answer likes")
 
 
-class QuestionDislike(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="question_dislikes",
+class AnswerDislike(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="answer_dislikes",
                              verbose_name=_("User"))
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="dislikes",
-                                 verbose_name=_("Question"))
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name="dislikes",
+                               verbose_name=_("Answer"))
     modified_datetime = models.DateTimeField(auto_now=True, verbose_name=_("Modified datetime"))
 
     def __str__(self):
-        return f"{self.user} disliked {self.question.text[:30]}"
+        return f"{self.user} disliked {self.answer.text[:30]}"
 
     class Meta:
-        verbose_name = _("Question dislike")
-        verbose_name_plural = _("Question dislikes")
+        verbose_name = _("Answer dislike")
+        verbose_name_plural = _("Answer dislikes")

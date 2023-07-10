@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from .models import Category, ProductColor, ProductSize, Product, ProductImage, Comment, Question, \
-    CommentLike, CommentDislike, QuestionLike, QuestionDislike
+    CommentLike, CommentDislike, AnswerLike, AnswerDislike, Answer
 
 
 class ProductImageInline(admin.TabularInline):
@@ -60,7 +60,20 @@ class QuestionAdmin(admin.ModelAdmin):
     def get_text(self, obj):
         return obj.text[:30]
 
-    get_text.short_description = _("Text")
+    get_text.short_description = _("Question")
+
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ("user", "get_text", "get_question", "product", "created_datetime")
+
+    def get_text(self, obj):
+        return obj.text[:30]
+    get_text.short_description = _("Answer")
+
+    def get_question(self, obj):
+        return obj.question.text[:30]
+    get_question.short_description = _("Question")
 
 
 @admin.register(CommentLike)
@@ -81,20 +94,20 @@ class CommentDislikeAdmin(admin.ModelAdmin):
     get_title_product.short_description = _("Title of product")
 
 
-@admin.register(QuestionLike)
-class QuestionLikeAdmin(admin.ModelAdmin):
-    list_display = ("user", "question", "get_title_product", "modified_datetime")
+@admin.register(AnswerLike)
+class AnswerLikeAdmin(admin.ModelAdmin):
+    list_display = ("user", "answer", "get_title_product", "modified_datetime")
 
     def get_title_product(self, obj):
-        return obj.comment.product.title
+        return obj.answer.product.title
     get_title_product.short_description = _("Title of product")
 
 
-@admin.register(QuestionDislike)
-class QuestionDislikeAdmin(admin.ModelAdmin):
-    list_display = ("user", "question", "get_title_product", "modified_datetime")
+@admin.register(AnswerDislike)
+class AnswerDislikeAdmin(admin.ModelAdmin):
+    list_display = ("user", "answer", "get_title_product", "modified_datetime")
 
     def get_title_product(self, obj):
-        return obj.comment.product.title
+        return obj.answer.product.title
     get_title_product.short_description = _("Title of product")
 

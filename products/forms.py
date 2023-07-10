@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import Comment, Question
+from .models import Comment, Question, Answer
 
 
 class CommentForm(forms.ModelForm):
@@ -40,3 +40,12 @@ class QuestionForm(forms.ModelForm):
                 params={"min_characters": min_characters}
             )
         return text
+
+
+class AnswerForm(QuestionForm):
+    class Meta:
+        model = Answer
+        fields = ("text",)
+        widgets = {
+            "text": forms.Textarea(attrs={'class': 'form-control'})
+        }
