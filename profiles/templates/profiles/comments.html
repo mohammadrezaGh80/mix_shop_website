@@ -1,0 +1,300 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block page_title %}{% trans 'Comments' %}{% endblock page_title %}
+
+{% block page_content %}
+    <div class="mt-5">
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+
+                <div class="col-4">
+                    {% include "profiles/profile_sidebar.html" %}
+                </div>
+                <div class="col-8">
+                    <div style="max-height: 85vh"
+                         class="wrapper-my-comments border border-secondary rounded px-3 py-4 overflow-y-auto">
+                        <span class="d-inline-block mb-4">{% trans "Comments" %}</span>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link text-secondary" id="nav-awaiting-comment-register-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#nav-awaiting-comment-register" type="button" role="tab"
+                                        aria-controls="nav-awaiting-comment-register"
+                                        aria-selected="true">{% trans "Awaiting comment registration" %}
+                                </button>
+                                <button class="nav-link text-danger active" id="nav-my-comments-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#nav-my-comments" type="button" role="tab"
+                                        aria-controls="nav-my-comments" aria-selected="false">{% trans "My comments" %}
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade" id="nav-awaiting-comment-register" role="tabpanel"
+                                 aria-labelledby="nav-awaiting-comment-register-tab" tabindex="0">1
+                            </div>
+                            <div class="tab-pane fade show active" id="nav-my-comments" role="tabpanel"
+                                 aria-labelledby="nav-my-comments-tab" tabindex="0">
+                                {% if comments.count > 0 %}
+                                    <div>
+                                        {% for comment in page_obj %}
+                                            <div class="wrapper-comment-info py-5 mx-3 border-bottom border-secondary d-flex">
+                                                <div class="right-comment-info d-flex flex-column">
+                                                    <figure class="mb-1" style="width: 80px;height: 80px">
+                                                        <img class="w-100 h-100 d-block object-fit-cover"
+                                                             src="{{ comment.product.images.first.image.url }}" alt="">
+                                                    </figure>
+                                                    <span style="width: 30px;height: 25px"
+                                                          class="text-light px-1 rounded align-self-end d-flex justify-content-center align-items-center me-2 {% if comment.star_rating >= 3 %}bg-success{% else %}bg-warning bg-gradient{% endif %}">
+                                                    {{ comment.star_rating }}
+                                                </span>
+                                                </div>
+                                                <div class="left-comment-info flex-grow-1 ms-2">
+                                                    <div class="border-bottom border-secondary pb-4 d-flex align-items-center">
+                                                        {% if comment.title %}
+                                                            <span class="fw-bold align-self-start">{{ comment.title }}</span>
+                                                        {% endif %}
+                                                        <div style="max-width: 160px"
+                                                             class="d-flex flex-column flex-grow-1 ms-auto align-items-center">
+                                                            <div class="wrapper-edit-comment">
+                                                                <button class="btn btn-outline-primary btn-sm border-0" data-bs-toggle="modal"
+                                                                      data-bs-target="#editComment{{ comment.id }}">
+                                                                    <i style="font-size: 18px;"
+                                                                       class="bi bi-pencil"></i>
+                                                                    <span class="ms-2">{% trans "Edit comment" %}</span>
+                                                                </button>
+
+                                                                <div class="modal fade"
+                                                                     id="editComment{{ comment.id }}">
+                                                                    <div style="max-width: 650px"
+                                                                         class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header mx-3 px-0">
+                                                                                <div>
+                                                                                    <span class="fs-5 fw-bold">{% trans "Your Comment" %}</span>
+                                                                                    <p style="font-size: 14px;"
+                                                                                       class="my-2">
+                                                                                        {% blocktrans with title=comment.product.title %}
+                                                                                            About
+                                                                                            {{ title }}{% endblocktrans %}</p>
+                                                                                </div>
+                                                                                <button type="button"
+                                                                                        class="btn-close shadow-none"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="card px-4 py-3">
+                                                                                    <form action="" method="post"
+                                                                                          class="comment-form">
+                                                                                        {% csrf_token %}
+                                                                                        <input type="hidden"
+                                                                                               value="{{ comment.pk }}"
+                                                                                               name="id_comment">
+                                                                                        <div class="d-flex flex-column mb-3">
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <span class="required-input">{{ comment_form.star_rating.label }}:</span>
+                                                                                                <div class="d-flex flex-row-reverse align-items-center column-gap-1 wrapper-rating ms-3">
+                                                                                                    <input type="radio"
+                                                                                                           id="id_star_rating_4"
+                                                                                                           name="star_rating"
+                                                                                                           value="5"
+                                                                                                           class="opacity-0"
+                                                                                                           {% if comment.star_rating == 5 %}checked{% endif %}>
+                                                                                                    <label for="id_star_rating_4">
+                                                                                                        <i class="bi bi-star"></i>
+                                                                                                    </label>
+                                                                                                    <input type="radio"
+                                                                                                           id="id_star_rating_3"
+                                                                                                           name="star_rating"
+                                                                                                           value="4"
+                                                                                                           class="opacity-0"
+                                                                                                           {% if comment.star_rating == 4 %}checked{% endif %}>
+                                                                                                    <label for="id_star_rating_3">
+                                                                                                        <i class="bi bi-star"></i>
+                                                                                                    </label>
+                                                                                                    <input type="radio"
+                                                                                                           id="id_star_rating_2"
+                                                                                                           name="star_rating"
+                                                                                                           value="3"
+                                                                                                           class="opacity-0"
+                                                                                                           {% if comment.star_rating == 3 %}checked{% endif %}>
+                                                                                                    <label for="id_star_rating_2">
+                                                                                                        <i class="bi bi-star"></i>
+                                                                                                    </label>
+                                                                                                    <input type="radio"
+                                                                                                           id="id_star_rating_1"
+                                                                                                           name="star_rating"
+                                                                                                           value="2"
+                                                                                                           class="opacity-0"
+                                                                                                           {% if comment.star_rating == 2 %}checked{% endif %}>
+                                                                                                    <label for="id_star_rating_1">
+                                                                                                        <i class="bi bi-star"></i>
+                                                                                                    </label>
+                                                                                                    <input type="radio"
+                                                                                                           id="id_star_rating_0"
+                                                                                                           name="star_rating"
+                                                                                                           value="1"
+                                                                                                           class="opacity-0"
+                                                                                                           required
+                                                                                                           {% if comment.star_rating == 1 %}checked{% endif %}>
+                                                                                                    <label for="id_star_rating_0">
+                                                                                                        <i class="bi bi-star"></i>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            {% for error in comment_form.star_rating.errors %}
+                                                                                                <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                        <div class="d-flex flex-column mb-3">
+                                                                                            <label class="form-label"
+                                                                                                   for="id_title">{{ comment_form.title.label }}:</label>
+                                                                                            <input type="text"
+                                                                                                   name="title"
+                                                                                                   class="form-control"
+                                                                                                   maxlength="100"
+                                                                                                   id="id_title"
+                                                                                                   {% if comment.title %}value="{{ comment.title }}"{% endif %}>
+                                                                                            {% for error in comment_form.title.errors %}
+                                                                                                <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                        <div class="d-flex flex-column mb-3">
+                                                                                            <label class="form-label required-input"
+                                                                                                   for="id_text">{{ comment_form.text.label }}:</label>
+                                                                                            <textarea name="text"
+                                                                                                      cols="40"
+                                                                                                      rows="10"
+                                                                                                      class="form-control"
+                                                                                                      placeholder="{% trans 'Write for us...' %}"
+                                                                                                      required=""
+                                                                                                      id="id_text">{{ comment.text }}</textarea>
+                                                                                            {% for error in comment_form.text.errors %}
+                                                                                                <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                        <div class="d-flex mb-3">
+                                                                                            <input type="checkbox"
+                                                                                                   name="is_anonymous"
+                                                                                                   id="id_is_anonymous"
+                                                                                                   {% if comment.is_anonymous %}checked{% endif %}>
+                                                                                            <p class="ms-2">{% trans "Register a comment anonymously" %}</p>
+                                                                                            {% for error in comment_form.is_anonymous.errors %}
+                                                                                                <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                        <button type="submit"
+                                                                                                class="btn btn-danger mt-3">{% trans "Edit comment" %}</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-2 wrapper-delete-comment">
+                                                                <button class="btn btn-outline-danger btn-sm border-0" data-bs-toggle="modal"
+                                                                      data-bs-target="#deleteComment{{ comment.id }}">
+                                                                    <i style="font-size: 18px;"
+                                                                       class="bi bi-trash"></i>
+                                                                    <span class="ms-2">{% trans "Delete comment" %}</span>
+                                                                </button>
+
+                                                                <div class="modal fade"
+                                                                     id="deleteComment{{ comment.id }}">
+                                                                    <div style="max-width: 650px"
+                                                                         class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header mx-3 px-0">
+                                                                                <span class="fs-5 fw-bold">{% trans "Delete comment" %}</span>
+                                                                                <button type="button"
+                                                                                        class="btn-close shadow-none"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>{% trans "Are you sure to delete this comment?" %}</p>
+                                                                                <div class="mt-3 d-flex justify-content-end">
+                                                                                    <button type="button"
+                                                                                            class="btn btn-outline-danger me-2"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close">{% trans "Cancel" %}</button>
+                                                                                    <form action="{% url 'profiles:comment_delete' comment.pk %}"
+                                                                                          method="post">
+                                                                                        {% csrf_token %}
+                                                                                        <button type="submit"
+                                                                                                class="btn btn-danger">{% trans "Delete" %}</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <p class="border-bottom border-secondary pt-4 pb-3">{{ comment.text }}</p>
+                                                    <span style="font-size: 13px"
+                                                          class="d-inline-block mt-4 text-secondary">{{ comment.product.seller.email }}</span>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center my-3">
+                                        <span class="text-danger">
+                                            {% if page_obj.has_previous %}
+                                                <a class="text-decoration-none text-danger fw-bold"
+                                                   href="?page={{ page_obj.previous_page_number }}">
+                                                    {% if LANGUAGE_CODE == "fa" %}
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    {% elif LANGUAGE_CODE == "en" %}
+                                                        <i class="bi bi-chevron-left"></i>
+                                                    {% endif %}
+                                                    {% trans "Before" %}
+                                                </a>
+                                            {% endif %}
+                                        </span>
+                                        <ul class="custom-pagination d-flex">
+                                            {% for page in range_pages %}
+                                                <li class="me-2 page">
+                                                    <a style="width: 30px;height: 30px"
+                                                       href="?page={{ page }}"
+                                                       class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <span class="text-danger">
+                                        {% if page_obj.has_next %}
+                                            <a class="text-decoration-none text-danger fw-bold"
+                                               href="?page={{ page_obj.next_page_number }}">
+                                                {% trans "After" %}
+                                                {% if LANGUAGE_CODE == "fa" %}
+                                                    <i class="bi bi-chevron-left"></i>
+                                                {% elif LANGUAGE_CODE == "en" %}
+                                                    <i class="bi bi-chevron-right"></i>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    </span>
+                                    </div>
+                                {% else %}
+                                    <p class="fw-bold mt-3">{% trans "You haven't any comment to display." %}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/profiles/main.js' %}"></script>
+{% endblock page_content %}

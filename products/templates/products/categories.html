@@ -11,9 +11,11 @@
             {% if not category.parent %}
                 {% trans category.category_name as category_name %}
                 <li>
-                    <a class="dropdown-item" href="{% url 'products:product_category' category.category_name %}">{{ category_name|replace_dash_with_space_category_name }} {% if category.sub_categories.all %}&raquo{% endif %}</a>
                 {% if category.sub_categories.all %}
+                    <a class="dropdown-item" href="{% url 'products:product_category' category.category_name %}">{{ category_name|replace_dash_with_space_category_name }} &raquo</a>
                     {% include "products/sub_categories.html" with category=category %}
+                {% else %}
+                    <a class="dropdown-item" href="{% url 'products:product_sub_category_list' category.category_name %}">{{ category_name|replace_dash_with_space_category_name }}</a>
                 {% endif %}
                 </li>
             {% endif %}

@@ -39,6 +39,10 @@
                    href="{% url "profiles:favorites_list" %}">{% trans "Favorites list" %}</a>
             </li>
             <li class="mt-2 border-top border-secondary">
+                <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:comments" %}text-danger{% else %}text-black{% endif %} fw-bold"
+                   href="{% url "profiles:comments" %}">{% trans "Comments" %}</a>
+            </li>
+            <li class="mt-2 border-top border-secondary">
                 <a class="text-decoration-none d-inline-block py-2 {% if request.resolver_match.view_name == "profiles:addresses" %}text-danger{% else %}text-black{% endif %} fw-bold"
                    href="{% url "profiles:addresses" %}">{% trans "Addresses" %}</a>
             </li>

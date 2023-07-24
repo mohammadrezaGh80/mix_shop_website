@@ -127,6 +127,31 @@
             border: 2px solid rgb(220,53,69);
             color: rgb(220,53,69);
         }
+
+        {# comments #}
+        .bi-three-dots-vertical:hover{
+            cursor: pointer;
+        }
+
+        .dropdown-menu{
+            --bs-dropdown-link-active-color: initial;
+            --bs-dropdown-link-active-bg: initial;
+            --bs-dropdown-link-hover-bg: initial;
+            --bs-dropdown-link-hover-color: initial;
+        }
+
+        .wrapper-my-comments{
+            scrollbar-width: none;
+        }
+
+        .wrapper-my-comments::-webkit-scrollbar {
+            display: none;
+        }
+
+        .wrapper-edit-comment:hover,
+        .wrapper-delete-comment:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>

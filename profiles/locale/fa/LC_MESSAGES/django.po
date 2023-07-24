@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-08 11:20+0330\n"
-"PO-Revision-Date: 2023-06-08 11:21+0330\n"
-"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2023-07-23 18:41+0330\n"
+"PO-Revision-Date: 2023-07-23 18:41+0330\n"
+"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,103 +19,159 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\templates\profiles\addresses.html:6
-#: .\templates\profiles\addresses.html:21
-#: .\templates\profiles\profile_sidebar.html:43
+#: templates/profiles/addresses.html:6 templates/profiles/addresses.html:21
+#: templates/profiles/profile_sidebar.html:47
 msgid "Addresses"
 msgstr "آدرس ها"
 
-#: .\templates\profiles\favorites.html:6
-#: .\templates\profiles\favorites.html:21
-#: .\templates\profiles\profile_sidebar.html:39
-msgid "Favorites list"
-msgstr "لیست علاقه مندی ها"
+#: templates/profiles/comments.html:7 templates/profiles/comments.html:23
+#: templates/profiles/profile_sidebar.html:43
+msgid "Comments"
+msgstr "دیدگاه ها"
 
-#: .\templates\profiles\orders.html:6 .\templates\profiles\orders.html:21
-#: .\templates\profiles\profile_sidebar.html:35
-msgid "Orders"
-msgstr "سفارش ها"
+#: templates/profiles/comments.html:30
+msgid "Awaiting comment registration"
+msgstr "در انتظار ثبت دیدگاه"
 
-#: .\templates\profiles\personal_info.html:6
-#: .\templates\profiles\profile_sidebar.html:51
-msgid "Personal info"
-msgstr "اطلاعات حساب کاربری"
+#: templates/profiles/comments.html:34
+msgid "My comments"
+msgstr "دیدگاه های من"
 
-#: .\templates\profiles\personal_info.html:68
-#: .\templates\profiles\personal_info.html:71
-msgid "birth date..."
-msgstr "تاریخ تولد..."
+#: templates/profiles/comments.html:69 templates/profiles/comments.html:189
+msgid "Edit comment"
+msgstr "ویرایش دیدگاه"
 
-#: .\templates\profiles\personal_info.html:79
-#: .\templates\profiles\profile_sidebar.html:22
-msgid "Edit"
-msgstr "ویرایش"
+#: templates/profiles/comments.html:78
+msgid "Your Comment"
+msgstr "دیدگاه شما"
 
-#: .\templates\profiles\profile_page.html:6
-msgid "Profile"
-msgstr "پروفایل"
+#: templates/profiles/comments.html:81
+#, python-format
+#| msgid ""
+#| "\n"
+#| "                                                                                    About\n"
+#| "                                                                                    %(title)s"
+msgid ""
+"\n"
+"                                                                                        About\n"
+"                                                                                        %(title)s"
+msgstr ""
+"\n"
+"درمورد %(title)s"
 
-#: .\templates\profiles\profile_page.html:21
-#: .\templates\profiles\profile_sidebar.html:31
-msgid "Summary of activities"
-msgstr "خلاصه فعالیت ها"
+#: templates/profiles/comments.html:171
+msgid "Write for us..."
+msgstr "برای ما بنویسید..."
 
-#: .\templates\profiles\profile_sidebar.html:47
-#: .\templates\profiles\recent_visits.html:7
-msgid "Recent visits"
-msgstr "بازدید های اخیر"
+#: templates/profiles/comments.html:183
+msgid "Register a comment anonymously"
+msgstr "ارسال دیدگاه به صورت ناشناس"
 
-#: .\templates\profiles\profile_sidebar.html:55
-msgid "Logout"
-msgstr "خروج"
+#: templates/profiles/comments.html:202 templates/profiles/comments.html:210
+msgid "Delete comment"
+msgstr "حذف دیدگاه"
 
-#: .\templates\profiles\recent_visits.html:27
-msgid "Clear All"
-msgstr "پاک کردن همه"
+#: templates/profiles/comments.html:217
+msgid "Are you sure to delete this comment?"
+msgstr "از حذف این دیدگاه مطمئن هستید؟"
 
-#: .\templates\profiles\recent_visits.html:48
+#: templates/profiles/comments.html:222
+#: templates/profiles/recent_visits.html:68
+msgid "Cancel"
+msgstr "انصراف"
+
+#: templates/profiles/comments.html:225
+#: templates/profiles/recent_visits.html:48
 msgid "Delete"
 msgstr "حذف"
 
-#: .\templates\profiles\recent_visits.html:56
+#: templates/profiles/comments.html:243
+msgid "You haven't any comment to display."
+msgstr "هیچ نظری برای نمایش ندارید."
+
+#: templates/profiles/favorites.html:6 templates/profiles/favorites.html:21
+#: templates/profiles/profile_sidebar.html:39
+msgid "Favorites list"
+msgstr "لیست علاقه مندی ها"
+
+#: templates/profiles/orders.html:6 templates/profiles/orders.html:21
+#: templates/profiles/profile_sidebar.html:35
+msgid "Orders"
+msgstr "سفارش ها"
+
+#: templates/profiles/personal_info.html:6
+#: templates/profiles/profile_sidebar.html:55
+msgid "Personal info"
+msgstr "اطلاعات حساب کاربری"
+
+#: templates/profiles/personal_info.html:68
+#: templates/profiles/personal_info.html:71
+msgid "birth date..."
+msgstr "تاریخ تولد..."
+
+#: templates/profiles/personal_info.html:79
+#: templates/profiles/profile_sidebar.html:22
+msgid "Edit"
+msgstr "ویرایش"
+
+#: templates/profiles/profile_page.html:6
+msgid "Profile"
+msgstr "پروفایل"
+
+#: templates/profiles/profile_page.html:21
+#: templates/profiles/profile_sidebar.html:31
+msgid "Summary of activities"
+msgstr "خلاصه فعالیت ها"
+
+#: templates/profiles/profile_sidebar.html:51
+#: templates/profiles/recent_visits.html:7
+msgid "Recent visits"
+msgstr "بازدید های اخیر"
+
+#: templates/profiles/profile_sidebar.html:59
+msgid "Logout"
+msgstr "خروج"
+
+#: templates/profiles/recent_visits.html:27
+msgid "Clear All"
+msgstr "پاک کردن همه"
+
+#: templates/profiles/recent_visits.html:56
 msgid "Remove from recent visits"
 msgstr "حذف از بازدید های اخیر"
 
-#: .\templates\profiles\recent_visits.html:62
+#: templates/profiles/recent_visits.html:62
 #, python-format
-#| msgid ""
-#| "Are you\n"
-#| "                                                            sure for remove\n"
-#| "                                                            %(title)s from recent visits?"
 msgid ""
 "Are you\n"
 "                                                                sure for remove\n"
 "                                                                %(title)s from recent visits?"
 msgstr "آیا از حذف %(title)s از بازدیدهای اخیر اطمینان دارید؟"
 
-#: .\templates\profiles\recent_visits.html:68
-msgid "Cancel"
-msgstr "انصراف"
-
-#: .\templates\profiles\recent_visits.html:77
+#: templates/profiles/recent_visits.html:77
 msgid "Remove product"
 msgstr "حذف محصول"
 
-#: .\templates\profiles\recent_visits.html:86
-#: .\templates\profiles\recent_visits.html:89
+#: templates/profiles/recent_visits.html:86
+#: templates/profiles/recent_visits.html:89
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\profiles\recent_visits.html:97
+#: templates/profiles/recent_visits.html:97
 msgid "You have not visited any products."
 msgstr "از هیچ محصولی بازدید نکرده اید."
 
-#: .\views.py:55
+#: views.py:60
+msgid "Your comment was successfully changed."
+msgstr "دیدگاه شما با موفقیت تغییر یافت."
+
+#: views.py:70
+msgid "Your comment was successfully deleted."
+msgstr "دیدگاه شما با موفقیت حذف شد."
+
+#: views.py:104
 msgid "Your information has been edited successfully."
 msgstr "اطلاعات شما با موفقیت ویرایش شد."
-
-#~ msgid "Comments"
-#~ msgstr "دیدگاه ها"
 
 #~ msgid "Messages"
 #~ msgstr "پیغام ها"
