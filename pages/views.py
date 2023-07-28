@@ -1,13 +1,16 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import activate, get_language
 from django.conf import settings
 from django.views import View
+from django.contrib.postgres.search import TrigramWordSimilarity
+
+from math import ceil
+from itertools import groupby
 
 from products.models import Product
 from profiles.recent_visits import RecentVisits
-from itertools import groupby
-from math import ceil
+from .search_history import SearchHistory
 
 
 class HomePageView(View):
@@ -48,3 +51,28 @@ def change_language_view(request):
     activate(language_code)
 
     return response
+
+
+class SearchView(View):
+    def get(self, request, *args, **kwargs):
+        query_name = request.GET.get("q")
+        search_history = SearchHistory(request)
+        products = Product.objects.all()
+
+        if query_name:
+            search_history.add(query_name)
+            products = Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}"))\
+                .filter(similarity__gte=0.2).order_by("-similarity")
+
+        # for p in Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}")).order_by("-similarity"):
+        #     print(f"{p.title}: {p.similarity}")
+
+        return render(request, "products/product_sub_category_list.html",
+                      context={"title": "Search", "products": products})
+
+
+class SearchClearView(View):
+    def get(self, request, *args, **kwargs):
+        search_history = SearchHistory(request)
+        search_history.clear()
+        return redirect("pages:home")

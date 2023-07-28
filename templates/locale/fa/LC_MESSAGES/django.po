@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 18:41+0330\n"
-"PO-Revision-Date: 2023-06-01 18:42+0330\n"
-"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2023-07-27 19:16+0330\n"
+"PO-Revision-Date: 2023-07-27 19:17+0330\n"
+"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,113 +19,124 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\_base.html:106
-msgid "EN"
-msgstr "انگلیسی"
-
-#: .\_base.html:109
-msgid "FA"
-msgstr "فارسی"
-
-#: .\home.html:6 .\home.html:17
+#: _base.html:226 home.html:8 home.html:19
 msgid "Home"
 msgstr "خانه"
 
-#: .\home.html:20
+#: _base.html:244
+msgid "Your last searches"
+msgstr "آخرین جستجوهای شما"
+
+#: _base.html:266
+#| msgid "Your last searches"
+msgid "Popular searches"
+msgstr "جستجو های پرطرفدار"
+
+#: _base.html:279
+msgid "EN"
+msgstr "انگلیسی"
+
+#: _base.html:282
+msgid "FA"
+msgstr "فارسی"
+
+#: home.html:22
 msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: .\home.html:22
+#: home.html:24
 msgid "Profile"
 msgstr "پروفایل"
 
-#: .\home.html:24
+#: home.html:26
 msgid "Change password"
 msgstr "تغییر رمزعبور"
 
-#: .\home.html:26
+#: home.html:28
 msgid "Logout of account"
 msgstr "خروج از حساب کاربری"
 
-#: .\home.html:29 .\registration\password_reset_complete.html:17
+#: home.html:31 registration/password_reset_complete.html:17
 msgid "Login to account"
 msgstr "ورود به حساب کاربری"
 
-#: .\home.html:31
+#: home.html:33
 msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
 
-#: .\home.html:35
+#: home.html:38
 msgid "Suggestion products:"
 msgstr "محصولات پیشنهادی:"
 
-#: .\registration\login.html:6 .\registration\login.html:33
-#: .\registration\register_step_1.html:42
+#: home.html:54 home.html:57
+msgid "$"
+msgstr "ریال"
+
+#: registration/login.html:6 registration/login.html:33
+#: registration/register_step_1.html:42
 msgid "Login"
 msgstr "ورود"
 
-#: .\registration\login.html:35 .\registration\register_step_1.html:7
-#: .\registration\register_step_2.html:6
-#: .\registration\register_step_2.html:81
+#: registration/login.html:35 registration/register_step_1.html:7
+#: registration/register_step_2.html:6 registration/register_step_2.html:81
 msgid "Register"
 msgstr "ثبت نام"
 
-#: .\registration\login.html:37
+#: registration/login.html:37
 msgid "Forgot your password?"
 msgstr "رمز عبور خود را فراموش کرده اید؟"
 
-#: .\registration\password_change.html:6 .\registration\password_reset.html:6
+#: registration/password_change.html:6 registration/password_reset.html:6
 msgid "Password Reset"
 msgstr "بازنشانی رمزعبور"
 
-#: .\registration\password_change.html:16
+#: registration/password_change.html:16
 msgid "For more security, enter your current password."
 msgstr "برای امنیت بیشتر، رمزعبور فعلی خود را وارد کنید."
 
-#: .\registration\password_change.html:43
+#: registration/password_change.html:43
 msgid "Change"
 msgstr "تغییر"
 
-#: .\registration\password_reset.html:16
+#: registration/password_reset.html:16
 msgid ""
 "Enter your email and a mail will be sent with instructions to reset password"
 msgstr ""
 "ایمیل خود را وارد کنید و یک ایمیل با دستورالعمل بازنشانی رمز عبور برایتان "
 "ارسال خواهد شد."
 
-#: .\registration\password_reset.html:27
+#: registration/password_reset.html:27
 msgid "Send"
 msgstr "ارسال"
 
-#: .\registration\password_reset_complete.html:6
+#: registration/password_reset_complete.html:6
 msgid "Complete"
 msgstr "انجام شد"
 
-#: .\registration\password_reset_complete.html:16
+#: registration/password_reset_complete.html:16
 msgid "Back to home"
 msgstr "بازگشت به خانه"
 
-#: .\registration\password_reset_confirm.html:6
+#: registration/password_reset_confirm.html:6
 msgid "Set New Password"
 msgstr "ایجاد رمزعبور جدید"
 
-#: .\registration\password_reset_confirm.html:32
+#: registration/password_reset_confirm.html:32
 msgid "Change Password"
 msgstr "تغییر رمزعبور"
 
-#: .\registration\password_reset_done.html:6
+#: registration/password_reset_done.html:6
 msgid "Sent"
 msgstr "ارسال شد"
 
-#: .\registration\register_step_2.html:52
-#: .\registration\register_step_2.html:55
+#: registration/register_step_2.html:52 registration/register_step_2.html:55
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
-#: .\registration\register_topbar.html:5
+#: registration/register_topbar.html:5
 msgid "Account"
 msgstr "حساب کاربری"
 
-#: .\registration\register_topbar.html:8
+#: registration/register_topbar.html:8
 msgid "Personal"
 msgstr "اطلاعات شخصی"

@@ -20,7 +20,7 @@ class ProductCategoryView(View):
         sub_categories = category.sub_categories.all()
 
         return render(request, "products/product_category.html",
-                      context={"category_name": category_name, "sub_categories": sub_categories})
+                      context={"title": category_name, "sub_categories": sub_categories})
 
 
 class ProductSubCategoryListView(View):
@@ -32,7 +32,7 @@ class ProductSubCategoryListView(View):
         products = Product.objects.filter(category=category).order_by("-modified_datetime")
 
         return render(request, "products/product_sub_category_list.html",
-                      context={"category_name": category_name, "products": products})
+                      context={"title": category_name, "products": products})
 
 
 class ProductDetailView(ContextMixin, View):

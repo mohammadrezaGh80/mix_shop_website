@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from products.models import Product
 
 
@@ -37,11 +39,10 @@ class RecentVisits:
         del self.session["recent_visits"]
 
     def __iter__(self):
-        recent_visits_copy = self.recent_visits.copy()
+        recent_visits_copy = deepcopy(self.recent_visits)
 
         product_ids = recent_visits_copy.keys()
         products = Product.objects.filter(id__in=product_ids)
-
         for product in products:
             recent_visits_copy[str(product.id)]["product"] = product
             recent_visits_copy[str(product.id)]["category"] = product.category.category_name

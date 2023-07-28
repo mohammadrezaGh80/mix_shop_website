@@ -6,13 +6,13 @@
             <img class="w-100 h-100 d-block"
                  src="https://api.digikala.com/static/files/fd4840b2.svg" alt="">
         </figure>
-        <div class="d-flex flex-column mb-0">
+        <div class="d-flex flex-column mb-0 ms-3 flex-grow-1">
             <span>{{ user.email }}</span>
             <div class="d-flex justify-content-between align-items-center mt-1">
                 {% if user.phone %}
                     <span>{{ user.phone }}</span>
                 {% endif %}
-                <a class="text-decoration-none d-flex justify-content-end align-items-center"
+                <a class="text-decoration-none d-flex justify-content-end align-items-center ms-auto"
                    href="{% url "profiles:personal_info" %}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke-width="1.5" stroke="currentColor" style="width: 25px;height: 25px">
