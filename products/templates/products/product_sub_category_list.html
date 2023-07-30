@@ -17,7 +17,7 @@
                 {% endfor %}
 
             {% if products %}
-                    {% for product in products %}
+                    {% for product in page_obj %}
                         <div class="col-12 col-md-4 my-3">
                             <div class="card p-3 h-100">
                                 <a href="{{ product.get_absolute_url }}" class="d-flex justify-content-center">
@@ -40,6 +40,43 @@
                             </div>
                         </div>
                     {% endfor %}
+                <div class="d-flex justify-content-between align-items-center my-3">
+                                        <span class="text-danger">
+                                            {% if page_obj.has_previous %}
+                                                <a class="text-decoration-none text-danger fw-bold"
+                                                   href="?page={{ page_obj.previous_page_number }}{% if request.session.query_name %}&q={{ request.session.query_name }}{% endif %}">
+                                                    {% if LANGUAGE_CODE == "fa" %}
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    {% elif LANGUAGE_CODE == "en" %}
+                                                        <i class="bi bi-chevron-left"></i>
+                                                    {% endif %}
+                                                    {% trans "Before" %}
+                                                </a>
+                                            {% endif %}
+                                        </span>
+                                        <ul class="custom-pagination d-flex">
+                                            {% for page in range_pages %}
+                                                <li class="me-2 page">
+                                                    <a style="width: 30px;height: 30px"
+                                                       href="?page={{ page }}{% if request.session.query_name %}&q={{ request.session.query_name }}{% endif %}"
+                                                       class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <span class="text-danger">
+                                        {% if page_obj.has_next %}
+                                            <a class="text-decoration-none text-danger fw-bold"
+                                               href="?page={{ page_obj.next_page_number }}{% if request.session.query_name %}&q={{ request.session.query_name }}{% endif %}">
+                                                {% trans "After" %}
+                                                {% if LANGUAGE_CODE == "fa" %}
+                                                    <i class="bi bi-chevron-left"></i>
+                                                {% elif LANGUAGE_CODE == "en" %}
+                                                    <i class="bi bi-chevron-right"></i>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    </span>
+                                    </div>
                 {% else %}
                     <p class="alert alert-info">{% trans "There aren't any product." %}</p>
                 {% endif %}

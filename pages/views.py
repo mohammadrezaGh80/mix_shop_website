@@ -9,6 +9,7 @@ from math import ceil
 from itertools import groupby
 
 from products.models import Product
+from products.paginator import CustomPaginator
 from profiles.recent_visits import RecentVisits
 from .search_history import SearchHistory
 
@@ -54,8 +55,10 @@ def change_language_view(request):
 
 
 class SearchView(View):
+
     def get(self, request, *args, **kwargs):
         query_name = request.GET.get("q")
+        request.session["query_name"] = query_name
         search_history = SearchHistory(request)
         products = Product.objects.all()
 
@@ -64,11 +67,17 @@ class SearchView(View):
             products = Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}"))\
                 .filter(similarity__gte=0.2).order_by("-similarity")
 
-        # for p in Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}")).order_by("-similarity"):
-        #     print(f"{p.title}: {p.similarity}")
+        paginator = CustomPaginator(products, 2)
+        page = self.request.GET.get("page")
+        page_obj = paginator.get_page(page)
+        range_pages_product = page_obj.paginator.get_elided_page_range(number=page, on_each_side=1)
+
+        for p in Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}")).order_by("-similarity"):
+            print(f"{p.title}: {p.similarity}")
 
         return render(request, "products/product_sub_category_list.html",
-                      context={"title": "Search", "products": products})
+                      context={"title": "Search", "products": products,
+                               "page_obj": page_obj, "range_pages": range_pages_product})
 
 
 class SearchClearView(View):

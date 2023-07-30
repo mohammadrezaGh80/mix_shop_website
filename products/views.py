@@ -25,14 +25,22 @@ class ProductCategoryView(View):
 
 class ProductSubCategoryListView(View):
     def get(self, request, category_name, *args, **kwargs):
+        if request.session.get("query_name"):
+            del request.session["query_name"]
         category = get_object_or_404(Category, category_name=category_name)
         if category.sub_categories.exists():
             raise Http404()
 
         products = Product.objects.filter(category=category).order_by("-modified_datetime")
 
+        paginator = CustomPaginator(products, 2)
+        page = self.request.GET.get("page")
+        page_obj = paginator.get_page(page)
+        range_pages_product = page_obj.paginator.get_elided_page_range(number=page, on_each_side=1)
+
         return render(request, "products/product_sub_category_list.html",
-                      context={"title": category_name, "products": products})
+                      context={"title": category_name, "products": products,
+                               "page_obj": page_obj, "range_pages": range_pages_product})
 
 
 class ProductDetailView(ContextMixin, View):
