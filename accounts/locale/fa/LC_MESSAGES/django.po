@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 11:06+0430\n"
-"PO-Revision-Date: 2023-05-10 10:08+0330\n"
-"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2023-08-17 17:35+0330\n"
+"PO-Revision-Date: 2023-08-17 17:36+0330\n"
+"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,120 +19,132 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\admin.py:18
+#: admin.py:18
 msgid "Personal info"
 msgstr "اطلاعات حساب کاربری"
 
-#: .\admin.py:19
+#: admin.py:19
 msgid "Permissions"
 msgstr "دسترسی ها"
 
-#: .\apps.py:8
+#: apps.py:8
 msgid "accounts"
 msgstr "حساب های کاربری"
 
-#: .\forms.py:16
+#: authentication.py:19
+msgid "Your account is not active."
+msgstr "حساب کاربری شما فعال نیست."
+
+#: authentication.py:23
+msgid "Username and Password is incorrect!"
+msgstr "ایمیل و رمزعبور درست نمیباشند!"
+
+#: forms.py:19
 msgid "The two password fields didn't match."
 msgstr "دو رمز عبور با یکدیگر مطابقت ندارند."
 
-#: .\forms.py:17
-#| msgid "A user with that username already exists."
+#: forms.py:20
 msgid "A user with that email already exists."
 msgstr "یک کاربر با این ایمیل وجود دارد."
 
-#: .\forms.py:20 .\models.py:48
-#| msgid "email address"
+#: forms.py:23 forms.py:263 models.py:49
 msgid "Email address"
 msgstr "آدرس ایمیل"
 
-#: .\forms.py:21 .\forms.py:114 .\forms.py:160 .\forms.py:209
+#: forms.py:24 forms.py:117 forms.py:163 forms.py:212
 msgid "email..."
 msgstr "ایمیل..."
 
-#: .\forms.py:23 .\forms.py:198
+#: forms.py:26 forms.py:201
 msgid "Password"
 msgstr "رمزعبور"
 
-#: .\forms.py:27
-#| msgid "password confirmation..."
+#: forms.py:30
 msgid "Password confirmation"
 msgstr "تکرار رمز عبور"
 
-#: .\forms.py:34 .\forms.py:145 .\forms.py:216
+#: forms.py:37 forms.py:148 forms.py:219
 msgid "password..."
 msgstr "رمزعبور..."
 
-#: .\forms.py:36 .\forms.py:147 .\forms.py:222
+#: forms.py:39 forms.py:150 forms.py:225
 msgid "password confirmation..."
 msgstr "تکرار رمز عبور..."
 
-#: .\forms.py:61 .\forms.py:106 .\forms.py:152
+#: forms.py:64 forms.py:109 forms.py:155
 #, python-format
 msgid "Your birth date is invalid,date of today: %(current_date)s"
 msgstr "تاریخ تولد شما نامعتبر است،تاریخ امروز: %(current_date)s"
 
-#: .\forms.py:62 .\forms.py:107 .\forms.py:153
+#: forms.py:65 forms.py:110 forms.py:156
 msgid "The age value for register must be at least 10 years old."
 msgstr "حداقل سن مورد نیاز برای ثبت نام 10 سال است."
 
-#: .\forms.py:69 .\forms.py:115 .\forms.py:161
+#: forms.py:72 forms.py:118 forms.py:164
 msgid "username..."
 msgstr "نام کاربری..."
 
-#: .\forms.py:70 .\forms.py:116 .\forms.py:162
+#: forms.py:73 forms.py:119 forms.py:165
 msgid "first name..."
 msgstr "نام..."
 
-#: .\forms.py:71 .\forms.py:117 .\forms.py:163
+#: forms.py:74 forms.py:120 forms.py:166
 msgid "last name..."
 msgstr "نام خانوادگی..."
 
-#: .\forms.py:72 .\forms.py:118 .\forms.py:164
+#: forms.py:75 forms.py:121 forms.py:167
 msgid "phone number..."
 msgstr "شماره تلفن..."
 
-#: .\forms.py:197
+#: forms.py:200
 msgid "Email or Username"
 msgstr "آدرس ایمیل یا نام کاربری"
 
-#: .\forms.py:203
+#: forms.py:206
 msgid "Your username is not valid!"
 msgstr "نام کاربری شما معتبر نیست!"
 
-#: .\forms.py:208
+#: forms.py:211
 msgid "Email"
 msgstr "ایمیل..."
 
-#: .\forms.py:210
+#: forms.py:213
 msgid "Enter a valid email address."
 msgstr "یک آدرس ایمیل معتبر وارد کنید."
 
-#: .\forms.py:215
+#: forms.py:218
 msgid "New password"
 msgstr "رمزعبور جدید"
 
-#: .\forms.py:220
+#: forms.py:223
 msgid "New password confirmation"
 msgstr "تکرار رمز عبور جدید..."
 
-#: .\forms.py:229
+#: forms.py:232
 msgid "Your current password was entered incorrectly. Please enter it again."
 msgstr "رمزعبور فعلی خود را اشتباه وارد کردید. دوباره وارد کنید."
 
-#: .\forms.py:233
+#: forms.py:236
 msgid "Current password"
 msgstr "رمزعبور فعلی"
 
-#: .\forms.py:236
+#: forms.py:239
 msgid "current password..."
 msgstr "رمزعبور فعلی..."
 
-#: .\models.py:53
-#| msgid "username"
+#: forms.py:265
+msgid "There is no user with this email address."
+msgstr "کاربری با این آدرس ایمیل وجود ندارد."
+
+#: forms.py:266
+msgid "This account is active."
+msgstr "این اکانت فعال است."
+
+#: models.py:54
 msgid "Username"
 msgstr "نام کاربری"
 
-#: .\models.py:58
+#: models.py:59
 msgid ""
 "150 characters or fewer. Letters, digits and ./-/_ only which starts with "
 "letters and has at least 4 characters."
@@ -140,49 +152,43 @@ msgstr ""
 "باید 150 کاراکتر یا کمتر باشد. شامل حروف،ارقام و ./-/_ است که باید با حروف "
 "شروع شود و حداقل دارای چهار کاراکتر باشد."
 
-#: .\models.py:62
+#: models.py:63
 msgid "A user with that username already exists."
 msgstr "یک کاربر با این نام کاربری وجود دارد."
 
-#: .\models.py:65
-#| msgid "first name"
+#: models.py:66
 msgid "First name"
 msgstr "نام"
 
-#: .\models.py:66
-#| msgid "last name"
+#: models.py:67
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: .\models.py:67
-#| msgid "phone"
+#: models.py:68
 msgid "Phone"
 msgstr "تلفن"
 
-#: .\models.py:69
-#| msgid "birth date"
+#: models.py:70
 msgid "Birth date"
 msgstr "تاریخ تولد"
 
-#: .\models.py:71
-#| msgid "is active?"
+#: models.py:72
 msgid "Is active?"
 msgstr "فعال بودن"
 
-#: .\models.py:72
-#| msgid "is admin?"
+#: models.py:73
 msgid "Is admin?"
 msgstr "مدیر بودن"
 
-#: .\models.py:80
+#: models.py:81
 msgid "User"
 msgstr "کاربر"
 
-#: .\models.py:81
+#: models.py:82
 msgid "Users"
 msgstr "کاربران"
 
-#: .\validators.py:8
+#: validators.py:8
 msgid ""
 "Enter a valid username. This value may contain only letters, digits, and "
 "./-/_ only which starts with letters and has at least 4 characters."
@@ -190,7 +196,7 @@ msgstr ""
 "یک نام کاربری معتبر وارد کنید. این نام باید شامل حروف، ارقام و ./-/_ باشد که"
 " با حروف شروع شود و حداقل دارای چهار کاراکتر باشد."
 
-#: .\validators.py:17
+#: validators.py:17
 msgid ""
 "Enter a valid phone number. This value must have 11 digits which starts with"
 " the number 09."
@@ -198,36 +204,43 @@ msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: .\views.py:39
-msgid "Username and Password is incorrect!"
-msgstr "ایمیل و رمزعبور درست نمیباشند!"
+#: views.py:107
+msgid ""
+"Account created successfully,check your email to activate your account."
+msgstr ""
+"حساب کاربری با موفقیت ساخته شد،برای فعال کردن حساب کاربری ایمیل خود را بررسی"
+" کنید."
 
-#: .\views.py:92
-#| msgid "Your password has been changed successfully."
-msgid "Account created successfully."
-msgstr "حساب کاربری با موفقیت ایجاد شد."
+#: views.py:142
+#| msgid ""
+#| "Account created successfully,check your email to activate your account."
+msgid "Check your email to activate your account."
+msgstr "برای فعال کردن حساب کاربری ایمیل خود را بررسی کنید."
 
-#: .\views.py:127
+#: views.py:181
 msgid "Invalid Header"
 msgstr "هدر نامعتبر است."
 
-#: .\views.py:130
+#: views.py:184
 msgid "There isn't an email with this address"
 msgstr "ایمیلی با این آدرس وجود ندارد."
 
-#: .\views.py:136
+#: views.py:190
 msgid ""
 "An email with password reset instructions has been sent to your email "
 "address"
 msgstr "ایمیلی با دستورالعمل بازنشانی رمز عبور برای ایمیل شما ارسال شد."
 
-#: .\views.py:147
+#: views.py:201
 msgid "Your password has been successfully reset."
 msgstr "رمز شما با موفقیت بازنشانی شد."
 
-#: .\views.py:161
+#: views.py:221
 msgid "Your password has been changed successfully."
 msgstr "رمز شما با موفقیت تغییر یافت."
+
+#~ msgid "Account created successfully."
+#~ msgstr "حساب کاربری با موفقیت ایجاد شد."
 
 #~ msgid "birth date..."
 #~ msgstr "تاریخ تولد..."

@@ -6,9 +6,12 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import SetPasswordForm
 from django.utils import timezone
 from django.utils.translation import get_language
+from django.contrib.auth import get_user_model
 
 from dateutil.relativedelta import relativedelta
 import jdatetime
+
+User = get_user_model()
 
 
 class CreateAccountForm(forms.Form):
@@ -254,3 +257,26 @@ class CustomPasswordChangeForm(CustomSetPasswordForm):
         if commit:
             self.user.save()
         return self.user
+
+
+class ActivationAccountResendForm(forms.Form):
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}), label=_("Email address"))
+    error_messages = {
+        "user_not_exist": _("There is no user with this email address."),
+        "account_active": _("This account is active.")
+    }
+
+    def clean(self):
+        validated_data = super().clean()
+        email = validated_data.get("email")
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise ValidationError({'email': self.error_messages["user_not_exist"]}, code="user_not_exist")
+
+        if user.is_active:
+            raise ValidationError({'email': self.error_messages["account_active"]}, code="account_active")
+
+        validated_data["user"] = user
+
+        return validated_data

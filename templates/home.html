@@ -30,7 +30,9 @@
                             <a class="text-decoration-none"
                                href="{% url 'accounts:login' %}">{% trans 'Login to account' %}</a> |
                             <a class="text-decoration-none"
-                               href="{% url 'accounts:register_step_one' %}">{% trans 'Register an account' %}</a>
+                               href="{% url 'accounts:register_step_one' %}">{% trans 'Register an account' %}</a> |
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:activation_account_resend' %}">{% trans 'Activation an account' %}</a>
                         {% endif %}
                     </div>
                     {% if suggestion_products %}

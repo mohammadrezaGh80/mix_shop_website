@@ -36,12 +36,6 @@
             margin: 0;
         }
 
-        .input-search:focus {
-            box-shadow: none;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
         .input-search:focus ~ .wrapper-search-history,
         .wrapper-search-history:hover{
             display: flex;
@@ -232,7 +226,7 @@
                     <div class="flex-grow-1 ms-3">
                         <form action="{% url 'pages:search' %}" method="get">
                             <div class="wrapper-input-search position-relative">
-                                <input type="text" class="form-control bg-body-secondary border-0 input-search z-2"
+                                <input type="text" class="form-control bg-body-secondary border-0 input-search z-2 shadow-none"
                                        name="q"
                                        aria-label="Search"
                                        autocomplete="off">

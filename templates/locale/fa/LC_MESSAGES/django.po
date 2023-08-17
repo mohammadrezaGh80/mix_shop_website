@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-27 19:16+0330\n"
-"PO-Revision-Date: 2023-07-27 19:17+0330\n"
+"POT-Creation-Date: 2023-08-17 17:56+0330\n"
+"PO-Revision-Date: 2023-08-17 17:55+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,24 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: _base.html:226 home.html:8 home.html:19
+#: _base.html:222 home.html:8 home.html:19
 msgid "Home"
 msgstr "خانه"
 
-#: _base.html:244
+#: _base.html:242
 msgid "Your last searches"
 msgstr "آخرین جستجوهای شما"
 
-#: _base.html:266
-#| msgid "Your last searches"
+#: _base.html:268
 msgid "Popular searches"
 msgstr "جستجو های پرطرفدار"
 
-#: _base.html:279
+#: _base.html:294
 msgid "EN"
 msgstr "انگلیسی"
 
-#: _base.html:282
+#: _base.html:297
 msgid "FA"
 msgstr "فارسی"
 
@@ -64,13 +63,39 @@ msgstr "ورود به حساب کاربری"
 msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
 
-#: home.html:38
+#: home.html:35 registration/activation_account.html:22
+msgid "Activation an account"
+msgstr "فعالسازی حساب کاربری"
+
+#: home.html:40
 msgid "Suggestion products:"
 msgstr "محصولات پیشنهادی:"
 
-#: home.html:54 home.html:57
+#: home.html:56 home.html:59
 msgid "$"
 msgstr "ریال"
+
+#: registration/activation_account.html:6
+#: registration/activation_account_resend.html:6
+msgid "Activation account"
+msgstr "فعالسازی حساب کاربری"
+
+#: registration/activation_account.html:18
+msgid "Your account has been successfully activated."
+msgstr "حساب کاربری شما با موفقیت فعال شد."
+
+#: registration/activation_account.html:19
+msgid "Login to website"
+msgstr "ورود به سایت"
+
+#: registration/activation_account.html:21
+msgid "The link has expired, click to resend the link."
+msgstr "لینک منقضی شده است، برای ارسال مجدد لینک کلیک کنید."
+
+#: registration/activation_account_resend.html:25
+#: registration/password_reset.html:27
+msgid "Send"
+msgstr "ارسال"
 
 #: registration/login.html:6 registration/login.html:33
 #: registration/register_step_1.html:42
@@ -105,10 +130,6 @@ msgstr ""
 "ایمیل خود را وارد کنید و یک ایمیل با دستورالعمل بازنشانی رمز عبور برایتان "
 "ارسال خواهد شد."
 
-#: registration/password_reset.html:27
-msgid "Send"
-msgstr "ارسال"
-
 #: registration/password_reset_complete.html:6
 msgid "Complete"
 msgstr "انجام شد"
@@ -140,3 +161,8 @@ msgstr "حساب کاربری"
 #: registration/register_topbar.html:8
 msgid "Personal"
 msgstr "اطلاعات شخصی"
+
+#, fuzzy
+#~| msgid "Activation account"
+#~ msgid "Activation resend"
+#~ msgstr "فعالسازی حساب کاربری"

@@ -60,9 +60,9 @@ class SearchView(View):
         query_name = request.GET.get("q")
         request.session["query_name"] = query_name
         search_history = SearchHistory(request)
-        products = Product.objects.all()
+        products = Product.objects.all().order_by("-modified_datetime")
 
-        if query_name:
+        if query_name and query_name is not None:
             search_history.add(query_name)
             products = Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}"))\
                 .filter(similarity__gte=0.2).order_by("-similarity")
@@ -71,9 +71,6 @@ class SearchView(View):
         page = self.request.GET.get("page")
         page_obj = paginator.get_page(page)
         range_pages_product = page_obj.paginator.get_elided_page_range(number=page, on_each_side=1)
-
-        for p in Product.objects.annotate(similarity=TrigramWordSimilarity(query_name, f"title_{get_language()}")).order_by("-similarity"):
-            print(f"{p.title}: {p.similarity}")
 
         return render(request, "products/product_sub_category_list.html",
                       context={"title": "Search", "products": products,

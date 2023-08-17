@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'jalali_date',
     'ckeditor',
     'modeltranslation',
+    'mail_templated',
 
     # my apps
     'accounts',
@@ -169,8 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication config
 AUTH_USER_MODEL = 'accounts.CustomUser'
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
-                           'accounts.authentication.UsernameAuthBackend']
+AUTHENTICATION_BACKENDS = ['accounts.authentication.CustomAuthBackend']
 
 # messages config
 MESSAGE_TAGS = {
@@ -187,3 +187,6 @@ EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD")
 
 # Rosetta config
 ROSETTA_ACCESS_CONTROL_FUNCTION = is_access_to_rosetta_views
+
+# Password reset and activation account time
+PASSWORD_RESET_TIMEOUT = 300

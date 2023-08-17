@@ -8,6 +8,7 @@ django-cache-url==3.4.4
 django-ckeditor==6.5.1
 django-jalali-date==1.0.1
 django-js-asset==2.0.0
+django-mail-templated==2.6.5
 django-modeltranslation==0.18.9
 django-rosetta==0.9.8
 environs==9.5.0

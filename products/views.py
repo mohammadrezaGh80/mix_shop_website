@@ -25,8 +25,9 @@ class ProductCategoryView(View):
 
 class ProductSubCategoryListView(View):
     def get(self, request, category_name, *args, **kwargs):
-        if request.session.get("query_name"):
+        if "query_name" in request.session:
             del request.session["query_name"]
+
         category = get_object_or_404(Category, category_name=category_name)
         if category.sub_categories.exists():
             raise Http404()

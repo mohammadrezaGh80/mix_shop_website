@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load products_tags %}
 
 
 {% block page_title %}{% trans 'Comments' %}{% endblock page_title %}
@@ -265,11 +266,15 @@
                                         </span>
                                         <ul class="custom-pagination d-flex">
                                             {% for page in range_pages %}
-                                                <li class="me-2 page">
-                                                    <a style="width: 30px;height: 30px"
-                                                       href="?page={{ page }}"
-                                                       class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
-                                                </li>
+                                                {% if page|is_number %}
+                                                    <li class="me-2 page">
+                                                        <a style="width: 30px;height: 30px"
+                                                           href="?page={{ page }}"
+                                                           class="{% if page_obj.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="me-2">{{ page }}</li>
+                                                {% endif %}
                                             {% endfor %}
                                         </ul>
                                         <span class="text-danger">

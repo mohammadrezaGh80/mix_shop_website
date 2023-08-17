@@ -36,6 +36,7 @@ class CustomUserManager(BaseUserManager):
             **extra_fields
         )
         user.is_admin = True
+        user.is_active = True
         user.save(using=self._db)
         return user
 
@@ -68,7 +69,7 @@ class CustomUser(AbstractBaseUser):
                              blank=True, null=True, validators=[phone_validator])
     birth_date = models.DateField(verbose_name=_('Birth date'), blank=True, null=True)
 
-    is_active = models.BooleanField(verbose_name=_('Is active?'), default=True)
+    is_active = models.BooleanField(verbose_name=_('Is active?'), default=False)
     is_admin = models.BooleanField(verbose_name=_('Is admin?'), default=False)
 
     objects = CustomUserManager()

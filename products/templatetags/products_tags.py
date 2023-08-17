@@ -29,3 +29,8 @@ def is_user_liked_answer(answer, user):
 @register.filter
 def is_user_disliked_answer(answer, user):
     return answer.dislikes.filter(user=user).exists()
+
+
+@register.filter
+def is_number(value):
+    return isinstance(value, int)

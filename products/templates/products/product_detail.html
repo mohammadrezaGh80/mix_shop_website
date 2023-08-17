@@ -314,10 +314,14 @@
                                     </span>
                                     <ul class="custom-pagination d-flex">
                                         {% for page in range_pages_comment %}
-                                            <li class="me-2 page">
-                                                <a style="width: 30px;height: 30px" href="?page1={{ page }}#comments"
-                                                   class="{% if page_obj_comment.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
-                                            </li>
+                                            {% if page|is_number %}
+                                                <li class="me-2 page">
+                                                    <a style="width: 30px;height: 30px" href="?page1={{ page }}#comments"
+                                                       class="{% if page_obj_comment.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="me-2">{{ page }}</li>
+                                            {% endif %}
                                         {% endfor %}
                                     </ul>
                                     <span class="text-danger">
@@ -529,10 +533,14 @@
                                 </span>
                                     <ul class="custom-pagination d-flex">
                                         {% for page in range_pages_question %}
-                                            <li class="me-2 page">
-                                                <a style="width: 30px;height: 30px" href="?page2={{ page }}#questions"
-                                                   class="{% if page_obj_question.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
-                                            </li>
+                                            {% if page|is_number %}
+                                                <li class="me-2 page">
+                                                    <a style="width: 30px;height: 30px" href="?page2={{ page }}#questions"
+                                                       class="{% if page_obj_question.number == page %}bg-danger text-light{% else %}text-dark{% endif %} rounded-circle text-decoration-none d-flex justify-content-center align-items-center">{{ page }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="me-2">{{ page }}</li>
+                                            {% endif %}
                                         {% endfor %}
                                     </ul>
                                     <span class="text-danger">

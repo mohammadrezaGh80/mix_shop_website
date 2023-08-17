@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+
+{% load i18n %}
+
+
+{% block page_title %}{% trans 'Activation account' %}{% endblock page_title %}
+
+{% block page_content %}
+    <div class="mt-5">
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+
+                <p class="d-flex align-items-center">
+                    {% if is_valid_token %}
+                        {% trans "Your account has been successfully activated." %}
+                        <a href="{% url 'accounts:login' %}" class="text-decoration-none">{% trans "Login to website" %}</a>
+                    {% else %}
+                        {% trans "The link has expired, click to resend the link." %}
+                        <a href="{% url 'accounts:activation_account_resend' %}" class="text-decoration-none">{% trans "Activation an account" %}</a>
+                    {% endif %}
+                </p>
+
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
