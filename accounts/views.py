@@ -1,8 +1,4 @@
-from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
@@ -19,7 +15,7 @@ from mail_templated import EmailMessage
 
 from .forms import LoginForm, CustomPasswordResetForm, CustomSetPasswordForm, CustomPasswordChangeForm, \
     CreateAccountForm, PersonalDetailsForm, ActivationAccountResendForm
-from .tokens import account_activation_token
+from .tokens import custom_token_generator
 from .utils import EmailThread
 
 User = get_user_model()
@@ -101,7 +97,7 @@ class RegisterStepTwoView(View):
                                      context={'email_name': user.email[:user.email.find("@")],
                                               'domain': f'{request.get_host()}',
                                               'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                              'token': account_activation_token.make_token(user),
+                                              'token': custom_token_generator.make_token(user),
                                               'protocol': 'http'}, to=[user.email])
 
             messages.success(request, _("Account created successfully,check your email to activate your account."))
@@ -115,7 +111,7 @@ class ActivationAccountView(View):
     def get(self, request, uid, token, *args, **kwargs):
         user_id = urlsafe_base64_decode(uid).decode()
         user = get_object_or_404(User, pk=user_id)
-        is_valid_token = account_activation_token.check_token(user, token)
+        is_valid_token = custom_token_generator.check_token(user, token)
         if is_valid_token:
             user.is_active = True
             user.save()
@@ -131,12 +127,12 @@ class ActivationAccountResendView(UserPassesTestMixin, View):
     def post(self, request, *args, **kwargs):
         form = ActivationAccountResendForm(request.POST)
         if form.is_valid():
-            user = form.cleaned_data["user"]
+            user = form.cleaned_data.get("user", None)
             email_obj = EmailMessage('email/activation_account.tpl',
                                      context={'email_name': user.email[:user.email.find("@")],
                                               'domain': f'{request.get_host()}',
                                               'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                              'token': account_activation_token.make_token(user),
+                                              'token': custom_token_generator.make_token(user),
                                               'protocol': 'http'}, to=[user.email])
 
             messages.success(request, _("Check your email to activate your account."))
@@ -148,68 +144,57 @@ class ActivationAccountResendView(UserPassesTestMixin, View):
         return not self.request.user.is_authenticated
 
 
-class PasswordResetView(View):
+class PasswordResetView(UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect("pages:home")
-        password_reset_form = CustomPasswordResetForm()
-        return render(request, "registration/password_reset.html", context={"form": password_reset_form})
+        form = CustomPasswordResetForm()
+        return render(request, "registration/password_reset.html", context={"form": form})
 
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        form = CustomPasswordResetForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data.get("user", None)
+            email_obj = EmailMessage('email/password_reset.tpl',
+                                     context={'email': user.email,
+                                              'email_name': user.email[:user.email.find("@")],
+                                              'domain': f'{request.get_host()}',
+                                              'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                              'token': custom_token_generator.make_token(user),
+                                              'protocol': 'http'}, to=[user.email])
+
+            EmailThread(email_obj).start()
+
+            messages.info(request, _("An email with password reset instructions has been sent to your email address"))
+            return render(request, "registration/password_reset_done.html")
+        return render(request, "registration/password_reset.html", context={"form": form})
+
+    def test_func(self):
+        return not self.request.user.is_authenticated
+
+
+class CustomPasswordResetConfirmView(View):
+    def get(self, request, uid, token, *args, **kwargs):
+        user_id = urlsafe_base64_decode(uid).decode()
+        user = get_object_or_404(User, pk=user_id)
+        is_valid_token = custom_token_generator.check_token(user, token)
+        form = CustomSetPasswordForm(user=user)
+        return render(request, "registration/password_reset_confirm.html",
+                      context={"form": form, "is_valid_token": is_valid_token})
+
+    def post(self, request, uid, token, *args, **kwargs):
+        user_id = urlsafe_base64_decode(uid).decode()
+        user = get_object_or_404(User, pk=user_id)
+        is_valid_token = custom_token_generator.check_token(user, token)
+        form = CustomSetPasswordForm(user, data=request.POST)
+        if is_valid_token and form.is_valid():
+            form.save()
+            messages.info(request, _("Your password has been successfully reset."))
             return redirect("pages:home")
-        password_reset_form = CustomPasswordResetForm(request.POST)
-        if password_reset_form.is_valid():
-            email = password_reset_form.cleaned_data.get("email")
-            user = User.objects.filter(email=email)
-            if user.exists():
-                user = user.first()
-                subject = "Password Reset Request"
-                email_template_name = 'registration/password_reset_message.txt'
-                parameters = {
-                    'email': user.email,
-                    'domain': f'{request.get_host()}',
-                    'site_name': 'MixShop',
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': default_token_generator.make_token(user),
-                    'protocol': 'http'
-                }
-                email = render_to_string(email_template_name, context=parameters)
-                try:
-                    send_mail(subject=subject, message=email, from_email='', recipient_list=[user.email])
-                except BadHeaderError:
-                    return HttpResponse(_("Invalid Header"))
-                return redirect("accounts:password_reset_done")
-            else:
-                password_reset_form.add_error("email", _("There isn't an email with this address"))
-        return render(request, "registration/password_reset.html", context={"form": password_reset_form})
-
-
-class PasswordResetDoneView(View):
-    def get(self, request, *args, **kwargs):
-        messages.info(request, _("An email with password reset instructions has been sent to your email address"))
-        return render(request, "registration/password_reset_done.html")
-
-
-class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    form_class = CustomSetPasswordForm
-    success_url = reverse_lazy("accounts:password_reset_complete")
-
-
-class PasswordResetCompleteView(View):
-    def get(self, request, *args, **kwargs):
-        messages.info(request, _("Your password has been successfully reset."))
-        return render(request, "registration/password_reset_complete.html")
+        return render(request, "registration/password_reset_confirm.html",
+                      context={"form": form, "is_valid_token": is_valid_token})
 
 
 class PasswordChangeView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        # u = User.objects.get(pk=2)
-        # token = account_activation_token.make_token(request.user)
-        # token = "bszgdt-986d55d26378b4398707d2bb7c728c6c"
-        # print(token)
-        # print(datetime.datetime.now())
-        # print(account_activation_token.check_token(request.user, token))
         form = CustomPasswordChangeForm(request.user)
         return render(request, "registration/password_change.html", context={"form": form})
 

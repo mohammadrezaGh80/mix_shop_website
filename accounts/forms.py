@@ -208,9 +208,24 @@ class LoginForm(forms.Form):
 
 
 class CustomPasswordResetForm(forms.Form):
-    email = forms.EmailField(label=_("Email"), max_length=255,
+    email = forms.EmailField(label=_("Email address"), max_length=255,
                              widget=forms.TextInput(attrs={"placeholder": _("email..."), "class": "form-control"}),
                              error_messages={"invalid_email": _("Enter a valid email address.")})
+    error_messages = {
+        "user_not_exist": _("There is no user with this email address."),
+    }
+
+    def clean(self):
+        validated_data = super().clean()
+        email = validated_data.get("email")
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise ValidationError({'email': self.error_messages["user_not_exist"]}, code="user_not_exist")
+
+        validated_data["user"] = user
+
+        return validated_data
 
 
 class CustomSetPasswordForm(SetPasswordForm):
@@ -260,7 +275,8 @@ class CustomPasswordChangeForm(CustomSetPasswordForm):
 
 
 class ActivationAccountResendForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}), label=_("Email address"))
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}), label=_("Email address"),
+                             error_messages={"invalid_email": _("Enter a valid email address.")})
     error_messages = {
         "user_not_exist": _("There is no user with this email address."),
         "account_active": _("This account is active.")

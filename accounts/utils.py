@@ -9,4 +9,3 @@ class EmailThread(threading.Thread):
 
     def run(self):
         self.email_obj.send()
-

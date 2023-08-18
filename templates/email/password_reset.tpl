@@ -1,13 +1,15 @@
 {% extends "mail_templated/base.tpl" %}
 
 {% block subject %}
-Activation account for MixShop
+Password Reset Request for MixShop
 {% endblock %}
 
 {% block html %}
     <h2>Hello {{ email_name }}</h2>
-    <p>Click the link to activate your account.
-        <a href="{{ protocol }}://{{ domain }}{% url 'accounts:activation_account' uid=uid token=token %}">Link</a>
+
+    <p>
+        We received a request to reset the password for your account for this email address. Click the link below to set a new password.
+        <a href="{{ protocol }}://{{ domain }}{% url 'accounts:password_reset_confirm' uid=uid token=token %}">Link</a>
     </p>
     <p>
        If you didn't make this request, you can simply ignore this email.
@@ -17,4 +19,5 @@ Activation account for MixShop
 
     <p>Thank you for choosing us</p>
     <p>The MixShop Team</p>
+
 {% endblock %}
