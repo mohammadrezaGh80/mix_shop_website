@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 
 {% load i18n %}
+{% load static %}
 
 
 {% block page_title %}{% trans 'Login' %}{% endblock page_title %}
@@ -10,7 +11,10 @@
         <div class="container">
             <div class="row">
                 {% for message in messages %}
-                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                    <p class="alert alert-{{ message.tags }} d-flex align-items-center justify-content-between">
+                        <span>{{ message }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </p>
                 {% endfor %}
 
                 <form action="" method="post">
@@ -24,7 +28,13 @@
                     </div>
                     <div class="d-flex flex-column mb-3">
                         <label class="form-label" for="id_password">{{ form.password.label }}:</label>
-                        {{ form.password }}
+                        <div class="position-relative">
+                            {{ form.password }}
+                            <input type="checkbox" id="id_checkbox_password" hidden>
+                            <label for="id_checkbox_password" id="toggle_eye_label_password">
+                                <i class="bi bi-eye-slash-fill"></i>
+                            </label>
+                        </div>
                         {% for error in form.password.errors %}
                             <p class="alert alert-danger mt-2 mb-0">{{ error }}</p>
                         {% endfor %}
@@ -32,13 +42,16 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <button class="btn btn-primary" type="submit">{% trans 'Login' %}</button>
                         <div>
-                            <a class="text-decoration-none" href="{% url 'accounts:register_step_one' %}">{% trans 'Register' %}</a>
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:register_step_one' %}">{% trans 'Register' %}</a>
                             <span>/</span>
-                            <a class="text-decoration-none" href="{% url 'accounts:password_reset' %}">{% trans 'Forgot your password?' %}</a>
+                            <a class="text-decoration-none"
+                               href="{% url 'accounts:password_reset' %}">{% trans 'Forgot your password?' %}</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="{% static 'js/accounts/main.js' %}"></script>
 {% endblock page_content %}

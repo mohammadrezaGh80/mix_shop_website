@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'products',
     'profiles',
     'price_conversion',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,7 @@ TEMPLATES = [
                 'products.context_processors.categories',
                 'pages.context_processors.search_history',
                 'pages.context_processors.popular_searches',
+                'cart.context_processors.cart',
             ],
         },
     },

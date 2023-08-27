@@ -11,8 +11,12 @@
         <div class="container">
             <div class="row">
                 {% for message in messages %}
-                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                    <p class="alert alert-{{ message.tags }} d-flex align-items-center justify-content-between">
+                    <span>{{ message }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </p>
                 {% endfor %}
+
                 <div class="col-12">
                     {% include "registration/register_topbar.html" with amount=25 %}
                     <form class="mt-4" action="" method="post">

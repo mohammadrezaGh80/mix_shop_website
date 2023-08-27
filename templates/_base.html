@@ -1,5 +1,7 @@
 {% load i18n %}
 {% load static %}
+{% load humanize %}
+{% load price_conversion_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
 <html {% if LANGUAGE_CODE == "fa" %}dir="rtl" lang="fa" {% elif LANGUAGE_CODE == "en" %}dir="ltr" lang="en" {% endif %}>
@@ -37,7 +39,7 @@
         }
 
         .input-search:focus ~ .wrapper-search-history,
-        .wrapper-search-history:hover{
+        .wrapper-search-history:hover {
             display: flex;
             flex-direction: column;
         }
@@ -129,6 +131,34 @@
             }
         {% endif %}
 
+        .custom-badge {
+            display: flex;
+            width: 20px;
+            height: 20px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            font-size: 14px;
+            padding: 10px;
+            position: absolute;
+            top: 70%;
+            right: -5px;
+        }
+
+        .dropdown-toggle::after {
+            content: none;
+        }
+
+        .dropdown-item {
+            white-space: normal;
+        }
+
+        .dropdown-menu > ul {
+            width: 400px !important;
+            height: 450px !important;
+            overflow-y: auto;
+        }
+
         {#product sub category list#}
         table {
             border: none !important;
@@ -179,6 +209,18 @@
             color: rgb(220, 53, 69);
         }
 
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         {# comments #}
         .bi-three-dots-vertical:hover {
             cursor: pointer;
@@ -203,6 +245,17 @@
         .wrapper-delete-comment:hover {
             cursor: pointer;
         }
+
+        {#  login  #}
+        #toggle_eye_label_password {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -226,7 +279,8 @@
                     <div class="flex-grow-1 ms-3">
                         <form action="{% url 'pages:search' %}" method="get">
                             <div class="wrapper-input-search position-relative">
-                                <input type="text" class="form-control bg-body-secondary border-0 input-search z-2 shadow-none"
+                                <input type="text"
+                                       class="form-control bg-body-secondary border-0 input-search z-2 shadow-none"
                                        name="q"
                                        aria-label="Search"
                                        autocomplete="off">
@@ -259,42 +313,109 @@
                                             </ul>
                                         {% endif %}
                                         {% if popular_searches|length > 0 %}
-                                        	<div class="flex-grow-1 d-flex flex-column justify-content-end">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                     fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
-                                                    <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
-                                                </svg>
-                                                <span class="ms-2">{% trans "Popular searches" %}</span>
+                                            <div class="flex-grow-1 d-flex flex-column justify-content-end">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                         fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                                                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                                                    </svg>
+                                                    <span class="ms-2">{% trans "Popular searches" %}</span>
+                                                </div>
+                                                <ul class="popular-searches d-flex ps-4 mt-3 overflow-x-auto">
+                                                    {% for search in popular_searches %}
+                                                        <li class="me-2 border border-secondary rounded-pill px-2 py-1">
+                                                            <a class="text-decoration-none text-black fw-bold d-flex align-items-center justify-content-between"
+                                                               href="{% url 'pages:search' %}?q={{ search }}">
+                                                                <span class="me-2">{{ search }}</span>
+                                                                <i class="bi bi-chevron-left"></i>
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
                                             </div>
-                                            <ul class="popular-searches d-flex ps-4 mt-3 overflow-x-auto">
-                                                {% for search in popular_searches %}
-                                                    <li class="me-2 border border-secondary rounded-pill px-2 py-1">
-                                                        <a class="text-decoration-none text-black fw-bold d-flex align-items-center justify-content-between"
-                                                           href="{% url 'pages:search' %}?q={{ search }}">
-                                                            <span class="me-2">{{ search }}</span>
-                                                            <i class="bi bi-chevron-left"></i>
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
                                         {% endif %}
                                     </div>
                                 {% endif %}
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
             <div class="col-4">
                 <div class="d-flex align-items-center justify-content-end">
-                    <a class="text-decoration-none bg-primary text-light px-2 py-1 rounded"
-                       href="{% url 'pages:change_language' %}?lang=en&next_page={{ request.path }}">{% trans 'EN' %}</a>
-                    <span class="mx-2">/</span>
-                    <a class="text-decoration-none bg-danger text-light px-2 py-1 rounded"
-                       href="{% url 'pages:change_language' %}?lang=fa&next_page={{ request.path }}">{% trans 'FA' %}</a>
+                    <div class="wrapper-change-language">
+                        <a class="text-decoration-none bg-primary text-light p-2 rounded"
+                           href="{% url 'pages:change_language' %}?lang=en&next_page={{ request.path }}">{% trans 'EN' %}</a>
+                        <span class="mx-2">/</span>
+                        <a class="text-decoration-none bg-danger text-light p-2 rounded"
+                           href="{% url 'pages:change_language' %}?lang=fa&next_page={{ request.path }}">{% trans 'FA' %}</a>
+                    </div>
+
+                    <div class="wrapper-cart ms-5">
+                        <div class="btn-group">
+                            <button type="button" class="bg-transparent border-0 dropdown-toggle"
+                                    data-bs-toggle="dropdown">
+                                <i style="font-size: 30px" class="bi bi-cart2 position-relative">
+                                    <span class="custom-badge text-bg-danger">3</span>
+                                </i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end py-3">
+                                <p class="px-3 mb-3 d-flex justify-content-between align-items-center">
+                                    <span>۵ {% trans "Product" %}</span>
+                                    <a class="text-decoration-none text-danger d-flex align-items-center"
+                                       href="{% url 'cart:cart_detail' %}">
+                                        <span>{% trans "Go to cart" %}</span>
+                                        <i class="bi bi-chevron-left mt-1 ms-1"></i>
+                                    </a>
+                                </p>
+                                <ul>
+                                    {% for item in cart %}
+                                        <li class="dropdown-item {% if not forloop.last %}border-bottom border-secondary-subtle{% endif %} d-flex flex-column py-4">
+                                            <div class="up-card-section d-flex">
+                                                <figure class="m-0 mb-3" style="width: 180px;height: 100px">
+                                                    <img class="w-100 h-100 d-block object-fit-cover"
+                                                         src="{{ item.product.images.image.url }}"
+                                                         alt="">
+                                                </figure>
+                                                <span class="ms-3 mt-2">{{ item.product.title }}</span>
+                                            </div>
+                                            <div class="down-card-section d-flex align-items-center mt-3">
+                                                <span style="font-size: 20px"
+                                                      class="fw-bold">x {{ item.quantity }}</span>
+                                                <span style="font-size: 20px" class="fw-bold ms-3">
+                                                    {% if LANGUAGE_CODE == "en" %}
+                                                        {% trans "$" %}{{ item.product.price|convert_price_to_dollar|intword }}
+                                                    {% elif LANGUAGE_CODE == "fa" %}
+                                                        {{ item.product.price|convert_english_number_to_persian|intcomma:False }}
+                                                        {% trans "$" %}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center pt-3 px-3 border-top">
+                                    <div class="d-flex flex-column">
+                                        <span style="font-size: 14px">{% trans "Payable amount" %}</span>
+                                        <span style="font-size: 18px" class="fw-bold mt-2">
+                                            {{ cart.get_total_price }}
+{#                                            {% if LANGUAGE_CODE == "en" %}#}
+{#                                                {% trans "$" %}{{ cart.get_total_price|convert_price_to_dollar|intword }}#}
+{#                                            {% elif LANGUAGE_CODE == "fa" %}#}
+{#                                                {{ cart.get_total_price|convert_english_number_to_persian|intcomma:False }}#}
+{#                                                {% trans "$" %}#}
+{#                                            {% endif %}#}
+                                        </span>
+                                    </div>
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="btn btn-danger">{% trans "Register order" %}</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

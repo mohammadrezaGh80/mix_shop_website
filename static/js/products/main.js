@@ -63,8 +63,10 @@ textQuestion.addEventListener("input", function (event){
     lengthTextQuestion.textContent = `100/${lengthText}`
 })
 
-textAnswer.addEventListener("input", function (event){
-    const lengthText = textAnswer.value.length;
-    answerButton.disabled = lengthText < 7 || lengthText > 500;
-    lengthTextAnswer.textContent = `500/${lengthText}`
-})
+if(textAnswer){
+    textAnswer.addEventListener("input", function (event){
+        const lengthText = textAnswer.value.length;
+        answerButton.disabled = lengthText < 7 || lengthText > 500;
+        lengthTextAnswer.textContent = `500/${lengthText}`
+    })
+}

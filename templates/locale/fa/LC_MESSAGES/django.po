@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 17:56+0330\n"
-"PO-Revision-Date: 2023-08-17 17:55+0330\n"
+"POT-Creation-Date: 2023-08-22 17:09+0330\n"
+"PO-Revision-Date: 2023-08-22 17:10+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,95 +19,111 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: _base.html:222 home.html:8 home.html:19
+#: _base.html:273 home.html:8 home.html:22
 msgid "Home"
 msgstr "خانه"
 
-#: _base.html:242
+#: _base.html:294
 msgid "Your last searches"
 msgstr "آخرین جستجوهای شما"
 
-#: _base.html:268
+#: _base.html:320
 msgid "Popular searches"
 msgstr "جستجو های پرطرفدار"
 
-#: _base.html:294
+#: _base.html:346
 msgid "EN"
 msgstr "انگلیسی"
 
-#: _base.html:297
+#: _base.html:349
 msgid "FA"
 msgstr "فارسی"
 
-#: home.html:22
+#: _base.html:362
+msgid "Product"
+msgstr "محصول"
+
+#: _base.html:363
+msgid "Go to cart"
+msgstr "رفتن به سبد خرید"
+
+#: _base.html:411
+msgid "Payable amount"
+msgstr "مبلغ قابل پرداخت"
+
+#: _base.html:417
+msgid "Register order"
+msgstr "ثبت سفارش"
+
+#: home.html:25
 msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: home.html:24
+#: home.html:27
 msgid "Profile"
 msgstr "پروفایل"
 
-#: home.html:26
+#: home.html:29
 msgid "Change password"
 msgstr "تغییر رمزعبور"
 
-#: home.html:28
+#: home.html:31
 msgid "Logout of account"
 msgstr "خروج از حساب کاربری"
 
-#: home.html:31 registration/password_reset_complete.html:17
+#: home.html:34 registration/password_reset_complete.html:21
 msgid "Login to account"
 msgstr "ورود به حساب کاربری"
 
-#: home.html:33
+#: home.html:36
 msgid "Register an account"
 msgstr "ایجاد حساب کاربری"
 
-#: home.html:35 registration/activation_account.html:22
+#: home.html:38 registration/activation_account.html:25
 msgid "Activation an account"
 msgstr "فعالسازی حساب کاربری"
 
-#: home.html:40
+#: home.html:43
 msgid "Suggestion products:"
 msgstr "محصولات پیشنهادی:"
 
-#: home.html:56 home.html:59
+#: home.html:59 home.html:62
 msgid "$"
-msgstr "ریال"
+msgstr "تومان"
 
 #: registration/activation_account.html:6
 #: registration/activation_account_resend.html:6
 msgid "Activation account"
 msgstr "فعالسازی حساب کاربری"
 
-#: registration/activation_account.html:18
+#: registration/activation_account.html:21
 msgid "Your account has been successfully activated."
 msgstr "حساب کاربری شما با موفقیت فعال شد."
 
-#: registration/activation_account.html:19
+#: registration/activation_account.html:22
 msgid "Login to website"
 msgstr "ورود به سایت"
 
-#: registration/activation_account.html:21
+#: registration/activation_account.html:24
 msgid "The link has expired, click to resend the link."
 msgstr "لینک منقضی شده است، برای ارسال مجدد لینک کلیک کنید."
 
-#: registration/activation_account_resend.html:25
-#: registration/password_reset.html:27
+#: registration/activation_account_resend.html:28
+#: registration/password_reset.html:30
 msgid "Send"
 msgstr "ارسال"
 
-#: registration/login.html:6 registration/login.html:33
-#: registration/register_step_1.html:42
+#: registration/login.html:7 registration/login.html:43
+#: registration/register_step_1.html:46
 msgid "Login"
 msgstr "ورود"
 
-#: registration/login.html:35 registration/register_step_1.html:7
-#: registration/register_step_2.html:6 registration/register_step_2.html:81
+#: registration/login.html:46 registration/register_step_1.html:7
+#: registration/register_step_2.html:6 registration/register_step_2.html:84
 msgid "Register"
 msgstr "ثبت نام"
 
-#: registration/login.html:37
+#: registration/login.html:49
 msgid "Forgot your password?"
 msgstr "رمز عبور خود را فراموش کرده اید؟"
 
@@ -115,15 +131,15 @@ msgstr "رمز عبور خود را فراموش کرده اید؟"
 msgid "Password Reset"
 msgstr "بازنشانی رمزعبور"
 
-#: registration/password_change.html:16
+#: registration/password_change.html:19
 msgid "For more security, enter your current password."
 msgstr "برای امنیت بیشتر، رمزعبور فعلی خود را وارد کنید."
 
-#: registration/password_change.html:43
+#: registration/password_change.html:46
 msgid "Change"
 msgstr "تغییر"
 
-#: registration/password_reset.html:16
+#: registration/password_reset.html:19
 msgid ""
 "Enter your email and a mail will be sent with instructions to reset password"
 msgstr ""
@@ -134,23 +150,15 @@ msgstr ""
 msgid "Complete"
 msgstr "انجام شد"
 
-#: registration/password_reset_complete.html:16
+#: registration/password_reset_complete.html:20
 msgid "Back to home"
 msgstr "بازگشت به خانه"
-
-#: registration/password_reset_confirm.html:6
-msgid "Set New Password"
-msgstr "ایجاد رمزعبور جدید"
-
-#: registration/password_reset_confirm.html:32
-msgid "Change Password"
-msgstr "تغییر رمزعبور"
 
 #: registration/password_reset_done.html:6
 msgid "Sent"
 msgstr "ارسال شد"
 
-#: registration/register_step_2.html:52 registration/register_step_2.html:55
+#: registration/register_step_2.html:55 registration/register_step_2.html:58
 msgid "birth date..."
 msgstr "تاریخ تولد..."
 
@@ -162,7 +170,12 @@ msgstr "حساب کاربری"
 msgid "Personal"
 msgstr "اطلاعات شخصی"
 
+#~ msgid "Set New Password"
+#~ msgstr "ایجاد رمزعبور جدید"
+
+#~ msgid "Change Password"
+#~ msgstr "تغییر رمزعبور"
+
 #, fuzzy
-#~| msgid "Activation account"
 #~ msgid "Activation resend"
 #~ msgstr "فعالسازی حساب کاربری"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-08 13:40+0330\n"
-"PO-Revision-Date: 2023-07-08 13:41+0330\n"
+"POT-Creation-Date: 2023-08-21 15:56+0330\n"
+"PO-Revision-Date: 2023-08-21 15:56+0330\n"
 "Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,486 +19,493 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\admin.py:43 .\models.py:102
+#: admin.py:43 models.py:102
 msgid "Size"
 msgstr "اندازه"
 
-#: .\admin.py:48 .\models.py:101
+#: admin.py:48 models.py:101
 msgid "Color"
 msgstr "رنگ"
 
-#: .\admin.py:63 .\admin.py:76 .\models.py:196 .\models.py:204
-#: .\templates\products\product_detail.html:93
+#: admin.py:63 admin.py:76 models.py:196 models.py:204
+#: templates/products/product_detail.html:96
 msgid "Question"
 msgstr "پرسش"
 
-#: .\admin.py:72 .\models.py:219 .\models.py:255 .\models.py:270
-#: .\templates\products\product_detail.html:398
+#: admin.py:72 models.py:219 models.py:255 models.py:270
+#: templates/products/product_detail.html:431
 msgid "Answer"
 msgstr "پاسخ"
 
-#: .\admin.py:85 .\admin.py:94 .\admin.py:103 .\admin.py:112
+#: admin.py:85 admin.py:94 admin.py:103 admin.py:112
 msgid "Title of product"
 msgstr "عنوان کالا"
 
-#: .\apps.py:8
+#: apps.py:8
 msgid "products"
 msgstr "محصولات"
 
-#: .\forms.py:14
+#: forms.py:14
 msgid "Write for us..."
 msgstr "برای ما بنویسید..."
 
-#: .\forms.py:17
+#: forms.py:17
 msgid "Give rating"
 msgstr "امتیاز بدهید"
 
-#: .\forms.py:23
+#: forms.py:23
 #, python-format
 msgid "Your text must have at least %(min_characters)s characters."
 msgstr "متن شما باید حداقل دارای %(min_characters)s کاراکتر باشد."
 
-#: .\models.py:11
+#: models.py:11
 msgid "digital-product"
 msgstr "کالای دیجیتال"
 
-#: .\models.py:12
+#: models.py:12
 msgid "clothing"
 msgstr "پوشاک"
 
-#: .\models.py:13
+#: models.py:13
 msgid "stationery"
 msgstr "لوازم تحریر"
 
-#: .\models.py:14
+#: models.py:14
 msgid "beauty-and-health"
 msgstr "زیبایی و سلامت"
 
-#: .\models.py:15
+#: models.py:15
 msgid "smart-phone"
 msgstr "موبایل"
 
-#: .\models.py:17
+#: models.py:17
 msgid "television"
 msgstr "تلویزیون"
 
-#: .\models.py:18
+#: models.py:18
 msgid "laptop"
 msgstr "لپ تاپ"
 
-#: .\models.py:19
+#: models.py:19
 msgid "camera"
 msgstr "دوربین"
 
-#: .\models.py:20
+#: models.py:20
 msgid "game-console"
 msgstr "کنسول بازی"
 
-#: .\models.py:21
+#: models.py:21
 msgid "menswear"
 msgstr "لباس مردانه"
 
-#: .\models.py:22
+#: models.py:22
 msgid "women's-dress"
 msgstr "لباس زنانه"
 
-#: .\models.py:23
+#: models.py:23
 msgid "men's-shoes"
 msgstr "کفش مردانه"
 
-#: .\models.py:24
+#: models.py:24
 msgid "women's-shoes"
 msgstr "کفش زنانه"
 
-#: .\models.py:25
+#: models.py:25
 msgid "notebook"
 msgstr "دفتر"
 
-#: .\models.py:26
+#: models.py:26
 msgid "pencil"
 msgstr "مداد"
 
-#: .\models.py:27
+#: models.py:27
 msgid "desk"
 msgstr "میز تحریر"
 
-#: .\models.py:28
+#: models.py:28
 msgid "cosmetic"
 msgstr "لوازم آرایشی"
 
-#: .\models.py:29
+#: models.py:29
 msgid "sanitary-ware"
 msgstr "لوازم بهداشتی"
 
-#: .\models.py:30
+#: models.py:30
 msgid "xiaomi"
 msgstr "شیائومی"
 
-#: .\models.py:31
+#: models.py:31
 msgid "apple"
 msgstr "اپل"
 
-#: .\models.py:32
+#: models.py:32
 msgid "samsung"
 msgstr "سامسونگ"
 
-#: .\models.py:34
+#: models.py:34
 msgid "Category's name"
 msgstr "نام دسته بندی"
 
-#: .\models.py:36 .\models.py:42 .\models.py:104
+#: models.py:36 models.py:42 models.py:104
 msgid "Category"
 msgstr "دسته بندی"
 
-#: .\models.py:43
+#: models.py:43
 msgid "Categories"
 msgstr "دسته بندی ها"
 
-#: .\models.py:47
+#: models.py:47
 msgid "red"
 msgstr "قرمز"
 
-#: .\models.py:48
+#: models.py:48
 msgid "blue"
 msgstr "آبی"
 
-#: .\models.py:49
+#: models.py:49
 msgid "black"
 msgstr "مشکی"
 
-#: .\models.py:50
+#: models.py:50
 msgid "white"
 msgstr "سفید"
 
-#: .\models.py:51
+#: models.py:51
 msgid "pink"
 msgstr "صورتی"
 
-#: .\models.py:52
+#: models.py:52
 msgid "yellow"
 msgstr "زرد"
 
-#: .\models.py:53
+#: models.py:53
 msgid "brown"
 msgstr "قهوه ای"
 
-#: .\models.py:54
+#: models.py:54
 msgid "purple"
 msgstr "بنفش"
 
-#: .\models.py:55
+#: models.py:55
 msgid "green"
 msgstr "سبز"
 
-#: .\models.py:56
+#: models.py:56
 msgid "orange"
 msgstr "نارنجی"
 
-#: .\models.py:57
+#: models.py:57
 msgid "gray"
 msgstr "خاکستری"
 
-#: .\models.py:58
+#: models.py:58
 msgid "golden"
 msgstr "طلایی"
 
-#: .\models.py:59
+#: models.py:59
 msgid "silver"
 msgstr "نقره ای"
 
-#: .\models.py:60
+#: models.py:60
 msgid "bronze"
 msgstr "برنزی"
 
-#: .\models.py:62
+#: models.py:62
 msgid "Color's name"
 msgstr "نام رنگ"
 
-#: .\models.py:68
+#: models.py:68
 msgid "Product color"
 msgstr "رنگ محصول"
 
-#: .\models.py:69
+#: models.py:69
 msgid "Product colors"
 msgstr "رنگ های محصول"
 
-#: .\models.py:81
+#: models.py:81
 msgid "Size's name"
 msgstr "نام اندازه"
 
-#: .\models.py:87
+#: models.py:87
 msgid "Product size"
 msgstr "اندازه محصول"
 
-#: .\models.py:88
+#: models.py:88
 msgid "Product sizes"
 msgstr "اندازه های محصول"
 
-#: .\models.py:92 .\models.py:160
+#: models.py:92 models.py:160
 msgid "Title"
 msgstr "عنوان"
 
-#: .\models.py:94
+#: models.py:94
 msgid "Seller"
 msgstr "فروشنده"
 
-#: .\models.py:98
+#: models.py:98
 msgid "The value of the price cannot be negative or zero."
 msgstr "مقدار قیمت نمیتواند عدد منفی یا صفر باشد."
 
-#: .\models.py:99
+#: models.py:99
 msgid "Price"
 msgstr "قیمت"
 
-#: .\models.py:103
+#: models.py:103
 msgid "Description"
 msgstr "توضیحات"
 
-#: .\models.py:106 .\models.py:167 .\models.py:189 .\models.py:206
+#: models.py:106 models.py:167 models.py:189 models.py:206
 msgid "Created datetime"
 msgstr "زمان ایجاد"
 
-#: .\models.py:107 .\models.py:168 .\models.py:190 .\models.py:207
-#: .\models.py:227 .\models.py:241 .\models.py:256 .\models.py:271
+#: models.py:107 models.py:168 models.py:190 models.py:207 models.py:227
+#: models.py:241 models.py:256 models.py:271
 msgid "Modified datetime"
 msgstr "زمان ویرایش"
 
-#: .\models.py:116 .\models.py:122 .\models.py:159 .\models.py:186
-#: .\models.py:202
+#: models.py:116 models.py:122 models.py:159 models.py:186 models.py:202
 msgid "Product"
 msgstr "محصول"
 
-#: .\models.py:117
+#: models.py:117
 msgid "Products"
 msgstr "محصولات"
 
-#: .\models.py:121
+#: models.py:121
 msgid "Image"
 msgstr "عکس"
 
-#: .\models.py:128
+#: models.py:128
 msgid "Product image"
 msgstr "عکس محصول"
 
-#: .\models.py:129
+#: models.py:129
 msgid "Product images"
 msgstr "عکس های محصولات"
 
-#: .\models.py:145
+#: models.py:145
 msgid "1 star"
 msgstr "یک ستاره"
 
-#: .\models.py:146
+#: models.py:146
 msgid "2 star"
 msgstr "دو ستاره"
 
-#: .\models.py:147
+#: models.py:147
 msgid "3 star"
 msgstr "سه ستاره"
 
-#: .\models.py:148
+#: models.py:148
 msgid "4 star"
 msgstr "چهار ستاره"
 
-#: .\models.py:149
+#: models.py:149
 msgid "5 star"
 msgstr "پنج ستاره"
 
-#: .\models.py:152
+#: models.py:152
 msgid "None"
 msgstr "هیچ"
 
-#: .\models.py:153
+#: models.py:153
 msgid "I suggest"
 msgstr "پیشنهاد میکنم"
 
-#: .\models.py:154
+#: models.py:154
 msgid "I don't suggest"
 msgstr "پیشنهاد نمیکنم"
 
-#: .\models.py:155
+#: models.py:155
 msgid "I'm not sure"
 msgstr "مطمئن نیستم"
 
-#: .\models.py:158 .\models.py:185 .\models.py:201 .\models.py:225
-#: .\models.py:239 .\models.py:253 .\models.py:268
+#: models.py:158 models.py:185 models.py:201 models.py:225 models.py:239
+#: models.py:253 models.py:268
 msgid "User"
 msgstr "کاربر"
 
-#: .\models.py:161 .\models.py:187 .\models.py:203
+#: models.py:161 models.py:187 models.py:203
 msgid "Text"
 msgstr "متن نظر"
 
-#: .\models.py:162
+#: models.py:162
 msgid "Star rating"
 msgstr "رتبه بندی ستاره ای"
 
-#: .\models.py:164
+#: models.py:164
 msgid "Suggestion"
 msgstr "پیشنهاد"
 
-#: .\models.py:165
+#: models.py:165
 msgid "Is anonymous?"
 msgstr "ناشناس است؟"
 
-#: .\models.py:180 .\models.py:226 .\models.py:240
-#: .\templates\products\product_detail.html:89
-#: .\templates\products\product_detail.html:222
+#: models.py:180 models.py:226 models.py:240
+#: templates/products/product_detail.html:92
+#: templates/products/product_detail.html:243
 msgid "Comment"
 msgstr "دیدگاه"
 
-#: .\models.py:181
+#: models.py:181
 msgid "Comments"
 msgstr "دیدگاه ها"
 
-#: .\models.py:197
+#: models.py:197
 msgid "Questions"
 msgstr "پرسش ها"
 
-#: .\models.py:220
+#: models.py:220
 msgid "Answers"
 msgstr "پاسخ ها"
 
-#: .\models.py:233
+#: models.py:233
 msgid "Comment like"
 msgstr "موافقت دیدگاه"
 
-#: .\models.py:234
+#: models.py:234
 msgid "Comment likes"
 msgstr "موافقت های دیدگاه"
 
-#: .\models.py:247
+#: models.py:247
 msgid "Comment dislike"
 msgstr "مخالفت دیدگاه"
 
-#: .\models.py:248
+#: models.py:248
 msgid "Comment dislikes"
 msgstr "مخالفت های دیدگاه"
 
-#: .\models.py:262
+#: models.py:262
 msgid "Answer like"
 msgstr "موافقت پاسخ"
 
-#: .\models.py:263
+#: models.py:263
 msgid "Answer likes"
 msgstr "موافقت های پاسخ"
 
-#: .\models.py:277
+#: models.py:277
 msgid "Answer dislike"
 msgstr "مخالفت پاسخ"
 
-#: .\models.py:278
+#: models.py:278
 msgid "Answer dislikes"
 msgstr "مخالفت های پاسخ"
 
-#: .\templates\products\categories.html:7
+#: templates/products/categories.html:7
 msgid "categories"
 msgstr "دسته بندی ها"
 
-#: .\templates\products\product_detail.html:59
+#: templates/products/product_detail.html:62
 msgid "Colors:"
 msgstr "رنگ ها:"
 
-#: .\templates\products\product_detail.html:61
+#: templates/products/product_detail.html:64
 msgid "Color:"
 msgstr "رنگ:"
 
-#: .\templates\products\product_detail.html:66
-#: .\templates\products\product_detail.html:81
+#: templates/products/product_detail.html:69
+#: templates/products/product_detail.html:84
 msgid ","
 msgstr "،"
 
-#: .\templates\products\product_detail.html:74
+#: templates/products/product_detail.html:77
 msgid "Sizes:"
 msgstr "اندازه ها:"
 
-#: .\templates\products\product_detail.html:76
+#: templates/products/product_detail.html:79
 msgid "Size:"
 msgstr "اندازه:"
 
-#: .\templates\products\product_detail.html:98
-#: .\templates\products\product_detail.html:101
-#: .\templates\products\product_sub_category_list.html:34
-#: .\templates\products\product_sub_category_list.html:37
+#: templates/products/product_detail.html:102
+#: templates/products/product_detail.html:105
+#: templates/products/product_sub_category_list.html:38
+#: templates/products/product_sub_category_list.html:41
 msgid "$"
 msgstr "تومان"
 
-#: .\templates\products\product_detail.html:112
-#: .\templates\products\product_detail.html:119
-#: .\templates\products\product_detail.html:213
+#: templates/products/product_detail.html:121
+msgid "Add to cart"
+msgstr "افزودن به سبد"
+
+#: templates/products/product_detail.html:133
+#: templates/products/product_detail.html:140
+#: templates/products/product_detail.html:234
 msgid "Register comment"
 msgstr "ثبت دیدگاه"
 
-#: .\templates\products\product_detail.html:127
+#: templates/products/product_detail.html:148
 msgid "Your Comment"
 msgstr "دیدگاه شما"
 
-#: .\templates\products\product_detail.html:129
+#: templates/products/product_detail.html:150
 #, python-format
 msgid ""
 "About\n"
 "                                                        %(title)s"
 msgstr "در مورد %(title)s"
 
-#: .\templates\products\product_detail.html:207
+#: templates/products/product_detail.html:228
 msgid "Register a comment anonymously"
 msgstr "ارسال دیدگاه به صورت ناشناس"
 
-#: .\templates\products\product_detail.html:244
+#: templates/products/product_detail.html:265
 msgid "Mixshop user"
 msgstr "کاربر میکس شاپ"
 
-#: .\templates\products\product_detail.html:311
+#: templates/products/product_detail.html:332
+#: templates/products/product_detail.html:552
+#: templates/products/product_sub_category_list.html:57
 msgid "Before"
 msgstr "قبلی"
 
-#: .\templates\products\product_detail.html:327
+#: templates/products/product_detail.html:353
+#: templates/products/product_detail.html:573
+#: templates/products/product_sub_category_list.html:78
 msgid "After"
 msgstr "بعدی"
 
-#: .\templates\products\product_detail.html:338
+#: templates/products/product_detail.html:364
 msgid "You can also comment on this product."
 msgstr "شما هم می‌توانید در مورد این کالا نظر دهید."
 
-#: .\templates\products\product_detail.html:347
-#: .\templates\products\product_detail.html:354
-#: .\templates\products\product_detail.html:377
+#: templates/products/product_detail.html:373
+#: templates/products/product_detail.html:380
+#: templates/products/product_detail.html:409
 msgid "Register question"
 msgstr "ثبت پرسش"
 
-#: .\templates\products\product_detail.html:361
+#: templates/products/product_detail.html:387
 msgid "Register your question about this product"
 msgstr "پرسش خود را درباره این کالا ثبت کنید"
 
-#: .\templates\products\product_detail.html:458
+#: templates/products/product_detail.html:491
 msgid "Register a new answer"
 msgstr "ثبت پاسخ جدید"
 
-#: .\templates\products\product_detail.html:471
+#: templates/products/product_detail.html:505
 msgid "Answer this question"
 msgstr "به این پرسش پاسخ دهید"
 
-#: .\templates\products\product_detail.html:490
+#: templates/products/product_detail.html:532
 msgid "Register answer"
 msgstr "ثبت پاسخ"
 
-#: .\templates\products\product_detail.html:501
+#: templates/products/product_detail.html:584
 msgid "You can also question on this product."
 msgstr "شما هم می‌توانید در مورد این کالا سوال بپرسید."
 
-#: .\templates\products\product_sub_category_list.html:44
+#: templates/products/product_sub_category_list.html:89
 msgid "There aren't any product."
 msgstr "هیچ محصولی وجود ندارد."
 
-#: .\views.py:94
+#: views.py:111
 msgid "Your comment was successfully submitted."
 msgstr "دیدگاه شما با موفقیت ثبت شد."
 
-#: .\views.py:106
+#: views.py:121
 msgid "Your question was successfully submitted."
 msgstr "پرسش شما با موفقیت ثبت شد."
 
-#: .\views.py:120
+#: views.py:135
 msgid "Your answer was successfully submitted."
 msgstr "پاسخ شما با موفقیت ثبت شد."
 
