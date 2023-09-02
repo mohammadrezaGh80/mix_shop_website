@@ -27,7 +27,7 @@ class Cart:
         if product_id not in self.cart.keys():
             self.cart[product_id] = {"product_id": product_id, "quantity": quantity}
         else:
-            self.cart[product_id]["quantity"] += quantity
+            self.cart[product_id]["quantity"] = quantity
 
         messages.success(self.request, _("Product has been successfully added to the cart."))
         self.save()
@@ -44,9 +44,31 @@ class Cart:
 
     def get_total_price(self):
         """
-        Get amount of total price products
+        Return amount of total price products
         """
-        return sum([product_obj["product"].price * product_obj["quantity"] for product_obj in self.cart.values()])
+        return sum([product_obj["product"].price * product_obj["quantity"] for product_obj in self])
+
+    def get_count_items(self):
+        """
+        Return count of all items
+        """
+        return sum([product_obj["quantity"] for product_obj in self])
+
+    def is_exist_product_in_cart(self, product):
+        """
+        Check product exist in cart, if exist return True otherwise False
+        """
+        product_id = str(product.id)
+        return True if self.cart.get(product_id) else False
+
+    def get_quantity_of_product_in_cart(self, product):
+        """
+        Return quantity of specific product in cart, if product doesn't exist in cart return 0
+        """
+        product_id = str(product.id)
+        if self.is_exist_product_in_cart(product):
+            return self.cart[product_id]["quantity"]
+        return 0
 
     def clear(self):
         """
@@ -61,7 +83,7 @@ class Cart:
         return len(self.cart.keys())
 
     def __iter__(self):
-        cart_copy = self.cart.copy()
+        cart_copy = deepcopy(self.cart)
         product_ids = cart_copy.keys()
         products = Product.objects.filter(id__in=product_ids)
 

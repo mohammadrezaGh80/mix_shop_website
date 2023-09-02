@@ -6,8 +6,8 @@ const likeButton = Array.from(listCommentLikeButton).concat(Array.from(listAnswe
 const dislikeButton = Array.from(listCommentDislikeButton).concat(Array.from(listAnswerDislikeButton))
 const csrfToken = document.querySelector("input[name=csrfmiddlewaretoken]").value
 
-for(let btn of likeButton){
-    btn.addEventListener("click", function (event){
+for (let btn of likeButton) {
+    btn.addEventListener("click", function (event) {
         event.preventDefault();
         let url = btn.parentElement.action;
         let formData = new FormData();
@@ -15,10 +15,10 @@ for(let btn of likeButton){
         axios.post(url, formData).then(res => {
             let countLikesElement = this.parentElement.previousElementSibling;
             let iconLike = this.querySelector(".bi");
-            if(res.data["status"] ===  "liked"){
+            if (res.data["status"] === "liked") {
                 countLikesElement.innerHTML = `${+countLikesElement.innerHTML + 1}`;
                 iconLike.className = "bi bi-hand-thumbs-up-fill";
-            }else if(res.data["status"] ===  "retake_liked"){
+            } else if (res.data["status"] === "retake_liked") {
                 countLikesElement.innerHTML = `${+countLikesElement.innerHTML - 1}`;
                 iconLike.className = "bi bi-hand-thumbs-up";
             }
@@ -28,8 +28,8 @@ for(let btn of likeButton){
     })
 }
 
-for(let btn of dislikeButton){
-    btn.addEventListener("click", function (event){
+for (let btn of dislikeButton) {
+    btn.addEventListener("click", function (event) {
         event.preventDefault();
         let url = btn.parentElement.action;
         let formData = new FormData();
@@ -37,10 +37,10 @@ for(let btn of dislikeButton){
         axios.post(url, formData).then(res => {
             let countDislikesElement = this.parentElement.previousElementSibling;
             let iconDislike = this.querySelector(".bi");
-            if(res.data["status"] ===  "disliked"){
+            if (res.data["status"] === "disliked") {
                 countDislikesElement.innerHTML = `${+countDislikesElement.innerHTML + 1}`;
                 iconDislike.className = "bi bi-hand-thumbs-down-fill";
-            }else if(res.data["status"] ===  "retake_disliked"){
+            } else if (res.data["status"] === "retake_disliked") {
                 countDislikesElement.innerHTML = `${+countDislikesElement.innerHTML - 1}`;
                 iconDislike.className = "bi bi-hand-thumbs-down";
             }
@@ -57,16 +57,29 @@ const answerButton = document.getElementById("answer_button")
 const lengthTextQuestion = document.getElementById("length_text_question")
 const lengthTextAnswer = document.getElementById("length_text_answer")
 
-textQuestion.addEventListener("input", function (event){
+textQuestion.addEventListener("input", function (event) {
     const lengthText = textQuestion.value.length;
     questionButton.disabled = lengthText < 7 || lengthText > 100;
     lengthTextQuestion.textContent = `100/${lengthText}`
 })
 
-if(textAnswer){
-    textAnswer.addEventListener("input", function (event){
+if (textAnswer) {
+    textAnswer.addEventListener("input", function (event) {
         const lengthText = textAnswer.value.length;
         answerButton.disabled = lengthText < 7 || lengthText > 500;
         lengthTextAnswer.textContent = `500/${lengthText}`
+    })
+}
+
+
+const btnShowAddToCartForm = document.getElementById("btnShowAddToCartForm")
+const addToCartForm = document.getElementById("addToCartForm");
+
+if (btnShowAddToCartForm) {
+    btnShowAddToCartForm.addEventListener("click", function () {
+        btnShowAddToCartForm.classList.add("d-none");
+
+        addToCartForm.classList.remove("d-none");
+        addToCartForm.classList.add("d-block");
     })
 }

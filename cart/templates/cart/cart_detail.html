@@ -2,6 +2,10 @@
 
 {% load i18n %}
 {% load static %}
+{% load humanize %}
+{% load price_conversion_tags %}
+{% load cart_tags %}
+{% get_current_language as LANGUAGE_CODE %}
 
 
 {% block page_title %}{% trans "Cart" %}{% endblock page_title %}
@@ -17,141 +21,197 @@
                     </p>
                 {% endfor %}
 
-                {#                <div class="col-12 my-3">#}
-                {#                    <div>#}
-                {#                        <h4>{% trans "Cart" %}</h4>#}
-                {#                        <div class="border border-secondary-subtle rounded mt-3 d-flex flex-column justify-content-center align-items-center py-5">#}
-                {#                            <figure class="m-0">#}
-                {#                                <img src="https://www.technolife.ir/image/static_emptyBasket.png" alt="">#}
-                {#                            </figure>#}
-                {#                            <p class="fw-bold fs-5">{% trans "Your cart is empty!" %}</p>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
-                <div class="col-9 my-4">
-                    <div class="border border-secondary-subtle rounded p-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">{% trans "Your cart" %}</span>
-                            <button class="btn btn-outline-danger btn-sm border-0">
-                                <i style="font-size: 18px;" class="bi bi-trash"></i>
-                                <span class="ms-2">{% trans "Delete all" %}</span>
-                            </button>
+                {% if cart|length == 0 %}
+                    <div class="col-12 my-3">
+                        <div>
+                            <h4>{% trans "Cart" %}</h4>
+                            <div class="border border-secondary-subtle rounded mt-3 d-flex flex-column justify-content-center align-items-center py-5">
+                                <figure class="m-0">
+                                    <img src="https://www.technolife.ir/image/static_emptyBasket.png" alt="">
+                                </figure>
+                                <p class="fw-bold fs-5">{% trans "Your cart is empty!" %}</p>
+                            </div>
                         </div>
-                        <ul>
-                            <li class="border-bottom border-secondary-subtle d-flex flex-column py-5">
-                                <div class="up-card-section d-flex">
-                                    <figure class="m-0 mb-3" style="width: 150px;height: 150px">
-                                        <img class="w-100 h-100 d-block object-fit-cover"
-                                             src="https://dkstatics-public.digikala.com/digikala-products/ec9a962187e1f82cc47e7a148ef99ec1c6fd024d_1656423336.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80"
-                                             alt="">
-                                    </figure>
-                                    <span class="ms-3 mt-2">گوشی موبایل اپل مدل iPhone 13 CH دو سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت - نات اکتیو</span>
-                                </div>
-                                <div class="down-card-section d-flex align-items-center mt-3">
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <div class="d-flex flex-column">
-                                            <div class="input-group">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-plus text-danger fw-bold" id="plus-icon"></i>
-                                                </button>
-                                                <input style="width: 60px" type="number" min="1" value="1"
-                                                       class="form-control text-center text-danger fw-bold"
-                                                       id="input-number">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-dash text-danger fw-bold" id="dash-icon"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <span style="font-size: 20px" class="fw-bold ms-3">۶۶,۹۹۰,۰۰۰ تومان</span>
-                                </div>
-                            </li>
-                            <li class="border-bottom border-secondary-subtle d-flex flex-column py-5">
-                                <div class="up-card-section d-flex">
-                                    <figure class="m-0 mb-3" style="width: 150px;height: 150px">
-                                        <img class="w-100 h-100 d-block object-fit-cover"
-                                             src="https://dkstatics-public.digikala.com/digikala-products/ec9a962187e1f82cc47e7a148ef99ec1c6fd024d_1656423336.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80"
-                                             alt="">
-                                    </figure>
-                                    <span class="ms-3 mt-2">گوشی موبایل اپل مدل iPhone 13 CH دو سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت - نات اکتیو</span>
-                                </div>
-                                <div class="down-card-section d-flex align-items-center mt-3">
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <div class="d-flex flex-column">
-                                            <div class="input-group">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-plus text-danger fw-bold" id="plus-icon"></i>
-                                                </button>
-                                                <input style="width: 60px" type="number" min="1" value="1"
-                                                       class="form-control text-center text-danger fw-bold"
-                                                       id="input-number">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-dash text-danger fw-bold" id="dash-icon"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <span style="font-size: 20px" class="fw-bold ms-3">۶۶,۹۹۰,۰۰۰ تومان</span>
-                                </div>
-                            </li>
-                            <li class="d-flex flex-column py-5">
-                                <div class="up-card-section d-flex">
-                                    <figure class="m-0 mb-3" style="width: 150px;height: 150px">
-                                        <img class="w-100 h-100 d-block object-fit-cover"
-                                             src="https://dkstatics-public.digikala.com/digikala-products/ec9a962187e1f82cc47e7a148ef99ec1c6fd024d_1656423336.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80"
-                                             alt="">
-                                    </figure>
-                                    <span class="ms-3 mt-2">گوشی موبایل اپل مدل iPhone 13 CH دو سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت - نات اکتیو</span>
-                                </div>
-                                <div class="down-card-section d-flex align-items-center mt-3">
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <div class="d-flex flex-column">
-                                            <div class="input-group">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-plus text-danger fw-bold" id="plus-icon"></i>
-                                                </button>
-                                                <input style="width: 60px" type="number" min="1" value="1"
-                                                       class="form-control text-center text-danger fw-bold"
-                                                       id="input-number">
-                                                <button type="submit" class="input-group-text">
-                                                    <i style="font-size: 18px; cursor: pointer"
-                                                       class="bi bi-dash text-danger fw-bold" id="dash-icon"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <span style="font-size: 20px" class="fw-bold ms-3">۶۶,۹۹۰,۰۰۰ تومان</span>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
-                </div>
-                <div class="col-3 my-4">
-                    <div style="top: 15px" class="border border-secondary-subtle p-3 rounded position-sticky">
-                        <ul>
-                            <li class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-secondary">{% trans "The price of products" %} (3)</span>
-                                <span class="text-secondary">۵۸,۴۴۳,۳۰۰ تومان</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center mb-3">
-                                <span>{% trans "Total amount" %}</span>
-                                <span>۵۵,۸۶۸,۳۰۰ تومان</span>
-                            </li>
-                        </ul>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger w-100 mt-3">{% trans "Register order" %}</button>
-                        </form>
+                {% else %}
+                    <div class="col-9 my-4">
+                        <div class="border border-secondary-subtle rounded p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">{% trans "Your cart" %}</span>
+                                <button type="button" class="btn btn-outline-danger btn-sm border-0"
+                                        data-bs-toggle="modal" data-bs-target="#clear_cart_modal">
+                                    <i style="font-size: 18px;" class="bi bi-trash"></i>
+                                    <span class="ms-2">{% trans "Delete all" %}</span>
+                                </button>
+
+                                <div class="modal fade" id="clear_cart_modal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 fw-bold">{% trans "Remove all products from cart" %}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>{% trans "Do you remove all items from the cart?" %}</p>
+                                                <div class="d-flex align-items-center justify-content-end mt-4">
+                                                    <button type="button"
+                                                            class="btn btn-outline-danger custom-btn-outline-danger"
+                                                            data-bs-dismiss="modal">{% trans "Back" %}</button>
+                                                    <form action="{% url 'cart:cart_clear' %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button type="submit"
+                                                                class="btn btn-danger ms-2">{% trans "Remove all" %}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <ul>
+                                {% for item in cart %}
+                                    <li class="{% if not forloop.last %}border-bottom border-secondary-subtle{% endif %} d-flex flex-column py-5">
+                                        <div class="up-card-section d-flex">
+                                            <figure class="m-0 mb-3" style="width: 150px;height: 150px">
+                                                <a href="{% url 'products:product_detail' item.product.category.category_name item.product.id %}">
+                                                    <img class="w-100 h-100 d-block object-fit-cover"
+                                                         src="{{ item.product.images.first.image.url }}"
+                                                         alt="">
+                                                </a>
+                                            </figure>
+                                            <span class="ms-3 mt-2">{{ item.product.title }}</span>
+                                        </div>
+                                        <div class="down-card-section d-flex align-items-center mt-3">
+                                            <form action="{% url 'cart:cart_add_product' item.product_id %}"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                {{ add_to_cart_form.is_replace }}
+                                                <div class="d-flex align-items-center">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            <i style="font-size: 18px; cursor: pointer"
+                                                               class="bi bi-plus text-danger fw-bold plus-icon"
+                                                               id="plus-icon-{{ item.product_id }}"></i>
+                                                        </span>
+                                                        <input style="width: 60px" type="number" min="1"
+                                                               value="{{ item.quantity }}"
+                                                               class="form-control text-center text-danger fw-bold input-number"
+                                                               id="input-number-{{ item.product_id }}" name="quantity">
+                                                        <span class="input-group-text">
+                                                            <i style="font-size: 18px; cursor: pointer"
+                                                               class="bi bi-dash text-danger fw-bold dash-icon"
+                                                               id="dash-icon-{{ item.product_id }}"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-danger ms-2">
+                                                        <i class="bi bi-cart-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div class="ms-3">
+                                                {% csrf_token %}
+                                                <button type="button" class="btn btn-link text-danger p-0"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#removeProductModal">
+                                                    <i style="font-size: 23px" class="bi bi-trash"></i>
+                                                </button>
+
+                                                <div class="modal fade" id="removeProductModal" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5">{% trans "Remove from cart" %}</h1>
+                                                                <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>
+                                                                    {% blocktrans with title=item.product.title %}
+                                                                        Are you
+                                                                        sure for remove
+                                                                        {{ title }} from cart?{% endblocktrans %}
+                                                                </p>
+                                                            </div>
+                                                            <div class="modal-footer border-top-0">
+                                                                <button type="button" class="btn btn-outline-danger"
+                                                                        data-bs-dismiss="modal">{% trans "Cancel" %}
+                                                                </button>
+                                                                <form action="{% url 'cart:cart_remove_product' item.product_id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <button type="submit"
+                                                                            class="btn btn-danger">{% trans "Remove from cart" %}
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-link text-danger p-0">
+                                                        <i style="font-size: 23px" class="bi bi-trash"></i>
+                                                    </button>
+                                                </div>
+                                                <span style="font-size: 20px" class="fw-bold ms-3">
+                                                    {% if LANGUAGE_CODE == "en" %}
+                                                        {% trans "$" %}{{ item.product.price|multiply:item.quantity|convert_price_to_dollar|intword }}
+                                                    {% elif LANGUAGE_CODE == "fa" %}
+                                                        {{ item.product.price|multiply:item.quantity|convert_english_number_to_persian|intcomma:False }}
+                                                        {% trans "$" %}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-3 my-4">
+                        <div style="top: 15px" class="border border-secondary-subtle p-3 rounded position-sticky">
+                            <ul>
+                                <li class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-secondary">
+                                        {% trans "The price of products" %}
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            ({{ cart.get_count_items }})
+                                        {% elif LANGUAGE_CODE == "fa" %}
+                                            ({{ cart.get_count_items|convert_english_number_to_persian }})
+                                        {% endif %}
+                                    </span>
+                                    <span class="text-secondary">
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            {% trans "$" %}{{ cart.get_total_price|convert_price_to_dollar|intword }}
+                                        {% elif LANGUAGE_CODE == "fa" %}
+                                            {{ cart.get_total_price|convert_english_number_to_persian|intcomma:False }}
+                                            {% trans "$" %}
+                                        {% endif %}
+                                    </span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>{% trans "Total amount" %}</span>
+                                    <span>
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            {% trans "$" %}{{ cart.get_total_price|convert_price_to_dollar|intword }}
+                                        {% elif LANGUAGE_CODE == "fa" %}
+                                            {{ cart.get_total_price|convert_english_number_to_persian|intcomma:False }}
+                                            {% trans "$" %}
+                                        {% endif %}
+                                    </span>
+                                </li>
+                            </ul>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn btn-danger w-100 mt-3">{% trans "Register order" %}</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% load price_conversion_tags %}
+{% load cart_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
 <html {% if LANGUAGE_CODE == "fa" %}dir="rtl" lang="fa" {% elif LANGUAGE_CODE == "en" %}dir="ltr" lang="en" {% endif %}>
@@ -256,6 +257,13 @@
             cursor: pointer;
         }
 
+        {# cart-detail #}
+        .custom-btn-outline-danger {
+            --bs-btn-hover-color: #dc3545;
+            --bs-btn-hover-bg: #fff;
+            --bs-btn-active-bg: #fff;
+            --bs-btn-active-color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -350,22 +358,40 @@
                         <a class="text-decoration-none bg-danger text-light p-2 rounded"
                            href="{% url 'pages:change_language' %}?lang=fa&next_page={{ request.path }}">{% trans 'FA' %}</a>
                     </div>
-
                     <div class="wrapper-cart ms-5">
-                        <div class="btn-group">
+                        {% if cart|length > 0 %}
                             <button type="button" class="bg-transparent border-0 dropdown-toggle"
                                     data-bs-toggle="dropdown">
                                 <i style="font-size: 30px" class="bi bi-cart2 position-relative">
-                                    <span class="custom-badge text-bg-danger">3</span>
+                                    {% if cart|length %}
+                                        <span class="custom-badge text-bg-danger">
+                                                {% if LANGUAGE_CODE == "fa" %}
+                                                    {{ cart.get_count_items|convert_english_number_to_persian }}
+                                                {% elif LANGUAGE_CODE == "en" %}
+                                                    {{ cart.get_count_items }}
+                                                {% endif %}
+                                        </span>
+                                    {% endif %}
                                 </i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end py-3">
                                 <p class="px-3 mb-3 d-flex justify-content-between align-items-center">
-                                    <span>۵ {% trans "Product" %}</span>
+                                    <span>
+                                        {% if LANGUAGE_CODE == "fa" %}
+                                            {{ cart.get_count_items|convert_english_number_to_persian }}
+                                        {% elif LANGUAGE_CODE == "en" %}
+                                            {{ cart.get_count_items }}
+                                        {% endif %}
+                                        {% trans "Product" %}
+                                    </span>
                                     <a class="text-decoration-none text-danger d-flex align-items-center"
                                        href="{% url 'cart:cart_detail' %}">
                                         <span>{% trans "Go to cart" %}</span>
-                                        <i class="bi bi-chevron-left mt-1 ms-1"></i>
+                                        {% if LANGUAGE_CODE == "en" %}
+                                            <i class="bi bi-chevron-right mt-1 ms-1"></i>
+                                        {% elif LANGUAGE_CODE == "fa" %}
+                                            <i class="bi bi-chevron-left mt-1 ms-1"></i>
+                                        {% endif %}
                                     </a>
                                 </p>
                                 <ul>
@@ -373,23 +399,34 @@
                                         <li class="dropdown-item {% if not forloop.last %}border-bottom border-secondary-subtle{% endif %} d-flex flex-column py-4">
                                             <div class="up-card-section d-flex">
                                                 <figure class="m-0 mb-3" style="width: 180px;height: 100px">
-                                                    <img class="w-100 h-100 d-block object-fit-cover"
-                                                         src="{{ item.product.images.image.url }}"
-                                                         alt="">
+                                                    <a href="{% url 'products:product_detail' item.product.category.category_name item.product.id %}">
+                                                        <img class="w-100 h-100 d-block object-fit-cover"
+                                                             src="{{ item.product.images.first.image.url }}"
+                                                             alt="">
+                                                    </a>
                                                 </figure>
                                                 <span class="ms-3 mt-2">{{ item.product.title }}</span>
                                             </div>
                                             <div class="down-card-section d-flex align-items-center mt-3">
-                                                <span style="font-size: 20px"
-                                                      class="fw-bold">x {{ item.quantity }}</span>
+                                                    <span style="font-size: 20px"
+                                                          class="fw-bold">
+                                                        <span>x</span>
+                                                        <span class="ms-1">
+                                                            {% if LANGUAGE_CODE == "en" %}
+                                                                {{ item.quantity }}
+                                                            {% elif LANGUAGE_CODE == "fa" %}
+                                                                {{ item.quantity|convert_english_number_to_persian }}
+                                                            {% endif %}
+                                                        </span>
+                                                    </span>
                                                 <span style="font-size: 20px" class="fw-bold ms-3">
-                                                    {% if LANGUAGE_CODE == "en" %}
-                                                        {% trans "$" %}{{ item.product.price|convert_price_to_dollar|intword }}
-                                                    {% elif LANGUAGE_CODE == "fa" %}
-                                                        {{ item.product.price|convert_english_number_to_persian|intcomma:False }}
-                                                        {% trans "$" %}
-                                                    {% endif %}
-                                                </span>
+                                                        {% if LANGUAGE_CODE == "en" %}
+                                                            {% trans "$" %}{{ item.product.price|multiply:item.quantity|convert_price_to_dollar|intword }}
+                                                        {% elif LANGUAGE_CODE == "fa" %}
+                                                            {{ item.product.price|multiply:item.quantity|convert_english_number_to_persian|intcomma:False }}
+                                                            {% trans "$" %}
+                                                        {% endif %}
+                                                    </span>
                                             </div>
                                         </li>
                                     {% endfor %}
@@ -398,14 +435,13 @@
                                     <div class="d-flex flex-column">
                                         <span style="font-size: 14px">{% trans "Payable amount" %}</span>
                                         <span style="font-size: 18px" class="fw-bold mt-2">
-                                            {{ cart.get_total_price }}
-{#                                            {% if LANGUAGE_CODE == "en" %}#}
-{#                                                {% trans "$" %}{{ cart.get_total_price|convert_price_to_dollar|intword }}#}
-{#                                            {% elif LANGUAGE_CODE == "fa" %}#}
-{#                                                {{ cart.get_total_price|convert_english_number_to_persian|intcomma:False }}#}
-{#                                                {% trans "$" %}#}
-{#                                            {% endif %}#}
-                                        </span>
+                                                {% if LANGUAGE_CODE == "en" %}
+                                                    {% trans "$" %}{{ cart.get_total_price|convert_price_to_dollar|intword }}
+                                                {% elif LANGUAGE_CODE == "fa" %}
+                                                    {{ cart.get_total_price|convert_english_number_to_persian|intcomma:False }}
+                                                    {% trans "$" %}
+                                                {% endif %}
+                                            </span>
                                     </div>
                                     <form action="" method="post">
                                         {% csrf_token %}
@@ -414,7 +450,11 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <a href="{% url 'cart:cart_detail' %}" class="text-decoration-none text-black">
+                                <i style="font-size: 30px" class="bi bi-cart2"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

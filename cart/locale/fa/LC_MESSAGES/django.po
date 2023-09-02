@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-26 14:55+0330\n"
-"PO-Revision-Date: 2023-08-26 14:57+0330\n"
-"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2023-09-02 17:04+0330\n"
+"PO-Revision-Date: 2023-09-02 17:02+0330\n"
+"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,34 +19,86 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: cart.py:32
+#: cart.py:35
 msgid "Product has been successfully added to the cart."
 msgstr "محصول با موفقیت به سبد خرید اضافه شد."
 
-#: cart.py:43
+#: cart.py:46
 msgid "Product has been successfully removed from the cart."
 msgstr "محصول با موفقیت از سبد خرید حذف شد."
 
-#: templates/cart/cart_detail.html:7
+#: templates/cart/cart_detail.html:11 templates/cart/cart_detail.html:27
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: templates/cart/cart_detail.html:34
+#: templates/cart/cart_detail.html:32
+msgid "Your cart is empty!"
+msgstr "سبد خرید شما خالی است!"
+
+#: templates/cart/cart_detail.html:40
 msgid "Your cart"
 msgstr "سبد خرید شما"
 
-#: templates/cart/cart_detail.html:37
+#: templates/cart/cart_detail.html:44
 msgid "Delete all"
 msgstr "حذف همه"
 
-#: templates/cart/cart_detail.html:141
+#: templates/cart/cart_detail.html:52
+msgid "Remove all products from cart"
+msgstr "حذف همه کالاها از سبد"
+
+#: templates/cart/cart_detail.html:57
+msgid "Do you remove all items from the cart?"
+msgstr "همه کالاها را از سبد حذف می‌کنید؟"
+
+#: templates/cart/cart_detail.html:61
+msgid "Back"
+msgstr "بازگشت"
+
+#: templates/cart/cart_detail.html:65
+msgid "Remove all"
+msgstr "حذف همه"
+
+#: templates/cart/cart_detail.html:127 templates/cart/cart_detail.html:148
+msgid "Remove from cart"
+msgstr "حذف از سبد خرید"
+
+#: templates/cart/cart_detail.html:134
+#, python-format
+msgid ""
+"\n"
+"                                                                        Are "
+"you\n"
+"                                                                        sure "
+"for remove\n"
+"                                                                        %(title)s "
+"from cart?"
+msgstr ""
+"\n"
+"آیا از حذف %(title)s  از سبد خرید طمینان دارید؟"
+
+#: templates/cart/cart_detail.html:142
+msgid "Cancel"
+msgstr "انصراف"
+
+#: templates/cart/cart_detail.html:161 templates/cart/cart_detail.html:164
+#: templates/cart/cart_detail.html:188 templates/cart/cart_detail.html:191
+#: templates/cart/cart_detail.html:199 templates/cart/cart_detail.html:202
+msgid "$"
+msgstr "تومان"
+
+#: templates/cart/cart_detail.html:179
 msgid "The price of products"
 msgstr "قیمت کالاها"
 
-#: templates/cart/cart_detail.html:145
+#: templates/cart/cart_detail.html:196
 msgid "Total amount"
 msgstr "قیمت کل"
 
-#: templates/cart/cart_detail.html:151
+#: templates/cart/cart_detail.html:210
 msgid "Register order"
 msgstr "ثبت سفارش"
+
+#: views.py:48
+msgid "Your shopping cart has been cleared successfully."
+msgstr "سبد خرید شما با موفقیت پاک شد."

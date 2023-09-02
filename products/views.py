@@ -9,6 +9,8 @@ from .models import Category, Product, Comment, CommentLike, CommentDislike, Que
 from profiles.recent_visits import RecentVisits
 from .forms import CommentForm, QuestionForm, AnswerForm
 from .paginator import CustomPaginator
+from cart.forms import AddToCartProductForm
+from cart.cart import Cart
 
 
 class ProductCategoryView(View):
@@ -55,6 +57,12 @@ class ProductDetailView(ContextMixin, View):
         product = self.get_object()
         comments = product.comments.order_by("-modified_datetime")
         questions = product.questions.order_by("-modified_datetime")
+        quantity_of_product_in_cart = Cart(self.request).get_quantity_of_product_in_cart(product)
+        context["add_to_cart_form"] = AddToCartProductForm(
+            initial={"is_replace": True if quantity_of_product_in_cart > 0 else False}
+        )
+        context["is_exist_product_in_cart"] = Cart(self.request).is_exist_product_in_cart(product)
+        context["quantity_of_product_in_cart"] = quantity_of_product_in_cart
         context["product"] = product
         context["comments"] = comments
         context["questions"] = questions

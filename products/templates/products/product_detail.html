@@ -12,10 +12,6 @@
 {% block page_title %}{% trans product.title %}{% endblock page_title %}
 
 {% block page_content %}
-    {% for product in cart %}
-        {{ product }}
-    {% endfor %}
-
     <div>
         <div class="container">
             <div class="row">
@@ -101,7 +97,7 @@
                                 {% endif %}
                             </div>
                             <div class="fs-4 d-flex justify-content-end fw-bold mt-auto">
-                                <span class="w-75">
+                                <span class="w-75 align-self-end">
                                     {% if LANGUAGE_CODE == "en" %}
                                         {% trans "$" %}{{ product.price|convert_price_to_dollar|intword }}
                                     {% elif LANGUAGE_CODE == "fa" %}
@@ -109,22 +105,39 @@
                                         {% trans "$" %}
                                     {% endif %}
                                 </span>
-                                <form action="{% url 'cart:cart_add_product' product.pk %}" method="post" class="w-25">
-                                    {% csrf_token %}
-                                    <div class="d-flex flex-column">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">
-                                                <i style="font-size: 18px; cursor: pointer" class="bi bi-plus text-danger fw-bold" id="plus-icon"></i>
-                                            </span>
-                                            <input style="width: 60px" type="number" min="1" value="1" class="form-control text-center text-danger fw-bold" id="input-number" name="quantity">
-                                            <span class="input-group-text">
-                                                <i style="font-size: 18px; cursor: pointer" class="bi bi-dash text-danger fw-bold" id="dash-icon"></i>
-                                            </span>
-                                        </div>
+                                <div id="wrapperAddToCartForm" class="w-25">
+                                    {% if not is_exist_product_in_cart %}
+                                        <button id="btnShowAddToCartForm" class="btn btn-danger w-100">{% trans "Add to cart" %}</button>
+                                    {% endif %}
+                                    <form action="{% url 'cart:cart_add_product' product.pk %}" id="addToCartForm" method="post" class="w-100 {% if not is_exist_product_in_cart %}d-none{% endif %}">
+                                        {% csrf_token %}
+                                        {{ add_to_cart_form.is_replace }}
+                                        <div class="d-flex flex-column">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">
+                                                    <i style="font-size: 18px; cursor: pointer"
+                                                       class="bi bi-plus text-danger fw-bold plus-icon" id="plus-icon-{{ product.pk }}"></i>
+                                                </span>
+                                                {% if quantity_of_product_in_cart > 0 %}
+                                                    <input style="width: 60px" type="number" min="1"
+                                                           value="{{ quantity_of_product_in_cart }}"
+                                                           class="form-control text-center text-danger fw-bold input-number"
+                                                           id="input-number-{{ product.pk }}" name="quantity">
+                                                {% else %}
+                                                    <input style="width: 60px" type="number" min="1" value="1"
+                                                           class="form-control text-center text-danger fw-bold input-number"
+                                                           id="input-number-{{ product.pk }}" name="quantity">
+                                                {% endif %}
+                                                <span class="input-group-text">
+                                                    <i style="font-size: 18px; cursor: pointer"
+                                                       class="bi bi-dash text-danger fw-bold dash-icon" id="dash-icon-{{ product.pk }}"></i>
+                                                </span>
+                                            </div>
 
-                                        <button type="submit" class="btn btn-danger">{% trans "Add to cart" %}</button>
-                                    </div>
-                                </form>
+                                            <button type="submit" class="btn btn-danger">{% trans "Add to cart" %}</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

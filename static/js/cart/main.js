@@ -1,14 +1,30 @@
-// increase and decrease number of product in cart
-const plusIcon = document.getElementById("plus-icon")
-const dashIcon = document.getElementById("dash-icon")
-const inputNumber = document.getElementById("input-number")
+const listPlusIcon = document.getElementsByClassName("plus-icon")
+const listDashIcon = document.getElementsByClassName("dash-icon")
 
-plusIcon.addEventListener("click", function (event){
-    inputNumber.value ++;
-})
+const closest = (to, selector) => {
+    let currentElement = document.querySelector(to)
+    let returnElement
 
-dashIcon.addEventListener("click", function (event){
-    if(inputNumber.value - 1 !== 0){
-        inputNumber.value --;
+    while (currentElement.parentNode && !returnElement) {
+        currentElement = currentElement.parentNode
+        returnElement = currentElement.querySelector(selector)
     }
-})
+
+    return returnElement
+}
+
+
+for (let plusIcon of listPlusIcon) {
+    plusIcon.addEventListener("click", function (event) {
+        closest(`#${plusIcon.id}`, '.input-number').value++;
+    })
+}
+
+for (let minusIcon of listDashIcon) {
+    minusIcon.addEventListener("click", function (event) {
+        const numberInput = closest(`#${minusIcon.id}`, '.input-number');
+        if (numberInput.value - 1 !== 0) {
+            numberInput.value--;
+        }
+    })
+}
