@@ -248,14 +248,25 @@
         }
 
         {#  login  #}
-        #toggle_eye_label_password {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            font-size: 20px;
-            cursor: pointer;
-        }
+        {% if LANGUAGE_CODE == "fa" %}
+            #toggle_eye_label_password {
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+                font-size: 20px;
+                cursor: pointer;
+            }
+        {% elif LANGUAGE_CODE == "en" %}
+            #toggle_eye_label_password {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+                font-size: 20px;
+                cursor: pointer;
+            }
+        {% endif %}
 
         {# cart-detail #}
         .custom-btn-outline-danger {

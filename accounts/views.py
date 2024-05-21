@@ -31,6 +31,7 @@ class LoginView(View):
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect("pages:home")
+        
         form = LoginForm(request.POST)
         if form.is_valid():
             cleaned_data = form.cleaned_data
@@ -78,7 +79,7 @@ class RegisterStepOneView(View):
 class RegisterStepTwoView(View):
     def get(self, request, *args, **kwargs):
         info_user = request.session.get("info_user")
-        if not info_user or (info_user and "email" not in info_user.keys() or "password" not in info_user.keys()):
+        if not info_user or (info_user and ("email" not in info_user.keys() or "password" not in info_user.keys())):
             return redirect("accounts:register_step_one")
         form = PersonalDetailsForm()
         return render(request, "registration/register_step_2.html", context={"form": form})

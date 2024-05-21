@@ -74,10 +74,18 @@ class PersonalDetailsForm(forms.ModelForm):
             "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("last name...")}),
             "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": _("phone number...")}),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super(PersonalDetailsForm, self).__init__(*args, **kwargs)
+        if get_language() == "en":
+            self.fields["birth_date"].widget = forms.TextInput(attrs={"type": "date" ,"class": "form-control", "placeholder": _("birth date...")})
+        else:
+            self.fields["birth_date"].widget = forms.TextInput(attrs={"class": "form-control jalali_date-date", "placeholder": _("birth date...")})
 
     def clean_birth_date(self):
         birth_date = self.cleaned_data.get("birth_date")
         current_date = timezone.now().date()
+
         if birth_date and get_language() == "fa":
             birth_date = jdatetime.date(year=birth_date.year, month=birth_date.month, day=birth_date.day).togregorian()
 
@@ -197,23 +205,28 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class LoginForm(forms.Form):
+    error_messages = {
+        "invalid_username": _("Your username is not valid!")
+    }
+
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label=_("Email or Username"))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label=_("Password"))
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if len(username) > 255:
-            raise ValidationError(_("Your username is not valid!"), code="invalid_username")
+            raise ValidationError(self.error_messages["invalid_username"], code="invalid_username")
         return username
 
 
 class CustomPasswordResetForm(forms.Form):
-    email = forms.EmailField(label=_("Email address"), max_length=255,
-                             widget=forms.TextInput(attrs={"placeholder": _("email..."), "class": "form-control"}),
-                             error_messages={"invalid_email": _("Enter a valid email address.")})
     error_messages = {
         "user_not_exist": _("There is no user with this email address."),
     }
+
+    email = forms.EmailField(label=_("Email address"), max_length=255,
+                             widget=forms.TextInput(attrs={"placeholder": _("email..."), "class": "form-control"}),
+                             error_messages={"invalid_email": _("Enter a valid email address.")})
 
     def clean(self):
         validated_data = super().clean()

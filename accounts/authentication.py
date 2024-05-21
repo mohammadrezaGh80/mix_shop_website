@@ -20,6 +20,6 @@ class CustomAuthBackend(ModelBackend):
                 else:
                     return user
             else:
-                messages.error(request, _("Username and Password is incorrect!"))
+                messages.error(request, _("User with entered info was not found."))
         except User.DoesNotExist:
-            return None
+            messages.error(request, _("User with entered info was not found."))

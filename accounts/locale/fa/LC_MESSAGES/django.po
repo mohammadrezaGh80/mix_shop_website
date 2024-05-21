@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 17:35+0330\n"
-"PO-Revision-Date: 2023-08-17 17:36+0330\n"
-"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2024-05-21 16:06+0330\n"
+"PO-Revision-Date: 2024-05-21 16:07+0330\n"
+"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -39,104 +39,100 @@ msgstr "حساب کاربری شما فعال نیست."
 msgid "Username and Password is incorrect!"
 msgstr "ایمیل و رمزعبور درست نمیباشند!"
 
-#: forms.py:19
+#: forms.py:20
 msgid "The two password fields didn't match."
 msgstr "دو رمز عبور با یکدیگر مطابقت ندارند."
 
-#: forms.py:20
+#: forms.py:21
 msgid "A user with that email already exists."
 msgstr "یک کاربر با این ایمیل وجود دارد."
 
-#: forms.py:23 forms.py:263 models.py:49
+#: forms.py:24 forms.py:212 forms.py:279 models.py:49
 msgid "Email address"
 msgstr "آدرس ایمیل"
 
-#: forms.py:24 forms.py:117 forms.py:163 forms.py:212
+#: forms.py:25 forms.py:118 forms.py:164 forms.py:213
 msgid "email..."
 msgstr "ایمیل..."
 
-#: forms.py:26 forms.py:201
+#: forms.py:27 forms.py:202
 msgid "Password"
 msgstr "رمزعبور"
 
-#: forms.py:30
+#: forms.py:31
 msgid "Password confirmation"
 msgstr "تکرار رمز عبور"
 
-#: forms.py:37 forms.py:148 forms.py:219
+#: forms.py:38 forms.py:149 forms.py:235
 msgid "password..."
 msgstr "رمزعبور..."
 
-#: forms.py:39 forms.py:150 forms.py:225
+#: forms.py:40 forms.py:151 forms.py:241
 msgid "password confirmation..."
 msgstr "تکرار رمز عبور..."
 
-#: forms.py:64 forms.py:109 forms.py:155
+#: forms.py:65 forms.py:110 forms.py:156
 #, python-format
 msgid "Your birth date is invalid,date of today: %(current_date)s"
 msgstr "تاریخ تولد شما نامعتبر است،تاریخ امروز: %(current_date)s"
 
-#: forms.py:65 forms.py:110 forms.py:156
+#: forms.py:66 forms.py:111 forms.py:157
 msgid "The age value for register must be at least 10 years old."
 msgstr "حداقل سن مورد نیاز برای ثبت نام 10 سال است."
 
-#: forms.py:72 forms.py:118 forms.py:164
+#: forms.py:73 forms.py:119 forms.py:165
 msgid "username..."
 msgstr "نام کاربری..."
 
-#: forms.py:73 forms.py:119 forms.py:165
+#: forms.py:74 forms.py:120 forms.py:166
 msgid "first name..."
 msgstr "نام..."
 
-#: forms.py:74 forms.py:120 forms.py:166
+#: forms.py:75 forms.py:121 forms.py:167
 msgid "last name..."
 msgstr "نام خانوادگی..."
 
-#: forms.py:75 forms.py:121 forms.py:167
+#: forms.py:76 forms.py:122 forms.py:168
 msgid "phone number..."
 msgstr "شماره تلفن..."
 
-#: forms.py:200
+#: forms.py:201
 msgid "Email or Username"
 msgstr "آدرس ایمیل یا نام کاربری"
 
-#: forms.py:206
+#: forms.py:207
 msgid "Your username is not valid!"
 msgstr "نام کاربری شما معتبر نیست!"
 
-#: forms.py:211
-msgid "Email"
-msgstr "ایمیل..."
-
-#: forms.py:213
+#: forms.py:214 forms.py:280
 msgid "Enter a valid email address."
 msgstr "یک آدرس ایمیل معتبر وارد کنید."
 
-#: forms.py:218
-msgid "New password"
-msgstr "رمزعبور جدید"
-
-#: forms.py:223
-msgid "New password confirmation"
-msgstr "تکرار رمز عبور جدید..."
-
-#: forms.py:232
-msgid "Your current password was entered incorrectly. Please enter it again."
-msgstr "رمزعبور فعلی خود را اشتباه وارد کردید. دوباره وارد کنید."
-
-#: forms.py:236
-msgid "Current password"
-msgstr "رمزعبور فعلی"
-
-#: forms.py:239
-msgid "current password..."
-msgstr "رمزعبور فعلی..."
-
-#: forms.py:265
+#: forms.py:216 forms.py:282
 msgid "There is no user with this email address."
 msgstr "کاربری با این آدرس ایمیل وجود ندارد."
 
-#: forms.py:266
+#: forms.py:234
+msgid "New password"
+msgstr "رمزعبور جدید"
+
+#: forms.py:239
+msgid "New password confirmation"
+msgstr "تکرار رمز عبور جدید..."
+
+#: forms.py:248
+msgid "Your current password was entered incorrectly. Please enter it again."
+msgstr "رمزعبور فعلی خود را اشتباه وارد کردید. دوباره وارد کنید."
+
+#: forms.py:252
+msgid "Current password"
+msgstr "رمزعبور فعلی"
+
+#: forms.py:255
+msgid "current password..."
+msgstr "رمزعبور فعلی..."
+
+#: forms.py:283
 msgid "This account is active."
 msgstr "این اکانت فعال است."
 
@@ -204,40 +200,43 @@ msgstr ""
 "یک شماره تلفن معتبر وارد کنید،این شماره باید دارای 11 رقم باشد که عدد 09 "
 "شروع میشود."
 
-#: views.py:107
+#: views.py:42
+msgid "User with entered info was not found."
+msgstr "کاربری با مشخصات وارد شده یافت نشد."
+
+#: views.py:105
 msgid ""
 "Account created successfully,check your email to activate your account."
 msgstr ""
 "حساب کاربری با موفقیت ساخته شد،برای فعال کردن حساب کاربری ایمیل خود را بررسی"
 " کنید."
 
-#: views.py:142
-#| msgid ""
-#| "Account created successfully,check your email to activate your account."
+#: views.py:140
 msgid "Check your email to activate your account."
 msgstr "برای فعال کردن حساب کاربری ایمیل خود را بررسی کنید."
 
-#: views.py:181
-msgid "Invalid Header"
-msgstr "هدر نامعتبر است."
-
-#: views.py:184
-msgid "There isn't an email with this address"
-msgstr "ایمیلی با این آدرس وجود ندارد."
-
-#: views.py:190
+#: views.py:168
 msgid ""
 "An email with password reset instructions has been sent to your email "
 "address"
 msgstr "ایمیلی با دستورالعمل بازنشانی رمز عبور برای ایمیل شما ارسال شد."
 
-#: views.py:201
+#: views.py:192
 msgid "Your password has been successfully reset."
 msgstr "رمز شما با موفقیت بازنشانی شد."
 
-#: views.py:221
+#: views.py:208
 msgid "Your password has been changed successfully."
 msgstr "رمز شما با موفقیت تغییر یافت."
+
+#~ msgid "Email"
+#~ msgstr "ایمیل..."
+
+#~ msgid "Invalid Header"
+#~ msgstr "هدر نامعتبر است."
+
+#~ msgid "There isn't an email with this address"
+#~ msgstr "ایمیلی با این آدرس وجود ندارد."
 
 #~ msgid "Account created successfully."
 #~ msgstr "حساب کاربری با موفقیت ایجاد شد."
