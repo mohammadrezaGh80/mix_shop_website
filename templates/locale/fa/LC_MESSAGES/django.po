@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 17:09+0330\n"
-"PO-Revision-Date: 2023-08-22 17:10+0330\n"
-"Last-Translator: محمدرضا قرقابی <mohammadreza.gharghabi6@gmail.com>\n"
+"POT-Creation-Date: 2024-05-21 11:26+0330\n"
+"PO-Revision-Date: 2024-05-21 11:28+0330\n"
+"Last-Translator: None None <mohammadreza.gharghabi6@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,39 +19,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: _base.html:273 home.html:8 home.html:22
+#: _base.html:283 home.html:8 home.html:22
 msgid "Home"
 msgstr "خانه"
 
-#: _base.html:294
+#: _base.html:304
 msgid "Your last searches"
 msgstr "آخرین جستجوهای شما"
 
-#: _base.html:320
+#: _base.html:330
 msgid "Popular searches"
 msgstr "جستجو های پرطرفدار"
 
-#: _base.html:346
+#: _base.html:356
 msgid "EN"
 msgstr "انگلیسی"
 
-#: _base.html:349
+#: _base.html:359
 msgid "FA"
 msgstr "فارسی"
 
-#: _base.html:362
+#: _base.html:385
 msgid "Product"
 msgstr "محصول"
 
-#: _base.html:363
+#: _base.html:389
 msgid "Go to cart"
 msgstr "رفتن به سبد خرید"
 
-#: _base.html:411
+#: _base.html:424 _base.html:427 _base.html:439 _base.html:442 home.html:59
+#: home.html:62
+msgid "$"
+msgstr "تومان"
+
+#: _base.html:436
 msgid "Payable amount"
 msgstr "مبلغ قابل پرداخت"
 
-#: _base.html:417
+#: _base.html:449
 msgid "Register order"
 msgstr "ثبت سفارش"
 
@@ -86,10 +91,6 @@ msgstr "فعالسازی حساب کاربری"
 #: home.html:43
 msgid "Suggestion products:"
 msgstr "محصولات پیشنهادی:"
-
-#: home.html:59 home.html:62
-msgid "$"
-msgstr "تومان"
 
 #: registration/activation_account.html:6
 #: registration/activation_account_resend.html:6
@@ -128,6 +129,7 @@ msgid "Forgot your password?"
 msgstr "رمز عبور خود را فراموش کرده اید؟"
 
 #: registration/password_change.html:6 registration/password_reset.html:6
+#: registration/password_reset_confirm.html:6
 msgid "Password Reset"
 msgstr "بازنشانی رمزعبور"
 
@@ -136,6 +138,7 @@ msgid "For more security, enter your current password."
 msgstr "برای امنیت بیشتر، رمزعبور فعلی خود را وارد کنید."
 
 #: registration/password_change.html:46
+#: registration/password_reset_confirm.html:36
 msgid "Change"
 msgstr "تغییر"
 
@@ -153,6 +156,16 @@ msgstr "انجام شد"
 #: registration/password_reset_complete.html:20
 msgid "Back to home"
 msgstr "بازگشت به خانه"
+
+#: registration/password_reset_confirm.html:40
+#| msgid "The link has expired, click to resend the link."
+msgid "The link has invalid or expired, click to resend the link."
+msgstr "لینک نامعتبر یا منقضی شده است، برای ارسال مجدد لینک کلیک کنید."
+
+#: registration/password_reset_confirm.html:41
+#| msgid "Password Reset"
+msgid "Password reset"
+msgstr "بازنشانی رمزعبور"
 
 #: registration/password_reset_done.html:6
 msgid "Sent"

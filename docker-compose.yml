@@ -1,9 +1,8 @@
-version: '3.9'
-
 services:
   web:
     build: .
     command: python /code/manage.py runserver 0.0.0.0:8000
+    container_name: web
     volumes:
       - .:/code
     ports:
@@ -19,8 +18,30 @@ services:
       - "POSTGRES_HOST=${DOCKER_COMPOSE_POSTGRES_HOST}"
       - "POSTGRES_PORT=${DOCKER_COMPOSE_POSTGRES_PORT}"
       - "DJANGO_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_DJANGO_EMAIL_HOST_PASSWORD}"
+    networks:
+      - main
+    restart: always
 
   db:
-    image: postgres:15
+    image: postgres:16
+    container_name: postgres
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - "POSTGRES_NAME=${DOCKER_COMPOSE_POSTGRES_NAME}"
+      - "POSTGRES_USER=${DOCKER_COMPOSE_POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${DOCKER_COMPOSE_POSTGRES_PASSWORD}"
+      - "POSTGRES_HOST=${DOCKER_COMPOSE_POSTGRES_HOST}"
+      - "POSTGRES_PORT=${DOCKER_COMPOSE_POSTGRES_PORT}"
+    networks:
+      - main
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  main:
+
+volumes:
+  postgres_data:

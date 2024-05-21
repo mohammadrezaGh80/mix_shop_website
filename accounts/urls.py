@@ -19,7 +19,7 @@ urlpatterns = [
 
     # Password Reset an account
     path("password_reset/", views.PasswordResetView.as_view(), name="password_reset"),
-    path("reset/<str:uid>/<str:token>/", views.CustomPasswordResetConfirmView.as_view(),
+    path("password_reset/<str:uid>/<str:token>/", views.CustomPasswordResetConfirmView.as_view(),
          name="password_reset_confirm"),
 
     # Password Change an account
