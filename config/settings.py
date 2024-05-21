@@ -17,7 +17,8 @@ from pathlib import Path
 from environs import Env
 import os
 
-from accounts.rosetta_access import is_access_to_rosetta_views
+from .rosetta_access import is_access_to_rosetta_views
+from .debug_toolbar_access import is_show_toolbar
 
 env = Env()
 env.read_env()
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     # third party apps
+    'debug_toolbar',
     'rosetta',
     'jalali_date',
     'ckeditor',
@@ -65,6 +67,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware",
@@ -192,3 +195,12 @@ ROSETTA_ACCESS_CONTROL_FUNCTION = is_access_to_rosetta_views
 
 # Password reset and activation account time
 PASSWORD_RESET_TIMEOUT = 300
+
+# Debug toolbar config
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : is_show_toolbar,
+}

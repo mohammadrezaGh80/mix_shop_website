@@ -28,6 +28,9 @@ urlpatterns = [
 
     # Rosetta(i18n)
     path('rosetta/', include('rosetta.urls')),
+
+    # Debug toolbar
+    path("__debug__/", include("debug_toolbar.urls"))
 ]
 
 if settings.DEBUG:
